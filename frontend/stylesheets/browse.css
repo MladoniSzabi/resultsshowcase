@@ -1,0 +1,57 @@
+#table-container {
+    max-width: 80em;
+    margin: auto
+}
+
+table {
+    width: 100%;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    border: solid 1px grey;
+    border-radius: 5px;
+    border-collapse: collapse;
+}
+
+thead tr:first-child {
+    height: 3em;
+}
+
+thead th {
+    vertical-align: bottom;
+}
+
+tbody tr {
+    border-top: solid 1px grey;
+    min-height: 5em;
+}
+
+tbody td {
+    padding: 1em;
+    min-height: 7ch;
+}
+
+#pagination-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#page-size-control {
+    display: flex
+}
+
+#page-size-control select {
+    margin-left: 0.5em;
+}
+
+#page-size-control p {
+    margin: 0;
+}
+
+#pagination-controls * {
+    margin: 0.2em;
+    font-size: 0.9em;
+}
+
+#pagination-controls {
+    display: flex;
+}

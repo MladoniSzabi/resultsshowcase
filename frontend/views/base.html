@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}{% endblock %} - GraphView</title>
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=close,menu,settings,zoom_in,zoom_out" />
+    <script src="/scripts/utils/fetch.js"></script>
+    <script src="/scripts/utils/settings.js"></script>
+    <script src="/scripts/components/topbar.component.js"></script>
+    <script src="/scripts/components/settings_modal.component.js"></script>
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+    <div id="top-bar">
+        <span class="material-symbols-outlined button" id="setting-button">settings</span>
+    </div>
+    <div>
+        {% block content %}{% endblock %}
+    </div>
+
+    <div class="modal" id="settings-modal">
+        <div class="modal-content" id="settings-modal-content">
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Graph{% endblock %}
+
+{% block head %}
+
+<script src="/scripts/components/graph_view.component.js"></script>
+<script src="/scripts/components/graph_side_panel.component.js"></script>
+<script src="/scripts/components/breadcrumbs.component.js"></script>
+
+<script src="/scripts/graph_types/FDT.js"></script>
+<script src="/scripts/graph_types/radialTree.js"></script>
+
+<script src="/scripts/utils/colour.js"></script>
+<script src="/scripts/utils/graph_events.js"></script>
+<script src="/scripts/utils/graph_common.js"></script>
+<script src="/scripts/utils/random.js"></script>
+<script src="/scripts/utils/strings.js"></script>
+
+<script src="/scripts/vendor/d3.js"></script>
+
+<link rel="stylesheet" href="/stylesheets/graph.css">
+
+{% endblock %}
+
+{% block content %}
+
+<div id="graph-container">
+    <p id="breadcrumbs"></p>
+    <div>
+        <div id="svg-container"></div>
+        <span id="zoom-in" class="zoom material-symbols-outlined">zoom_in</span>
+        <span id="zoom-out" class="zoom material-symbols-outlined">zoom_out</span>
+    </div>
+
+    <div id="sidepanel"></div>
+</div>
+
+{% endblock %}
