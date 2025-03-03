@@ -30,7 +30,8 @@ function renderTable(table, data, onShowClicked) {
         row.appendChild(cells["productReference"])
         row.appendChild(cells["type"])
         row.appendChild(cells["geography"])
-        row.appendChild(cells["cpc"])
+        row.appendChild(cells["cpcCode"])
+        row.appendChild(cells["cpcName"])
         row.appendChild(cells["numberOfNodes"])
         row.appendChild(cells["depth"])
 

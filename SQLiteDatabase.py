@@ -66,8 +66,10 @@ class SQLiteDatabase:
     def convert_result(self, sqlite_result, columns):
         retval = {}
         for name, val in zip(columns, sqlite_result):
-            if name == "CPCCategory":
-                retval["cpc"] = val
+            if name == "CPCName":
+                retval["cpcName"] = val
+            elif name == "CPCCode":
+                retval["cpcCode"] = val
             else:
                 name = name[0].lower() + name[1:]
                 retval[name] = val

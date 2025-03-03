@@ -3,3 +3,4 @@ database.db
 venv/
 .env
 graphs.db
+__pycache__/
