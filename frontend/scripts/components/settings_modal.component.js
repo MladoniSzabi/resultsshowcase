@@ -1,6 +1,6 @@
-function onInputChange(ev) {
+function onInputChange(ev, name) {
     const id = ev.target.id
-    setSetting(setting["name"], ev.target.value);
+    setSetting(name, ev.target.value);
     renderSettigns()
     document.getElementById(id).focus()
 }
@@ -49,7 +49,7 @@ function renderSettigns() {
         }
 
         input.value = setting.value
-        input.addEventListener("input", onInputChange)
+        input.addEventListener("input", (ev) => onInputChange(ev, setting.name))
 
         row.appendChild(label)
         row.appendChild(input)
