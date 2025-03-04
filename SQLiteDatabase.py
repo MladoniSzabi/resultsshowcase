@@ -55,12 +55,36 @@ class SQLiteDatabase:
 
         if filters["node_count"]:
             query += " AND NumberOfNodes = ?"
-            params.append(filters["node_count_min"])
+            params.append(filters["node_count"])
         
         if filters["depth"]:
             query += " AND Depth = ?"
             params.append(filters["depth"])
 
+        if filters["sort_by"]:
+            if filters["sort_by"] == "cpc-code":
+                query += " ORDER BY CPCCode"
+            elif filters["sort_by"] == "cpc-name":
+                query += " ORDER BY CPCName"
+            elif filters["sort_by"] == "name":
+                query += " ORDER BY Name"
+            elif filters["sort_by"] == "product":
+                query += " ORDER BY ProductReference"
+            elif filters["sort_by"] == "graph-type":
+                query += " ORDER BY Type"
+            elif filters["sort_by"] == "geography":
+                query += " ORDER BY Geography"
+            elif filters["sort_by"] == "node-count":
+                query += " ORDER BY NumberOfNodes"
+            elif filters["sort_by"] == "depth":
+                query += " ORDER BY Depth"
+        
+            if filters["sort-order"] == "descending":
+                query += " DESC"
+            else:
+                query += " ASC"
+
+        print(query)
         return (query, params)
 
     def convert_result(self, sqlite_result, columns):

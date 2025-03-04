@@ -13,6 +13,10 @@ function addSidePanelRow(name, value) {
 }
 
 function updateSidePanel(graphData) {
+
+    document.getElementById("graph-container").classList.remove("collapsed")
+    document.getElementById("sidepanel-container").classList.remove("collapsed")
+
     const sidepanel = document.getElementById("sidepanel")
     sidepanel.innerHTML = ""
 
@@ -58,5 +62,15 @@ function updateSidePanel(graphData) {
         const locationContainer = addSidePanelRow("Geography", graphData.location)
         sidepanel.appendChild(locationContainer)
     }
-
 }
+
+function onClose(ev) {
+    document.getElementById("graph-container").classList.add("collapsed")
+    document.getElementById("sidepanel-container").classList.add("collapsed")
+}
+
+function initialiseGraphSidePanel() {
+    document.getElementById("sidepanel-close").addEventListener("click", onClose)
+}
+
+document.addEventListener("DOMContentLoaded", initialiseGraphSidePanel)

@@ -25,7 +25,9 @@ function setPage(newPage) {
     currentUrl.delete("page")
     currentUrl.append("page", newPage)
 
-    window.location.search = currentUrl.toString()
+    tableState.currentPage = newPage
+    updateTable()
+    //window.location.search = currentUrl.toString()
 }
 
 function onPaginationSelect(event) {

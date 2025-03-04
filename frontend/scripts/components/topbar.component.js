@@ -3,8 +3,8 @@ function showSettings() {
     renderSettigns()
 }
 
-function initiliase() {
+function initiliaseTopbar() {
     document.getElementById("setting-button").addEventListener("click", showSettings)
 }
 
-document.addEventListener("DOMContentLoaded", initiliase)
+document.addEventListener("DOMContentLoaded", initiliaseTopbar)

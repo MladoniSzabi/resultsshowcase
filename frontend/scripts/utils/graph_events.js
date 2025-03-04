@@ -4,6 +4,21 @@ var initialViewbox = null
 var initialPos = null
 var viewbox = null
 var svg = null
+var historyTimeout = null
+
+function updateHistory(viewbox) {
+    const searchParams = new URLSearchParams(window.location.search)
+    searchParams.delete("viewbox")
+    searchParams.append("viewbox", viewbox.toString())
+    clearTimeout(historyTimeout)
+    historyTimeout = setTimeout(() => {
+        let state = { 'graph': window.history.state.graph, 'viewboxes': window.history.state.viewboxes }
+        state.viewboxes[state.viewboxes.length - 1] = viewbox
+        window.history.replaceState(state, "", window.location.pathname + "?" + searchParams.toString())
+        updateBreadcrumb({ "viewbox": viewbox })
+    }, 200)
+
+}
 
 function getDistance(event) {
     // Calculate distance between two touch points
@@ -75,6 +90,7 @@ function panSvg(distance, initialViewbox = null) {
 
     viewbox = newBox
     svg.attr("viewBox", viewbox)
+    updateHistory(viewbox)
 }
 
 function zoomSvg(factor, center, oldViewbox = null) {
@@ -108,6 +124,7 @@ function zoomSvg(factor, center, oldViewbox = null) {
     }
     viewbox = newBox
     svg.attr("viewBox", viewbox)
+    updateHistory(viewbox)
 }
 
 function handleScroll(event) {

@@ -20,6 +20,10 @@ thead th {
     vertical-align: bottom;
 }
 
+thead input {
+    width: 100%;
+}
+
 tbody tr {
     border-top: solid 1px grey;
     min-height: 5em;

@@ -1,4 +1,4 @@
-function createRadialGraph(rootNode) {
+function createRadialGraph(rootNode, viewbox = null) {
     const settings = getSettings()
 
     // Specify the chart’s dimensions.
@@ -21,7 +21,8 @@ function createRadialGraph(rootNode) {
         d.colour = getNodeColour(d, d.parent, settings)
     });
 
-    viewbox = [-width / 2, -height / 2, width, height]
+    if (!viewbox)
+        viewbox = [-width / 2, -height / 2, width, height]
 
     // Create the container SVG.
     const svg = d3.create("svg")

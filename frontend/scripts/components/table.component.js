@@ -4,7 +4,7 @@ let tableState = {
     itemsPerPage: 5
 }
 
-function initiliase() {
+function initiliaseTable() {
     const currentUrl = new URLSearchParams(window.location.search)
 
     table = document.getElementById("graphs-table")
@@ -58,4 +58,4 @@ async function updateTable() {
     updateNavigation(count, tableState.currentPage, tableState.itemsPerPage)
 }
 
-document.addEventListener("DOMContentLoaded", initiliase)
+document.addEventListener("DOMContentLoaded", initiliaseTable)

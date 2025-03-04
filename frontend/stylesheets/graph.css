@@ -57,9 +57,24 @@ span.zoom {
     line-height: 0;
 }
 
-#sidepanel {
+#sidepanel-container {
     background-color: rgb(217, 216, 216);
     padding: 1em;
     border: solid 1px black;
     border-radius: 5px;
+    position: relative;
+}
+
+#sidepanel-close {
+    position: absolute;
+    top: 0.2em;
+    right: 0.2em;
+}
+
+#graph-container.collapsed {
+    grid-template-columns: 1fr;
+}
+
+#sidepanel-container.collapsed {
+    display: none;
 }

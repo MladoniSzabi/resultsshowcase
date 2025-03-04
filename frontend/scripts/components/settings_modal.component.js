@@ -68,6 +68,8 @@ function hideSettings(ev) {
         document.getElementById("settings-modal").classList.remove("show")
 }
 
-function initiliase() {
+function initiliaseSettings() {
     document.addEventListener("click", hideSettings)
 }
+
+document.addEventListener("DOMContentLoaded", initiliaseSettings)

@@ -35,7 +35,10 @@ def get_filters():
         'geography': request.args.get('geography'),
         'node_count': request.args.get('node-count'),
         'depth': request.args.get('depth'),
-        'graph_id': request.args.get('graph_id')
+        'graph_id': request.args.get('graph_id'),
+
+        'sort_by': request.args.get('sort-by'),
+        'sort-order': request.args.get('sort-order')
     }
 
 if not is_debug():

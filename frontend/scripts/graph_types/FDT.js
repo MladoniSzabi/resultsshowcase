@@ -69,7 +69,7 @@ function addSubTree(newNode, root, d) {
     d.data = newNode
 }
 
-function createFDTGraph(rootNode) {
+function createFDTGraph(rootNode, viewbox = null) {
 
     // Specify the chart’s dimensions.
     const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
@@ -94,7 +94,8 @@ function createFDTGraph(rootNode) {
         .force("link", d3.forceLink().id(d => d.id).distance(500).strength(0.1))
         .force("charge", d3.forceManyBody().strength(-800));
 
-    const viewbox = [-width / 2, -height / 2, width, height]
+    if (!viewbox)
+        viewbox = [-width / 2, -height / 2, width, height]
 
     // Create the container SVG.
     const svg = d3.create("svg")

@@ -134,23 +134,37 @@ function wrap(text, width) {
     })
 }
 
+async function redirect(newid) {
+    const currentUrl = new URLSearchParams(window.location.search)
+    const nextPage = new URLSearchParams(window.location.search)
+    nextPage.delete('id')
+    nextPage.append('id', newid)
+    nextPage.append('breadcrumbs', currentUrl.get("id"))
+    nextPage.delete('viewbox')
+
+    console.log(currentUrl.get('id'))
+    const graph = await fetchGraph(currentUrl.get("id"))
+    const viewboxes = window.history.state.viewboxes || []
+
+    window.history.pushState({ 'graph': graph, viewboxes }, "", "/graph?" + nextPage.toString())
+
+    initialiseGraphView()
+    initialiseBreadcrumbs(viewboxes)
+}
+
 async function showSubGraph(nodeData) {
     const currentUrl = new URLSearchParams(window.location.search)
 
     const entry = await fetchTableEntry(currentUrl.get("id"))
 
-    if (entry["type"] == "supply_chain") {
+    if (entry["type"] == "supply_chain" || entry["type"] == "supply_chain_reduced") {
         if (!("categoryGraphId" in nodeData))
             return
 
         const form = new FormData()
         form.append("graph_id", nodeData["categoryGraphId"])
         const newEntry = (await getPage(0, 1, form))[0]
-        const nextPage = new URLSearchParams(window.location.search)
-        nextPage.delete('id')
-        nextPage.append('id', newEntry["id"])
-        nextPage.append('breadcrumbs', currentUrl.get("id"))
-        window.location.href = "/graph?" + nextPage.toString()
+        redirect(newEntry["id"])
         return
     }
 
@@ -158,13 +172,16 @@ async function showSubGraph(nodeData) {
         const form = new FormData()
         form.append("graph_id", nodeData["id"])
         const newEntry = (await getPage(0, 1, form))[0]
-        const nextPage = new URLSearchParams(window.location.search)
-        nextPage.delete('id')
-        nextPage.append('id', newEntry["id"])
-        nextPage.append('breadcrumbs', currentUrl.get("id"))
-        window.location.href = "/graph?" + nextPage.toString()
+        redirect(newEntry["id"])
     }
 
-    else if (entry["type"] == "graphlet")
-        return
+    else if (entry["type"] == "graphlet") {
+        const form = new FormData()
+        form.append("graph_id", nodeData["id"])
+        const newEntry = await getPage(0, 1, form)
+        if (newEntry.length == 0)
+            return
+
+        redirect(newEntry[0]["id"])
+    }
 }
