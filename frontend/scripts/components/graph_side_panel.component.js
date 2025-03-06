@@ -62,6 +62,16 @@ function updateSidePanel(graphData) {
         const locationContainer = addSidePanelRow("Geography", graphData.location)
         sidepanel.appendChild(locationContainer)
     }
+
+    if ("contribution" in graphData) {
+        const contributionContainer = addSidePanelRow("Contribution", graphData.contribution)
+        sidepanel.appendChild(contributionContainer)
+    }
+
+    if ("directContribution" in graphData) {
+        const directContributionContainer = addSidePanelRow("Direct Contribution", graphData.directContribution)
+        sidepanel.appendChild(directContributionContainer);
+    }
 }
 
 function onClose(ev) {

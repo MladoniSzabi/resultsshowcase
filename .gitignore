@@ -4,3 +4,4 @@ venv/
 .env
 graphs.db
 __pycache__/
+webserver2.tar.gz

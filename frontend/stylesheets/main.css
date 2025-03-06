@@ -9,7 +9,7 @@
     margin-bottom: 0.5em;
     border-bottom: solid 1px black;
     background-color: rgb(216, 216, 216);
-    justify-content: end;
+    justify-content: space-between;
     padding: 0.2em 0.5em;
 }
 
