@@ -164,16 +164,17 @@ function createFDTGraph(rootNode, viewbox = null) {
 
         nodeEnter.append("circle")
             .attr("fill", d => d.colour)
-            .attr("stroke", d => d.data.childCount == 0 ? "#fff" : "#000")
-            .attr("stroke-width", d => d.data.childCount == 0 ? 0 : 3)
-            .attr("r", 80)
+            .attr("stroke", d => getNodeBorderColour(d, d.parent, settings))
+            .attr("stroke-width", d => getNodeBorderColour(d, d.parent, settings) == "#fff" ? 0 : 3)
+            .attr("r", d => getNodeSize(d))
 
         nodeEnter.append("text")
             .text(d => d.data.name)
             .attr("alignment-baseline", "central")
             .attr("dominant-baseline", "central")
             .attr("text-anchor", "middle")
-            .attr("fill", d => invertColour(d.colour, true))
+            .attr("fill", d => getNodeSize(d) < 80 ? "#000" : invertColour(d.colour, true))
+            .attr("transform", d => getNodeSize(d) < 80 ? `translate(${getNodeSize(d) * 2 + 5}, 0)` : "")
             .call(wrap, 10);
 
         node = nodeEnter.merge(node)

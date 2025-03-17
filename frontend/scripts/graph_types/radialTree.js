@@ -53,9 +53,9 @@ function createRadialGraph(rootNode, viewbox = null) {
         .join("circle")
         .attr("transform", d => `rotate(${d.x * 180 / Math.PI - 180}) translate(${(d.depth) * radius},0) translate(0, ${d.depth == 0 ? firstNodeOffset : 0})`)
         .attr("fill", d => d.colour)
-        .attr("stroke", d => d.data.childCount == 0 ? "#fff" : "#000")
-        .attr("stroke-width", 3)
-        .attr("r", d => 80)
+        .attr("stroke", d => getNodeBorderColour(d, d.parent, settings))
+        .attr("stroke-width", d => getNodeBorderColour(d, d.parent, settings) == "#fff" ? 0 : 3)
+        .attr("r", d => getNodeSize(d))
         .on('dblclick', (event, d) => { showSubGraph(d.data) })
         .on('click', (event, d) => { updateSidePanel(d.data) })
 
@@ -70,10 +70,15 @@ function createRadialGraph(rootNode, viewbox = null) {
         .attr("alignment-baseline", "central")
         .attr("dominant-baseline", "central")
         .attr("text-anchor", "middle")
-        .attr("fill", d => invertColour(d.colour, true))
+        .attr("fill", d => getNodeSize(d) < 80 ? "#000" : invertColour(d.colour, true))
         .attr("dy", "0.31em")
         .attr("x", d => d.x < Math.PI === !d.children ? 6 : -6)
-        .attr("transform", d => `rotate(${d.x * 180 / Math.PI - 180}) translate(${(d.depth) * radius} ,0) rotate(${(d.x >= Math.PI / 2 && d.x <= 3 * Math.PI / 2) ? 0 : 180}) translate(0, ${d.depth == 0 ? firstNodeOffset : 0})`)
+        .attr("transform", d => `\
+            rotate(${d.x * 180 / Math.PI - 180})\
+            translate(${(d.depth) * radius} ,0)\
+            rotate(${(d.x >= Math.PI / 2 && d.x <= 3 * Math.PI / 2) ? 0 : 180})\
+            translate(0, ${d.depth == 0 ? firstNodeOffset : 0})\
+            ${getNodeSize(d) < 80 ? `translate(${getNodeSize(d) * 2 + 5}, 0)` : ""}`)
         .call(wrap, 10)
         .on('dblclick', (event, d) => { showSubGraph(d.data) })
         .on('click', (event, d) => { updateSidePanel(d.data) })

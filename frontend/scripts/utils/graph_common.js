@@ -74,7 +74,9 @@ function getColourForLayer(layer) {
 }
 
 function getNodeColour(node, parent, settings) {
-    if (node.data.colour)
+    if (node.data.contribution == 0)
+        return "#fff"
+    else if (node.data.colour)
         return node.data.colour
     else if (settings.graphColouring == GraphColouring.TAG && node.depth == 0)
         return ROOT_NODE_COLOUR
@@ -82,6 +84,24 @@ function getNodeColour(node, parent, settings) {
         return getColourFromTag(node.data.tag)
     else if (settings.graphColouring == GraphColouring.TAG && node.data.isAtBoundary)
         return generateColour()
+    else
+        return getColourForLayer(node.depth)
+}
+
+function getNodeSize(node) {
+    let normalised = Math.min(node.data.contribution / 10, 1);
+    return normalised * 180 + 20;
+}
+
+function getNodeBorderColour(node, parent, settings) {
+    if (node.data.contribution != 0)
+        return "#000"
+    else if (node.data.colour)
+        return node.data.colour
+    else if (settings.graphColouring == GraphColouring.TAG && node.depth == 0)
+        return ROOT_NODE_COLOUR
+    else if (settings.graphColouring == GraphColouring.TAG && node.data.tag && getColourFromTag(node.data.tag))
+        return getColourFromTag(node.data.tag)
     else
         return getColourForLayer(node.depth)
 }
@@ -163,21 +183,31 @@ async function showSubGraph(nodeData) {
 
         const form = new FormData()
         form.append("graph_id", nodeData["categoryGraphId"])
+        form.append("graph-type", "product_category")
         const newEntry = (await getPage(0, 1, form))[0]
         redirect(newEntry["id"])
         return
-    }
-
-    else if (entry["type"] == "product_category") {
+    } else if (entry["type"] == "product_category") {
         const form = new FormData()
-        form.append("graph_id", nodeData["id"])
+        form.append("graph_id", nodeData["graphId"])
+        form.append("graph-type", "region")
         const newEntry = (await getPage(0, 1, form))[0]
         redirect(newEntry["id"])
-    }
-
-    else if (entry["type"] == "graphlet") {
+    } else if (entry["type"] == "region") {
         const form = new FormData()
         form.append("graph_id", nodeData["id"])
+        form.append("graph-type", "graphlet")
+        const newEntry = (await getPage(0, 1, form))[0]
+        redirect(newEntry["id"])
+    } else if (entry["type"] == "graphlet") {
+        const form = new FormData()
+        if ("id" in nodeData) {
+            form.append("graph_id", nodeData["id"])
+            form.append("graph-type", "graphlet")
+        } else {
+            form.append("graph_id", nodeData["graphId"])
+            form.append("graph-type", "region")
+        }
         const newEntry = await getPage(0, 1, form)
         if (newEntry.length == 0)
             return
