@@ -34,11 +34,11 @@ var settings = [
         "value": defaultValue("graphColouring", GraphColouring.TAG),
         "possibleValues": [
             {
-                "value": "tag",
+                "value": GraphColouring.TAG,
                 "displayName": "By Tags"
             },
             {
-                "value": "layer",
+                "value": GraphColouring.LAYER,
                 "displayName": "By Layers"
             }
         ]

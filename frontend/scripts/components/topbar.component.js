@@ -1,6 +1,8 @@
-function showSettings() {
+function showSettings(ev) {
     document.getElementById("settings-modal").classList.add("show")
     renderSettigns()
+
+    ev.stopPropagation();
 }
 
 function initiliaseTopbar() {

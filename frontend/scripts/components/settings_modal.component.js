@@ -59,7 +59,7 @@ function renderSettigns() {
 
 function hideSettings(ev) {
 
-    const settings = document.getElementById("settings-modal")
+    const settings = document.getElementById("settings-modal-content")
 
     if (ev.target.getAttribute("id") == "setting-close-button")
         document.getElementById("settings-modal").classList.remove("show")
@@ -69,7 +69,7 @@ function hideSettings(ev) {
 }
 
 function initiliaseSettings() {
-    document.addEventListener("click", hideSettings)
+    document.getElementById("settings-modal").addEventListener("click", hideSettings)
 }
 
 document.addEventListener("DOMContentLoaded", initiliaseSettings)
