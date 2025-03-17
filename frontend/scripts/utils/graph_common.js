@@ -90,7 +90,10 @@ function getNodeColour(node, parent, settings) {
 
 function getNodeSize(node) {
     let normalised = Math.min(node.data.contribution / 10, 1);
-    return normalised * 180 + 20;
+    //linearSize = normalised * 180 + 20;
+    let b = Math.log(180 / 20) / (1 - 0)
+    let a = 20 / Math.exp(b * 0)
+    return a * Math.exp(b * normalised)
 }
 
 function getNodeBorderColour(node, parent, settings) {
