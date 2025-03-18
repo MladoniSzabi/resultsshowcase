@@ -36,7 +36,7 @@ function onPaginationSelect(event) {
 
 function getPaginationButtons(currentPage, totalPages) {
     pages = []
-    pages.push(1)
+    pages.push(0)
     if (currentPage > 3) {
         pages.push(null)
     }
@@ -73,9 +73,9 @@ function renderPagination(isFirstPage, isLastPage, currentPage, buttons) {
             continue
         }
         let button = document.createElement("button")
-        button.textContent = String(item)
+        button.textContent = String(item + 1)
         button.onclick = onPaginationSelect
-        if (item == currentPage + 1)
+        if (item == currentPage)
             button.disabled = true
         container.appendChild(button)
     }

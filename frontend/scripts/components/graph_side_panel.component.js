@@ -2,11 +2,13 @@ function addSidePanelRow(name, value) {
     const row = document.createElement("div")
 
     const nameEl = document.createElement("span")
-    nameEl.innerText = name + ": "
+    if (name) {
+        nameEl.innerText = name + ": "
+    }
     row.appendChild(nameEl)
 
     const valueEl = document.createElement("span")
-    valueEl.innerText = value
+    valueEl.innerText = String(value)
     row.appendChild(valueEl)
 
     return row
@@ -71,6 +73,15 @@ function updateSidePanel(graphData) {
     if ("directContribution" in graphData) {
         const directContributionContainer = addSidePanelRow("Direct Contribution", graphData.directContribution)
         sidepanel.appendChild(directContributionContainer);
+    }
+
+    if ("contribTable" in graphData) {
+        for (const location in graphData["contribTable"]) {
+            const contributionContainer = addSidePanelRow(location, "Emission: " + String(graphData["contribTable"][location]["contrib"]))
+            sidepanel.appendChild(contributionContainer)
+            const directContributionContainer = addSidePanelRow("", "Direct emission: " + String(graphData["contribTable"][location]["contrib"]))
+            sidepanel.appendChild(directContributionContainer)
+        }
     }
 }
 
