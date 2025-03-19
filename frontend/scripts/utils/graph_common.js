@@ -175,10 +175,43 @@ async function redirect(newid) {
     initialiseBreadcrumbs(viewboxes)
 }
 
+async function fetchGraphlet(nodeData) {
+    const form = new FormData()
+    form.append("graph_id", nodeData["id"])
+    form.append("graph-type", "graphlet")
+    const newEntry = await getPage(0, 1, form)
+    if (newEntry.length == 0)
+        return
+    redirect(newEntry[0]["id"])
+}
+
 async function showSubGraph(nodeData) {
     const currentUrl = new URLSearchParams(window.location.search)
 
     const entry = await fetchTableEntry(currentUrl.get("id"))
+
+
+    if ("id" in nodeData) {
+        fetchGraphlet(nodeData)
+        return;
+    }
+
+    if (!("graphType" in nodeData)) {
+        return
+    }
+
+    if (nodeData.graphType == "graphlet") {
+        fetchGraphlet(nodeData)
+        return
+    }
+    else if (nodeData.graphType == "region") {
+        const form = new FormData()
+        form.append("graph_id", nodeData["graphId"])
+        form.append("graph-type", "region")
+        const newEntry = (await getPage(0, 1, form))[0]
+        redirect(newEntry["id"])
+        return
+    }
 
     if (entry["type"] == "supply_chain" || entry["type"] == "supply_chain_reduced") {
         if (!("categoryGraphId" in nodeData))
