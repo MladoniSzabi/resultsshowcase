@@ -3,7 +3,7 @@ import os
 import json
 
 from dotenv import load_dotenv
-from flask import Flask, render_template, make_response, request
+from flask import Flask, render_template, make_response, request, send_from_directory
 
 from SQLiteDatabase import SQLiteDatabase
 
@@ -53,7 +53,8 @@ if not is_debug():
     with app.app_context():
         views = {
             "browse": compile_view('browse.html'),
-            "graph": compile_view('graph.html')
+            "graph": compile_view('graph.html'),
+            "sankey": compile_view('TEMP_sankey.html')
         }
 
 @app.route('/')
@@ -111,3 +112,14 @@ def get_graph(graph_id):
 @app.route("/api/ping", methods=["GET"])
 def ping():
     return ""
+
+@app.route("/sankey")
+def get_sankey():
+    if os.getenv("ENVIRONMENT") == "PROD":
+        return views['sankey']
+    else:
+        return render_template("TEMP_sankey.html")
+
+@app.route("/api/sankey/<int:layers>")
+def get_sankey_data(layers):
+    return send_from_directory("results", "sankey_layer_" + str(layers) + ".json")
