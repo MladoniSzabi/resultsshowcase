@@ -74,7 +74,7 @@ const path = d3.geoPath(projection);
 const svg = d3.create("svg")
     .attr("width", width)
     .attr("height", height)
-    .attr("viewBox", [0, 0, width, height])
+    .attr("viewBox", [0, 50, width, height])
     .attr("style", "max-width: 100%; height: auto;");
 
 function createGraph() {
@@ -86,9 +86,12 @@ function createGraph() {
     }
 
     // Append the legend.
-    svg.append("g")
-        .attr("transform", "translate(20,0)")
-        .append(() => Legend(color, { title: "Gross domestic product per kg greenhouse gas emissions (2021 USD/kg CO₂e)", width: 260 }));
+
+    const legend = Legend(color, { title: "", width: 260 })
+    legend.viewBox.baseVal.y = 25
+    legend.viewBox.baseVal.height = 25
+    d3.select("#legend-container")
+        .append(() => legend)
 
     // Add a white sphere with a black border.
     svg.append("path")
@@ -162,8 +165,10 @@ function play() {
     timer = setInterval(incrementYear, 1000)
 }
 function pause() {
-    if (timer)
+    if (timer) {
         clearInterval(timer)
+        timer = null
+    }
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -177,7 +182,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     extents = d3.extent(extents)
 
-    color = d3.scaleSequentialLog(extents, d3.interpolateInferno);
+    color = d3.scaleSequentialLog(extents, d3.interpolateRgb("red", "#10a778"));
     countries = topojson.feature(world, world.objects.countries);
     countrymesh = topojson.mesh(world, world.objects.countries, (a, b) => a !== b)
     let arr = createGraph(data)

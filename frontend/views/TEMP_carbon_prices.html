@@ -16,27 +16,50 @@
             font-size: 16px;
         }
 
-        #slider-container {
+        body {
             display: flex;
-            justify-content: left;
-            vertical-align: middle;
+            justify-content: center;
+        }
+
+        #controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-flow: column
+        }
+
+        #slider-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         #slider {
             width: 100%;
             max-width: 30em;
         }
+
+        h3 {
+            margin-bottom: 0;
+        }
     </style>
 </head>
 
 <body>
-    <div id="slider-container"><span id="slider-val">1990</span><input type="range" min="1990" max="2023" value="1990"
-            id="slider" /></div>
-    <p>
-        <button onclick="play()">Play</button>
-        <button onclick="pause()">Pause</button>
-    </p>
-    <div id="graph-container"></div>
+    <div>
+        <div id="controls">
+            <div id="slider-container"><span id="slider-val">1990</span><input type="range" min="1990" max="2023"
+                    value="1990" id="slider" /></div>
+            <p>
+                <button onclick="play()">Play</button>
+                <button onclick="pause()">Pause</button>
+            </p>
+            <h3>Gross domestic product per kg greenhouse gas emissions (2021 USD/kg CO₂e)</h3>
+            <div id="legend-container"></div>
+        </div>
+        <div id="graph-container"></div>
+    </div>
 </body>
 
 </html>
