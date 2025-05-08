@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <script src="scripts/components/TEMP_carbon_prices.js" defer></script>
+    <script src="scripts/vendor/d3.js"></script>
+    <script src="scripts/vendor/d3array.js"></script>
+    <script src="scripts/vendor/d3collection.js"></script>
+    <script src="scripts/vendor/d3path.js"></script>
+    <script src="scripts/vendor/d3shape.js"></script>
+    <script src="scripts/vendor/d3sankey.js"></script>
+    <script src="scripts/vendor/d3colorlegend.js"></script>
+    <script src="scripts/vendor/topojson.min.js"></script>
+
+    <style>
+        * {
+            font-size: 16px;
+        }
+
+        #slider-container {
+            display: flex;
+            justify-content: left;
+            vertical-align: middle;
+        }
+
+        #slider {
+            width: 100%;
+            max-width: 30em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="slider-container"><span id="slider-val">1990</span><input type="range" min="1990" max="2023" value="1990"
+            id="slider" /></div>
+    <p>
+        <button onclick="play()">Play</button>
+        <button onclick="pause()">Pause</button>
+    </p>
+    <div id="graph-container"></div>
+</body>
+
+</html>

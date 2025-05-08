@@ -54,7 +54,8 @@ if not is_debug():
         views = {
             "browse": compile_view('browse.html'),
             "graph": compile_view('graph.html'),
-            "sankey": compile_view('TEMP_sankey.html')
+            "sankey": compile_view('TEMP_sankey.html'),
+            "carbon_prices": compile_view("TEMP_carbon_prices.html")
         }
 
 @app.route('/')
@@ -120,6 +121,21 @@ def get_sankey():
     else:
         return render_template("TEMP_sankey.html")
 
+@app.route("/carbon_prices")
+def get_carbon_prices_view():
+    if os.getenv("ENVIRONMENT") == "PROD":
+        return views['carbon_prices']
+    else:
+        return render_template("TEMP_carbon_prices.html")
+
 @app.route("/api/sankey/<int:layers>")
 def get_sankey_data(layers):
     return send_from_directory("results", "sankey_layer_" + str(layers) + ".json")
+
+@app.route("/api/carbonprices/map")
+def get_world_map():
+        return send_from_directory("results", "countries-50m.json")
+
+@app.route("/api/carbonprices/data")
+def get_carbon_prices():
+        return send_from_directory("results", "carbon_prices.json")
