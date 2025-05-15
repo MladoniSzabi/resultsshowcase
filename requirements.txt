@@ -1,0 +1,7 @@
+python-dotenv
+flask
+
+#testing
+splinter
+selenium
+pytest
