@@ -178,7 +178,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     for (let i = 1990; i <= 2023; i++) {
         extents = extents.concat(d3.extent(data.map(d => mapNum(d[i]))));
     }
-    console.log(extents)
 
     extents = d3.extent(extents)
 
