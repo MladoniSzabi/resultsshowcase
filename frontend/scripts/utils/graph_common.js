@@ -1,53 +1,108 @@
 const ROOT_NODE_COLOUR = "#983334"
 
-function getColourFromTag(tag) {
-    if (tag == "renewable_wind")
-        return "#8fd14d"
-    else if (tag == "renewable_hydro")
-        return "#66a22a"
-    else if (tag == "renewable_solar")
-        return "#b3e085"
-    else if (tag == "renewable_geothermal")
-        return "#8fe33b3"
-    else if (tag == "renewable_methanol")
-        return "#66b319"
-    else if (tag == "renewable_biogas")
-        return "#b3ec79"
-    else if (tag == "renewable_biometahne")
-        return "#8fc15c"
-    else if (tag == "renewable_ethanol")
-        return "#669438"
-    else if (tag == "renewable_biodiesel")
-        return "#b3d590"
-    else if (tag == "production_process")
-        return "#85b8ff"
-    else if (tag == "gaseous_fuel")
-        return "#cce1ff"
-    else if (tag == "liquid_fuel")
-        return "#d0e2fb"
-    else if (tag == "solid_fuel")
-        return "#8eb9f6"
-    else if (tag == "electricity")
-        return "#12CDD4"
-    else if (tag == "heat_and_steam")
-        return "#0c888d"
-    else if (tag == "cooling")
-        return "#22bec3"
-    else if (tag == "purchased_goods_and_services")
-        return "#414BB2"
-    else if (tag == "transport_and_distribution")
-        return "#383e7a"
-    else if (tag == "fuel_and_energy_related_activities")
-        return "#505695"
-    else if (tag == "business_travel")
-        return "#5057a5"
-    else if (tag == "capital_goods")
-        return "#878cc5"
-    else if (tag == "waste")
-        return "#7981d2"
-    else if (tag == "intermediate")
-        return "#ce5a5a"
+TAG_INFORMATION = {
+    "root": {
+        "colour": "#983334",
+        "full_name": "Root node"
+    },
+    "renewable_wind": {
+        "colour": "#8fd14d",
+        "full_name": "Renewable wind"
+    },
+    "renewable_hydro": {
+        "colour": "#66a22a",
+        "full_name": "Renewable hydro"
+    },
+    "renewable_solar": {
+        "colour": "#b3e085",
+        "full_name": "Renewable solar"
+    },
+    "renewable_geothermal": {
+        "colour": "#8fe33b",
+        "full_name": "Renewable geothermal"
+    },
+    "renewable_methanol": {
+        "colour": "#66b319",
+        "full_name": "Renewable methanol"
+    },
+    "renewable_biogas": {
+        "colour": "#b3ec79",
+        "full_name": "Renewable biogas"
+    },
+    "renewable_biometahne": {
+        "colour": "#8fc15c",
+        "full_name": "Renewable biometahne"
+    },
+    "renewable_ethanol": {
+        "colour": "#669438",
+        "full_name": "Renewable ethanol"
+    },
+    "renewable_biodiesel": {
+        "colour": "#b3d590",
+        "full_name": "Renewable biodiesel"
+    },
+    "production_process": {
+        "colour": "#85b8ff",
+        "full_name": "Production process"
+    },
+    "gaseous_fuel": {
+        "colour": "#cce1ff",
+        "full_name": "Gaseous fuel"
+    },
+    "liquid_fuel": {
+        "colour": "#d0e2fb",
+        "full_name": "Liquid fuel"
+    },
+    "solid_fuel": {
+        "colour": "#8eb9f6",
+        "full_name": "Solid fuel"
+    },
+    "electricity": {
+        "colour": "#12CDD4",
+        "full_name": "Electricity"
+    },
+    "heat_and_steam": {
+        "colour": "#0c888d",
+        "full_name": "Heat and steam"
+    },
+    "cooling": {
+        "colour": "#22bec3",
+        "full_name": "Cooling"
+    },
+    "purchased_goods_and_services": {
+        "colour": "#414BB2",
+        "full_name": "Purchased goods and services"
+    },
+    "transport_and_distribution": {
+        "colour": "#383e7a",
+        "full_name": "Transport and distribution"
+    },
+    "fuel_and_energy_related_activities": {
+        "colour": "#505695",
+        "full_name": "Fuel and energy related activities"
+    },
+    "business_travel": {
+        "colour": "#5057a5",
+        "full_name": "Business travel"
+    },
+    "capital_goods": {
+        "colour": "#878cc5",
+        "full_name": "Capital goods"
+    },
+    "waste": {
+        "colour": "#7981d2",
+        "full_name": "Waste"
+    },
+    "intermediate": {
+        "colour": "#ce5a5a",
+        "full_name": "Intermediate"
+    },
+}
 
+function getColourFromTag(tag) {
+    if (tag in TAG_INFORMATION) {
+        return TAG_INFORMATION[tag]["colour"]
+    }
     return null
 }
 

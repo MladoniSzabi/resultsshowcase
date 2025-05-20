@@ -7,6 +7,7 @@
 <script src="/scripts/components/graph_view.component.js"></script>
 <script src="/scripts/components/graph_side_panel.component.js"></script>
 <script src="/scripts/components/breadcrumbs.component.js"></script>
+<script src="/scripts/components/legend.component.js"></script>
 
 <script src="/scripts/graph_types/FDT.js"></script>
 <script src="/scripts/graph_types/radialTree.js"></script>
@@ -27,10 +28,11 @@
 
 <div id="graph-container">
     <p id="breadcrumbs"></p>
-    <div>
+    <div id="graph-window">
         <div id="svg-container"></div>
         <span id="zoom-in" class="zoom material-symbols-outlined">zoom_in</span>
         <span id="zoom-out" class="zoom material-symbols-outlined">zoom_out</span>
+        <div id="legend"></div>
     </div>
 
     <div id="sidepanel-container">

@@ -28,6 +28,9 @@ function createGraph(graph, viewbox) {
     svgNode.addEventListener("touchend", handleTouchEnd)
 
     svgContainer.appendChild(svgNode)
+
+    const legend = document.getElementById("legend")
+    drawLegend(legend, TAG_INFORMATION)
 }
 
 async function initialiseGraphView() {
