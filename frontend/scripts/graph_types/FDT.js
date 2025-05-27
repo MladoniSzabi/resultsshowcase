@@ -170,11 +170,11 @@ function createFDTGraph(rootNode, viewbox = null) {
 
         nodeEnter.append("text")
             .text(d => d.data.name)
-            .attr("alignment-baseline", "central")
-            .attr("dominant-baseline", "central")
-            .attr("text-anchor", "middle")
-            .attr("fill", d => getNodeSize(d) < 80 ? "#000" : invertColour(d.colour, true))
-            .attr("transform", d => getNodeSize(d) < 80 ? `translate(${getNodeSize(d) * 2 + 5}, 0)` : "")
+            .attr("alignment-baseline", d => getNodeSize(d) < 60 ? "left" : "central")
+            .attr("dominant-baseline", d => getNodeSize(d) < 60 ? "left" : "central")
+            .attr("text-anchor", d => getNodeSize(d) < 60 ? "left" : "middle")
+            .attr("fill", d => getNodeSize(d) < 60 ? "#000" : invertColour(d.colour, true))
+            .attr("transform", d => getNodeSize(d) < 60 ? `translate(${getNodeSize(d) + 5}, 0)` : "")
             .call(wrap, 10);
 
         node = nodeEnter.merge(node)
