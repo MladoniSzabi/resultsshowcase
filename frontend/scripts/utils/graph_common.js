@@ -152,7 +152,9 @@ function getNodeSize(node) {
 }
 
 function getNodeBorderColour(node, parent, settings) {
-    if (node.data.contribution != 0)
+    if (node.data.expandable === false && node.data.contribution != 0)
+        return "#fff"
+    else if (node.data.contribution != 0)
         return "#000"
     else if (node.data.colour)
         return node.data.colour
