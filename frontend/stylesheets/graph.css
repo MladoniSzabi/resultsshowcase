@@ -86,9 +86,9 @@ span.zoom {
 #legend {
     position: absolute;
     display: grid;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(2, auto);
     column-gap: 0.5em;
     margin: 1em;
-    bottom: 0;
-    left: 0;
+    top: 0;
+    right: 0;
 }

@@ -7,96 +7,96 @@ TAG_INFORMATION = {
     },
     "renewable_wind": {
         "colour": "#8fd14d",
-        "full_name": "Renewable wind"
+        "full_name": "Renewable energy"
     },
     "renewable_hydro": {
-        "colour": "#66a22a",
-        "full_name": "Renewable hydro"
+        "colour": "#8fd14d", //"#66a22a",
+        "full_name": "Renewable energy"
     },
     "renewable_solar": {
-        "colour": "#b3e085",
-        "full_name": "Renewable solar"
+        "colour": "#8fd14d", //"#b3e085",
+        "full_name": "Renewable energy"
     },
     "renewable_geothermal": {
-        "colour": "#8fe33b",
-        "full_name": "Renewable geothermal"
+        "colour": "#8fd14d", //"#8fe33b",
+        "full_name": "Renewable energy"
     },
     "renewable_methanol": {
-        "colour": "#66b319",
-        "full_name": "Renewable methanol"
+        "colour": "#8fd14d", //"#66b319",
+        "full_name": "Renewable energy"
     },
     "renewable_biogas": {
-        "colour": "#b3ec79",
-        "full_name": "Renewable biogas"
+        "colour": "#8fd14d", //"#b3ec79",
+        "full_name": "Renewable energy"
     },
     "renewable_biometahne": {
-        "colour": "#8fc15c",
-        "full_name": "Renewable biometahne"
+        "colour": "#8fd14d", //"#8fc15c",
+        "full_name": "Renewable energy"
     },
     "renewable_ethanol": {
-        "colour": "#669438",
-        "full_name": "Renewable ethanol"
+        "colour": "#8fd14d", //"#669438",
+        "full_name": "Renewable energy"
     },
     "renewable_biodiesel": {
-        "colour": "#b3d590",
-        "full_name": "Renewable biodiesel"
+        "colour": "#8fd14d", //"#b3d590",
+        "full_name": "Renewable energy"
     },
     "production_process": {
-        "colour": "#85b8ff",
-        "full_name": "Production process"
+        "colour": "#B0D1FF", // "#85b8ff",
+        "full_name": "Scope 1"
     },
     "gaseous_fuel": {
-        "colour": "#cce1ff",
-        "full_name": "Gaseous fuel"
+        "colour": "#B0D1FF", // "#cce1ff",
+        "full_name": "Scope 1"
     },
     "liquid_fuel": {
-        "colour": "#d0e2fb",
-        "full_name": "Liquid fuel"
+        "colour": "#B0D1FF", // "#d0e2fb",
+        "full_name": "Scope 1"
     },
     "solid_fuel": {
-        "colour": "#8eb9f6",
-        "full_name": "Solid fuel"
+        "colour": "#B0D1FF", // "#8eb9f6",
+        "full_name": "Scope 1"
     },
     "electricity": {
-        "colour": "#12CDD4",
-        "full_name": "Electricity"
+        "colour": "#0AC7CE",// "#12CDD4",
+        "full_name": "Scope 2"
     },
     "heat_and_steam": {
-        "colour": "#0c888d",
-        "full_name": "Heat and steam"
+        "colour": "#0AC7CE", // "#0c888d",
+        "full_name": "Scope 2"
     },
     "cooling": {
-        "colour": "#22bec3",
-        "full_name": "Cooling"
+        "colour": "#0AC7CE", // "#22bec3",
+        "full_name": "Scope 2"
     },
     "purchased_goods_and_services": {
         "colour": "#414BB2",
         "full_name": "Purchased goods and services"
     },
     "transport_and_distribution": {
-        "colour": "#383e7a",
+        "colour": "#7D5CD9", // "#383e7a", 
         "full_name": "Transport and distribution"
     },
     "fuel_and_energy_related_activities": {
-        "colour": "#505695",
+        "colour": "#757897", // "#505695",
         "full_name": "Fuel and energy related activities"
     },
     "business_travel": {
-        "colour": "#5057a5",
+        "colour": "#79D5F9", // "#5057a5",
         "full_name": "Business travel"
     },
     "capital_goods": {
-        "colour": "#878cc5",
+        "colour": "#EAD082", // "#878cc5",
         "full_name": "Capital goods"
     },
     "waste": {
-        "colour": "#7981d2",
+        "colour": "#F2A47E", // "#7981d2",
         "full_name": "Waste"
     },
-    "intermediate": {
-        "colour": "#ce5a5a",
-        "full_name": "Intermediate"
-    },
+    // "intermediate": {
+    //     "colour": "#ce5a5a",
+    //     "full_name": "Intermediate"
+    // },
 }
 
 function getColourFromTag(tag) {

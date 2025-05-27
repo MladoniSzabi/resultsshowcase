@@ -1,8 +1,14 @@
 function drawLegend(container, tags) {
     container.innerHtml = ""
 
+    existingKeys = new Set();
+
     for (const key in tags) {
-        console.log(key)
+        if (existingKeys.has(tags[key]["full_name"])) {
+            continue
+        }
+        existingKeys.add(tags[key]["full_name"])
+        console.log(tags[key]["full_name"])
         const p = document.createElement("p")
         const span = document.createElement("span")
         span.innerText = "⬤ "
