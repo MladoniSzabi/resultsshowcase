@@ -91,4 +91,8 @@ span.zoom {
     margin: 1em;
     top: 0;
     right: 0;
+    border: solid 1px black;
+    padding: 0.5em;
+    border-radius: 10px;
+    background-color: white;
 }
