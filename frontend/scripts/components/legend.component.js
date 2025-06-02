@@ -1,5 +1,5 @@
 function drawLegend(container, tags) {
-    container.innerHtml = ""
+    container.innerHTML = ""
 
     existingKeys = new Set();
 
