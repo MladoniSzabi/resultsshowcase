@@ -9,23 +9,22 @@ function updateSidePanel(data) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Specify the chart’s dimensions.
     const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
     const height = 0.9 * vh;
     const width = 0.8 * vw;
+    const radius = 6000
+
+    const tree = d3.tree()
+        .size([2 * Math.PI, Math.min(width, height) * 1000 - 30])
+        .separation((a, b) => ((a.parent == b.parent ? 2 : 2) / a.depth));
 
     // Compute the graph and start the force simulation.
-    const root = d3.hierarchy(GRAPH);
+    const root = tree(d3.hierarchy(GRAPH))
 
-    const links = root.links();
-    const nodes = root.descendants();
-
-    const simulation = d3.forceSimulation()
-        .force("link", d3.forceLink().id(d => d.id).distance(500).strength(0.1))
-        .force("charge", d3.forceManyBody().strength(-800));
-
-    viewbox = [-width / 2, -height / 2, width, height]
-    initialViewbox = viewbox
+    if (!viewbox)
+        viewbox = [-width / 2, -height / 2, width, height]
 
     // Create the container SVG.
     svg = d3.create("svg")
@@ -33,64 +32,56 @@ document.addEventListener('DOMContentLoaded', () => {
         .attr("height", height)
         .attr("viewBox", viewbox);
 
-    const gLink = svg.append("g")
-        .attr("stroke", "#999")
-        .attr("stroke-opacity", 0.6)
-
-    const gNode = svg.append("g")
-
-    simulation.nodes(nodes)
-    simulation.force('link').links(links)
+    const firstNodeOffset = 0
 
     // Append links.
-    let link = gLink
-        .selectAll("line")
-        .data(links, d => d.target.id)
-
-    link.exit().remove()
-
-    const linkEnter = link.enter().append("line")
-
-    link = linkEnter.merge(link)
+    svg.append("g")
+        .attr("fill", "none")
+        .attr("stroke", "#555")
+        .attr("stroke-opacity", 0.4)
+        .attr("stroke-width", 1.5)
+        .selectAll()
+        .data(root.links(), d => d.target.id)
+        .join("line")
+        .attr("x1", d => (d.source.depth) * radius * Math.cos(d.source.x - Math.PI))
+        .attr("y1", d => ((d.source.depth) * radius + (d.source.depth == 0 ? firstNodeOffset : 0)) * Math.sin(d.source.x - Math.PI))
+        .attr("x2", d => (d.target.depth) * radius * Math.cos(d.target.x - Math.PI))
+        .attr("y2", d => ((d.target.depth) * radius + (d.target.depth == 0 ? firstNodeOffset : 0)) * Math.sin(d.target.x - Math.PI));
 
     // Append nodes.
-    let node = gNode
-        .selectAll("g")
-        .data(nodes, d => d.id)
-
-    node.exit().remove()
-
-    const nodeEnter = node.enter()
-        .append("g")
-        .call(drag(simulation))
-
-    nodeEnter.on('click', (event, d) => { updateSidePanel(d.data) })
-
-    nodeEnter.append("circle")
-        .attr("fill", d => d.data.colour ? d.data.colour : "#fff")
+    svg.append("g")
+        .selectAll()
+        .data(root.descendants())
+        .join("circle")
+        .attr("transform", d => `rotate(${d.x * 180 / Math.PI - 180}) translate(${(d.depth) * radius},0) translate(0, ${d.depth == 0 ? firstNodeOffset : 0})`)
+        .attr("fill", d => d.data.colour || "#fff")
         .attr("stroke", "#000")
         .attr("stroke-width", 3)
-        .attr("r", 80)
+        .attr("r", 60)
+        .on('click', (event, d) => { updateSidePanel(d.data) })
 
-    nodeEnter.append("text")
+    // Append labels.
+    svg.append("g")
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-width", 3)
+        .selectAll()
+        .data(root.descendants())
+        .join("text")
         .text(d => d.data.name)
         .attr("alignment-baseline", "central")
         .attr("dominant-baseline", "central")
         .attr("text-anchor", "middle")
         .attr("fill", "#000")
-        .call(wrap, 10);
-
-    node = nodeEnter.merge(node)
-
-    simulation.on("tick", () => {
-        link
-            .attr("x1", d => d.source.x)
-            .attr("y1", d => d.source.y)
-            .attr("x2", d => d.target.x)
-            .attr("y2", d => d.target.y);
-
-        node.attr('transform', d => `translate(${d.x},${d.y})`);
-    });
+        .attr("dy", "0.31em")
+        .attr("x", d => d.x < Math.PI === !d.children ? 6 : -6)
+        .attr("transform", d => `\
+            rotate(${d.x * 180 / Math.PI - 180})\
+            translate(${(d.depth) * radius} ,0)\
+            rotate(${(d.x >= Math.PI / 2 && d.x <= 3 * Math.PI / 2) ? 0 : 180})\
+            translate(0, ${d.depth == 0 ? firstNodeOffset : 0})\
+            ${getNodeSize(d) < 80 ? `translate(${getNodeSize(d) * 2 + 5}, 0)` : ""}`)
+        .call(wrap, 10)
+        .on('click', (event, d) => { updateSidePanel(d.data) })
 
     document.getElementById("svg-container").appendChild(svg.node())
 
