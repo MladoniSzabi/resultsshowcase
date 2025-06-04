@@ -7,16 +7,18 @@ var svg = null
 var historyTimeout = null
 
 function updateHistory(viewbox) {
-    const searchParams = new URLSearchParams(window.location.search)
-    searchParams.delete("viewbox")
-    searchParams.append("viewbox", viewbox.toString())
-    clearTimeout(historyTimeout)
-    historyTimeout = setTimeout(() => {
-        let state = { 'graph': window.history.state.graph, 'viewboxes': window.history.state.viewboxes }
-        state.viewboxes[state.viewboxes.length - 1] = viewbox
-        window.history.replaceState(state, "", window.location.pathname + "?" + searchParams.toString())
-        updateBreadcrumb({ "viewbox": viewbox })
-    }, 200)
+    if (window.history.state) {
+        const searchParams = new URLSearchParams(window.location.search)
+        searchParams.delete("viewbox")
+        searchParams.append("viewbox", viewbox.toString())
+        clearTimeout(historyTimeout)
+        historyTimeout = setTimeout(() => {
+            let state = { 'graph': window.history.state.graph, 'viewboxes': window.history.state.viewboxes }
+            state.viewboxes[state.viewboxes.length - 1] = viewbox
+            window.history.replaceState(state, "", window.location.pathname + "?" + searchParams.toString())
+            updateBreadcrumb({ "viewbox": viewbox })
+        }, 200)
+    }
 
 }
 
