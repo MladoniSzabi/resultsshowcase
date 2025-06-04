@@ -9,20 +9,24 @@ from SQLiteDatabase import SQLiteDatabase
 
 load_dotenv()
 
+
 def is_debug():
     if not "DEBUG" in os.environ:
         return False
-    
+
     debug_env_var = os.getenv("DEBUG")
     if debug_env_var == "1" or debug_env_var.lower() == "true":
         return True
 
     return False
 
+
 if is_debug():
     os.environ["FLASK_DEBUG"] = "1"
 
-app = Flask(__name__, static_url_path='', static_folder='frontend', template_folder='frontend/views')
+app = Flask(__name__, static_url_path='', static_folder='frontend',
+            template_folder='frontend/views')
+
 
 def get_filters():
     return {
@@ -41,8 +45,10 @@ def get_filters():
         'sort-order': request.args.get('sort-order')
     }
 
+
 if not is_debug():
     print("Environment is Production")
+
     def compile_view(view_path):
         content = gzip.compress(render_template(view_path).encode('utf-8'), 9)
         response = make_response(content)
@@ -55,12 +61,15 @@ if not is_debug():
             "browse": compile_view('browse.html'),
             "graph": compile_view('graph.html'),
             "sankey": compile_view('TEMP_sankey.html'),
-            "carbon_prices": compile_view("TEMP_carbon_prices.html")
+            "carbon_prices": compile_view("TEMP_carbon_prices.html"),
+            "llmresults": compile_view("TEMP_llmresults.html")
         }
+
 
 @app.route('/')
 def index():
     return browse()
+
 
 @app.route('/browse')
 def browse():
@@ -69,12 +78,14 @@ def browse():
     else:
         return render_template("browse.html")
 
+
 @app.route('/graph')
 def graph_view():
     if os.getenv("ENVIRONMENT") == "PROD":
         return views['graph']
     else:
         return render_template("graph.html")
+
 
 @app.route("/api/graphs/total", methods=["GET"])
 def get_graphs_count():
@@ -84,6 +95,7 @@ def get_graphs_count():
         query = db.generate_query(filters)
         result = db.get_count(query)
         return str(result)
+
 
 @app.route("/api/graphs/page", methods=["GET"])
 def get_graphs_page():
@@ -95,24 +107,27 @@ def get_graphs_page():
     with SQLiteDatabase("graphs.db") as db:
         query = db.generate_query(filters)
         collection = db.get_page(query, page_size, page_number)
-        
+
         if len(collection) == 0:
             return "[]"
 
         return json.dumps(collection)
 
+
 @app.route("/api/graph/<int:graph_id>", methods=["GET"])
 def get_graph(graph_id):
-    assert(graph_id >= 0)
+    assert (graph_id >= 0)
 
     with SQLiteDatabase("graphs.db") as db:
         graph_entry = db.get_graph(graph_id, ["Path"])
         with open(graph_entry["path"]) as f:
             return f.read()
 
+
 @app.route("/api/ping", methods=["GET"])
 def ping():
     return ""
+
 
 @app.route("/sankey")
 def get_sankey():
@@ -121,6 +136,7 @@ def get_sankey():
     else:
         return render_template("TEMP_sankey.html")
 
+
 @app.route("/carbon_prices")
 def get_carbon_prices_view():
     if os.getenv("ENVIRONMENT") == "PROD":
@@ -128,14 +144,25 @@ def get_carbon_prices_view():
     else:
         return render_template("TEMP_carbon_prices.html")
 
+
+@app.route("/llmresults")
+def get_llm_results():
+    if os.getenv("ENVIRONMENT") == "PROD":
+        return views['llmresults']
+    else:
+        return render_template("TEMP_llmresults.html")
+
+
 @app.route("/api/sankey/<int:layers>")
 def get_sankey_data(layers):
     return send_from_directory("results", "sankey_layer_" + str(layers) + ".json")
 
+
 @app.route("/api/carbonprices/map")
 def get_world_map():
-        return send_from_directory("results", "countries-50m.json")
+    return send_from_directory("results", "countries-50m.json")
+
 
 @app.route("/api/carbonprices/data")
 def get_carbon_prices():
-        return send_from_directory("results", "carbon_prices.json")
+    return send_from_directory("results", "carbon_prices.json")
