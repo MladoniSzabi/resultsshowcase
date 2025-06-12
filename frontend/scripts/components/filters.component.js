@@ -1,3 +1,5 @@
+let filterColumns = []
+
 function getSortedColumn() {
     const rows = document.getElementsByTagName("tr")
 
@@ -13,25 +15,16 @@ function getSortedColumn() {
 
 function getFilters() {
 
-    const name = document.getElementById("name").value
-    const product = document.getElementById("product").value
-    const cpcCode = document.getElementById("cpc-code").value
-    const cpcName = document.getElementById("cpc-name").value
-    const graphType = document.getElementById("graph-type").value
-    const geography = document.getElementById("geography").value
-    const nodeCount = document.getElementById("node-count").value
-    const depth = document.getElementById("depth").value
+    filters = {}
+    for (const col of filterColumns) {
+        filters[col] = document.getElementById(col).value
+    }
 
     let form = new FormData()
 
-    form.append("name", name)
-    form.append("product", product)
-    form.append("cpc-code", cpcCode)
-    form.append("cpc-name", cpcName)
-    form.append("graph-type", graphType)
-    form.append("geography", geography)
-    form.append("node-count", nodeCount)
-    form.append("depth", depth)
+    for (const col of filterColumns) {
+        form.append(col, filters[col])
+    }
 
     sorting = getSortedColumn()
     if (sorting) {
@@ -61,20 +54,15 @@ function onSort(ev) {
 
 function onChange(key, value) {
     clearTimeout(timeoutHandler)
-
-
     timeoutHandler = setTimeout(() => { tableState.currentPage = 0; updateTable(); timeoutHandler = null }, 700)
 }
 
-function initiliaseFilters() {
-    document.getElementById("name").addEventListener("input", (ev) => onChange("name", ev.target.value))
-    document.getElementById("product").addEventListener("input", (ev) => onChange("product", ev.target.value))
-    document.getElementById("cpc-code").addEventListener("input", (ev) => onChange("cpc-code", ev.target.value))
-    document.getElementById("cpc-name").addEventListener("input", (ev) => onChange("cpc-name", ev.target.value))
-    document.getElementById("graph-type").addEventListener("input", (ev) => onChange("graph-type", ev.target.value))
-    document.getElementById("geography").addEventListener("input", (ev) => onChange("geography", ev.target.value))
-    document.getElementById("node-count").addEventListener("input", (ev) => onChange("node-count", ev.target.value))
-    document.getElementById("depth").addEventListener("input", (ev) => onChange("depth", ev.target.value))
+function initiliaseFilters(columns) {
+    filterColumns = columns
+
+    for (const col of filterColumns) {
+        document.getElementById(col).addEventListener("input", (ev) => onChange(col, ev.target.value))
+    }
 
     const rows = document.getElementsByTagName("tr")
     for (let i = 0; i < rows[0].children.length - 1; i++)
@@ -82,5 +70,3 @@ function initiliaseFilters() {
 
     getSortedColumn()
 }
-
-document.addEventListener("DOMContentLoaded", initiliaseFilters)

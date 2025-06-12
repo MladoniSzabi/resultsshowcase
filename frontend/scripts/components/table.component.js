@@ -1,10 +1,14 @@
 
 let tableState = {
     currentPage: 0,
-    itemsPerPage: 5
+    itemsPerPage: 5,
+    callback: () => { },
+    columns: []
 }
 
-function initiliaseTable() {
+function initiliaseTable(columns, callback) {
+    tableState.columns = columns
+    tableState.callback = callback
     const currentUrl = new URLSearchParams(window.location.search)
 
     table = document.getElementById("graphs-table")
@@ -26,14 +30,9 @@ function renderTable(table, data, onShowClicked) {
             cells[key].textContent = String(graph[key])
         }
 
-        row.appendChild(cells["name"])
-        row.appendChild(cells["productReference"])
-        row.appendChild(cells["type"])
-        row.appendChild(cells["geography"])
-        row.appendChild(cells["cpcCode"])
-        row.appendChild(cells["cpcName"])
-        row.appendChild(cells["numberOfNodes"])
-        row.appendChild(cells["depth"])
+        for (const col of tableState.columns) {
+            row.appendChild(cells[col])
+        }
 
         let showButton = document.createElement("a")
         showButton.textContent = "Show"
@@ -54,8 +53,6 @@ async function updateTable() {
     const count = await getItemCount(filters)
     const items = await getPage(tableState.currentPage, tableState.itemsPerPage, filters)
 
-    renderTable(table, items, (i) => { window.location.href = "/graph?id=" + String(i) })
+    renderTable(table, items, tableState.callback)
     updateNavigation(count, tableState.currentPage, tableState.itemsPerPage)
 }
-
-document.addEventListener("DOMContentLoaded", initiliaseTable)

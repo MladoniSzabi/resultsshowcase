@@ -60,7 +60,7 @@ if not is_debug():
         views = {
             "browse": compile_view('browse.html'),
             "graph": compile_view('graph.html'),
-            "sankey": compile_view('TEMP_sankey.html'),
+            "sankey": compile_view('sankey.html'),
             "carbon_prices": compile_view("TEMP_carbon_prices.html"),
             "llmresults": compile_view("TEMP_llmresults.html")
         }
@@ -134,8 +134,32 @@ def get_sankey():
     if os.getenv("ENVIRONMENT") == "PROD":
         return views['sankey']
     else:
-        return render_template("TEMP_sankey.html")
+        return render_template("sankey.html")
 
+@app.route("/api/sankey/total", methods=["GET"])
+def get_sankey_total_items():
+    filters = get_filters()
+
+    with SQLiteDatabase("sankey.db", "sankey") as db:
+        query = db.generate_query(filters)
+        result = db.get_count(query)
+        return str(result)
+
+@app.route("/api/sankey/page", methods=["GET"])
+def get_sankey_page():
+    filters = get_filters()
+
+    page_number = int(request.args.get("page", 0))
+    page_size = min(int(request.args.get("count", 0)), 50)
+
+    with SQLiteDatabase("sankey.db", "sankey") as db:
+        query = db.generate_query(filters)
+        collection = db.get_page(query, page_size, page_number)
+
+        if len(collection) == 0:
+            return "[]"
+
+        return json.dumps(collection)
 
 @app.route("/carbon_prices")
 def get_carbon_prices_view():
@@ -153,9 +177,14 @@ def get_llm_results():
         return render_template("TEMP_llmresults.html")
 
 
-@app.route("/api/sankey/<int:layers>")
-def get_sankey_data(layers):
-    return send_from_directory("results", "sankey_layer_" + str(layers) + ".json")
+@app.route("/api/sankey/<int:sankey_id>")
+def get_sankey_data(sankey_id):
+    assert (sankey_id >= 0)
+
+    with SQLiteDatabase("sankey.db", "sankey") as db:
+        graph_entry = db.get_graph(sankey_id, ["path"])
+        with open(graph_entry["path"]) as f:
+            return f.read()
 
 
 @app.route("/api/carbonprices/map")

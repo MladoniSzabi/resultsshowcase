@@ -3,9 +3,12 @@ import json
 
 class SQLiteDatabase:
 
-    def __init__(self,name = None):
+    def __init__(self,name = None, table = None):
         if name == None:
             name = "databases.db"
+        self.table = table
+        if table == None:
+            self.table = "Graphs"
         self.name = "file:" + name + "?mode=ro"
 
     def __enter__(self):
@@ -100,16 +103,16 @@ class SQLiteDatabase:
         return retval
 
     def get_count(self, query):
-       return self.cur.execute("SELECT COUNT (*) FROM Graphs " + query[0], query[1]).fetchone()[0]
+       return self.cur.execute("SELECT COUNT (*) FROM " + self.table + " " + query[0], query[1]).fetchone()[0]
 
     def get_page(self, query, page_size:int = 5, page_number:int = 0, keys:None|list = None):
         collection = []
 
         if keys == None:
-            query_str = "SELECT rowid as id, * FROM Graphs " + query[0]
+            query_str = "SELECT rowid as id, * FROM " + self.table + " " + query[0]
         else:
             keys_conv = ["rowid" if k == 'id' else k for k in keys]
-            query_str = "SELECT " + ', '.join(keys_conv) + " FROM Graphs " + query[0]
+            query_str = "SELECT " + ', '.join(keys_conv) + " FROM " + self.table + " " + query[0]
         
         query_str = query_str + " LIMIT " + str(int(page_size)) + " OFFSET " + str(int(page_size) * int(page_number))
 
@@ -125,10 +128,10 @@ class SQLiteDatabase:
 
     def get_graph(self, graph_id:int, keys: None|list = None):
         if keys == None:
-            res = self.cur.execute("SELECT rowis as id, * FROM Graphs WHERE rowid=" + str(int(graph_id)))
+            res = self.cur.execute("SELECT rowis as id, * FROM " + self.table + " WHERE rowid=" + str(int(graph_id)))
         else:
             keys_conv = ["rowid" if k == 'id' else k for k in keys]
-            res = self.cur.execute("SELECT " + ', '.join(keys_conv) + " FROM Graphs WHERE rowid=" + str(int(graph_id)))
+            res = self.cur.execute("SELECT " + ', '.join(keys_conv) + " FROM " + self.table + " WHERE rowid=" + str(int(graph_id)))
         
         if keys == None:
             keys = [description[0] for description in res.description]

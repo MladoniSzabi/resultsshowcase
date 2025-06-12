@@ -3,9 +3,11 @@
 {% block title %}Browse{% endblock %}
 
 {% block head %}
-<script src="scripts/components/table.component.js"></script>
-<script src="scripts/components/table_navigation.component.js"></script>
-<script src="scripts/components/filters.component.js"></script>
+<script src="/scripts/components/browse.js"></script>
+<script src="/scripts/components/table.component.js"></script>
+<script src="/scripts/components/table_navigation.component.js"></script>
+<script src="/scripts/components/filters.component.js"></script>
+<script src="/scripts/utils/fetch.js"></script>
 <link rel="stylesheet" href="/stylesheets/browse.css">
 {% endblock %}
 
@@ -68,124 +70,11 @@
         <option value="network_cutoff">Network Graph Cutoff</option>
     </datalist>
 
-    <datalist id="cpc-code-datalist">
-    </datalist>
+    {% include 'cpc_code_datalist.html' %}
 
-    <datalist id="cpc-name-datalist">
-        <option>Alfalfa for forage and silage</option>
-        <option>Barley, other</option>
-        <option>Barley, seed</option>
-        <option>Beet seeds (excluding sugar beet seeds) and seeds of forage plants</option>
-        <option>Beet sugar</option>
-        <option>Butter and other fats and oils derived from milk of cattle</option>
-        <option>Cattle</option>
-        <option>Cereal straw, husks, unprepared, ground, pressed, or in the form of pellets</option>
-        <option>Cotton, whether or not ginned</option>
-        <option>Cottonseed</option>
-        <option>Cottonseed oil, crude</option>
-        <option>Cottonseed oil, refined</option>
-        <option>Cottonseed, seed for planting</option>
-        <option>Dates</option>
-        <option>Fats and oils and their fractions, of fish, other than liver oils</option>
-        <option>Fish fillets and fish meat (whether or not minced), fresh or chilled</option>
-        <option>Fish of Gadiformes, frozen</option>
-        <option>Fish processing services</option>
-        <option>Flours and meals of oil seeds or oleaginous fruits, except those of mustard</option>
-        <option>Forage products, n.e.c.</option>
-        <option>Groats, meal and pellets of wheat and other cereals</option>
-        <option>Linseed</option>
-        <option>Live plants; bulbs, tubers and roots; cuttings and slips; mushroom spawn</option>
-        <option>Maize (corn), other</option>
-        <option>Maize (corn), seed</option>
-        <option>Maize for forage and silage</option>
-        <option>Molasses</option>
-        <option>Oats, other</option>
-        <option>Other fibre crops, raw, n.e.c.</option>
-        <option>Other vegetable oils, crude or refined, n.e.c.</option>
-        <option>Other wild pelagic fish, live, fresh or chilled</option>
-        <option>Palm nuts and kernels</option>
-        <option>Palm oil, crude</option>
-        <option>Palm oil, refined</option>
-        <option>Potatoes</option>
-        <option>Preparations used in animal feeding n.e.c.</option>
-        <option>Processed liquid milk</option>
-        <option>Rape or colza seed</option>
-        <option>Raw milk of cattle</option>
-        <option>Rye, other</option>
-        <option>Rye, seed</option>
-        <option>Soya bean oil, crude</option>
-        <option>Soya beans, other</option>
-        <option>Soya beans, seed for planting</option>
-        <option>Starches; inulin; wheat gluten; dextrins and other modified starches</option>
-        <option>Sugar beet</option>
-        <option>Sugar beet seeds</option>
-        <option>Sunflower seed</option>
-        <option>Vegetable seeds, except beet seeds</option>
-        <option>Wheat and meslin flour</option>
-        <option>Wheat, other</option>
-        <option>Wheat, seed</option>
-    </datalist>
+    {% include 'cpc_name_datalist.html' %}
 
-    <datalist id="geography-datalist">
-        <option>GLO</option>
-        <option>RoW</option>
-        <option>BD</option>
-        <option>BR-MT</option>
-        <option>IN</option>
-        <option>CH</option>
-        <option>BR-PI</option>
-        <option>FI</option>
-        <option>ES</option>
-        <option>ZA</option>
-        <option>US-WA</option>
-        <option>CA-QC</option>
-        <option>RU</option>
-        <option>US-MN</option>
-        <option>CN</option>
-        <option>AU-QLD</option>
-        <option>MY</option>
-        <option>US-ND</option>
-        <option>AU-VIC</option>
-        <option>BR-RS</option>
-        <option>AR</option>
-        <option>PE</option>
-        <option>RLA</option>
-        <option>AU-SA</option>
-        <option>AU-TAS</option>
-        <option>BR-MG</option>
-        <option>IN-OR</option>
-        <option>US-SD</option>
-        <option>US</option>
-        <option>AU-WA</option>
-        <option>BR-TO</option>
-        <option>BR-MS</option>
-        <option>DE</option>
-        <option>BR-PR</option>
-        <option>US-NE</option>
-        <option>BR-GO</option>
-        <option>UA</option>
-        <option>Canada without Quebec</option>
-        <option>US-IN</option>
-        <option>RNA</option>
-        <option>RER</option>
-        <option>AU-NSW</option>
-        <option>US-OH</option>
-        <option>FR</option>
-        <option>BR</option>
-        <option>BR-SP</option>
-        <option>US-IA</option>
-        <option>BR-MA</option>
-        <option>US-IL</option>
-        <option>US-WI</option>
-        <option>CO</option>
-        <option>ID</option>
-        <option>Europe without Switzerland</option>
-        <option>BR-BA</option>
-        <option>US-OR</option>
-        <option>US-CO</option>
-        <option>HU</option>
-        <option>US-ID</option>
-    </datalist>
+    {% include 'geography_datalist.html' %}
 </div>
 
 {% endblock %}

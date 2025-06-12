@@ -122,25 +122,42 @@ function createGraph(data) {
     return svg.node();
 }
 
-async function fetchData(layerCount) {
-    let response = await fetch("/api/sankey/" + layerCount)
+async function fetchData(id) {
+    let response = await fetch("/api/sankey/" + id)
     let result = await response.json();
     return result
 }
 
-async function onLayerCountChange(ev) {
-    console.log("AJHKSJASD")
-    const sankey_data = await fetchData(ev.target.value)
+async function renderSankey(id) {
+    const sankey_data = await fetchData(id)
     const svgNode = createGraph(sankey_data)
     document.getElementById("graph-container").innerHTML = ""
     document.getElementById("graph-container").appendChild(svgNode)
+    const table = document.getElementById("table-container")
+    table.classList.add("hidden")
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
-    const sankey_data = await fetchData("4")
-    console.log(sankey_data)
-    const svgNode = createGraph(sankey_data)
-    document.getElementById("graph-container").appendChild(svgNode)
+document.addEventListener("DOMContentLoaded", () => {
+    initiliaseFilters([
+        "activity",
+        "product",
+        "cpc-code",
+        "cpc-name",
+        "geography",
+        "layers",
+    ])
 
-    document.getElementById("layer-count").addEventListener("change", onLayerCountChange)
+    initiliaseTable([
+        "activity",
+        "product",
+        "geography",
+        "cpc_code",
+        "cpc_name",
+        "layers"
+    ], (i) => { renderSankey(i) })
+
+    document.getElementsByTagName("h1")[0].addEventListener('click', () => {
+        const table = document.getElementById("table-container")
+        table.classList.toggle("hidden")
+    })
 })
