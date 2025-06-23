@@ -19,7 +19,7 @@ function createGraph(data) {
 
     const reference_emission = data["emission"]
 
-    const width = 928 * 2;
+    const width = 1100 * 2;
     const height = 600 * 2;
     const format = d3.format(",.3f");
 
@@ -43,9 +43,6 @@ function createGraph(data) {
         nodes: data.nodes.map(d => Object.assign({}, d)),
         links: data.edges.map(d => Object.assign({}, d))
     });
-
-    // // Defines a color scale.
-    // const color = d3.scaleOrdinal(d3.schemeCategory10);
 
     // Creates the rects that represent the nodes.
     const rect = svg.append("g")
@@ -72,29 +69,6 @@ function createGraph(data) {
         .join("g")
         .style("mix-blend-mode", "multiply");
 
-    // Creates a gradient, if necessary, for the source-target color option.
-    // if (linkColor === "source-target") {
-    //     const gradient = link.append("linearGradient")
-    //         .attr("id", d => (d.uid = DOM.uid("link")).id)
-    //         .attr("gradientUnits", "userSpaceOnUse")
-    //         .attr("x1", d => d.source.x1)
-    //         .attr("x2", d => d.target.x0);
-    //     gradient.append("stop")
-    //         .attr("offset", "0%")
-    //         .attr("stop-color", d => color(d.source.category));
-    //     gradient.append("stop")
-    //         .attr("offset", "100%")
-    //         .attr("stop-color", d => color(d.target.category));
-    // }
-
-    // link.append("path")
-    //     .attr("d", d3.sankeyLinkHorizontal())
-    //     .attr("stroke", linkColor === "source-target" ? (d) => d.uid
-    //         : linkColor === "source" ? (d) => color(d.source.category)
-    //             : linkColor === "target" ? (d) => color(d.target.category)
-    //                 : linkColor)
-    //     .attr("stroke-width", d => Math.max(1, d.width));
-
     link.append("path")
         .attr("d", d3.sankeyLinkHorizontal())
         .attr("stroke", d => d.source.colour)
@@ -113,8 +87,8 @@ function createGraph(data) {
         .attr("dy", "0.35em")
         .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
         .text(d => {
-            if (d.label == "Purchased other agri-food goods" && d.emission / reference_emission * 100 > 3)
-                return `Purchased other\nagri-food goods\n${(d.emission / reference_emission * 100).toFixed(2)}% ${d.emission.toFixed(2)}kg CO2-Eq`
+            if (d.label == "Purchased other goods and services" && (d.y1 - d.y0) > 60)
+                return `Purchased other\ngoods and services\n${(d.emission / reference_emission * 100).toFixed(2)}% ${d.emission.toFixed(2)}kg CO2-Eq`
             return `${d.label} ${(d.emission / reference_emission * 100).toFixed(2)}%${d.emission / reference_emission * 100 > 3 ? `\n${d.emission.toFixed(2)}kg CO2-Eq` : ''}`
         })
         .call(wrap);

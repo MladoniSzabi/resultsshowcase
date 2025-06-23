@@ -1,0 +1,11 @@
+results/sankey/butter production, from cow milk_butter, from cow milk_glo_1.json
+results/sankey/butter production, from cow milk_butter, from cow milk_glo_2.json
+results/sankey/butter production, from cow milk_butter, from cow milk_glo_3.json
+results/sankey/butter production, from cow milk_butter, from cow milk_glo_4.json
+results/sankey/butter production, from cow milk_butter, from cow milk_glo_5.json
+results/sankey/butter production, from cream, from cow milk_butter, from cow milk_glo_1.json
+results/sankey/butter production, from cream, from cow milk_butter, from cow milk_glo_2.json
+results/sankey/butter production, from cream, from cow milk_butter, from cow milk_glo_3.json
+results/sankey/butter production, from cream, from cow milk_butter, from cow milk_glo_4.json
+results/sankey/butter production, from cream, from cow milk_butter, from cow milk_glo_5.json
+results/sankey/butter production, from cream, from cow milk_butter, from cow milk_glo_6.json
