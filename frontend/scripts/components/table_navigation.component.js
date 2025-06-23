@@ -17,7 +17,8 @@ function isFirstPage(currentPage, totalPages) {
 }
 
 function isLastPage(currentPage, totalPages) {
-    return currentPage == totalPages - 1
+    console.log(currentPage, totalPages)
+    return currentPage == totalPages
 }
 
 function setPage(newPage) {
@@ -41,7 +42,7 @@ function getPaginationButtons(currentPage, totalPages) {
         pages.push(null)
     }
 
-    for (let i = Math.max(currentPage - 2, 1); i < Math.min(currentPage + 3, totalPages - 1); i++) {
+    for (let i = Math.max(currentPage - 2, 0); i < Math.min(currentPage + 3, totalPages - 1); i++) {
         pages.push(i + 1)
     }
 
