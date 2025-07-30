@@ -8,7 +8,6 @@ function drawLegend(container, tags) {
             continue
         }
         existingKeys.add(tags[key]["full_name"])
-        console.log(tags[key]["full_name"])
         const p = document.createElement("p")
         const span = document.createElement("span")
         span.innerText = "⬤ "

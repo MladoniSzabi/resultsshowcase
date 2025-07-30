@@ -14,6 +14,7 @@ def parseTree(tree):
         else:
             tree["expandable"] = False
     else:
+        tree["expandable"] = False
         for child in tree["children"]:
             parseTree(child)
 
@@ -26,19 +27,19 @@ def parseRegion(tree):
             tree["expandable"] = False
     else:
         for child in tree["children"]:
-            parseTree(child)
+            parseRegion(child)
 
 
-# for file in files:
-#     with open("data/graphlets/" + file) as f:
-#         data = json.load(f)
-#     parseTree(data)
-#     with open("data/graphlets/" + file, "w") as f:
-#         json.dump(data, f)
-
-for file in os.listdir("data/regions"):
-    with open("data/regions/" + file) as f:
+for file in os.listdir("data/graphlets"):
+    with open("data/graphlets/" + file) as f:
         data = json.load(f)
-    parseRegion(data)
-    with open("data/regions/" + file, "w") as f:
+    parseTree(data)
+    with open("data/graphlets/" + file, "w") as f:
         json.dump(data, f)
+
+# for file in os.listdir("data/regions"):
+#     with open("data/regions/" + file) as f:
+#         data = json.load(f)
+#     parseRegion(data)
+#     with open("data/regions/" + file, "w") as f:
+#         json.dump(data, f)
