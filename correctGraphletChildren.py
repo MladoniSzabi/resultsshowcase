@@ -1,7 +1,8 @@
 import os
 import json
 
-files = os.listdir("data/graphlets")
+folder = "data/steel/graphlets"
+files = os.listdir(folder)
 
 
 def parseTree(tree):
@@ -30,11 +31,11 @@ def parseRegion(tree):
             parseRegion(child)
 
 
-for file in os.listdir("data/graphlets"):
-    with open("data/graphlets/" + file) as f:
+for file in os.listdir(folder):
+    with open(folder + "/" + file) as f:
         data = json.load(f)
     parseTree(data)
-    with open("data/graphlets/" + file, "w") as f:
+    with open(folder + "/" + file, "w") as f:
         json.dump(data, f)
 
 # for file in os.listdir("data/regions"):
