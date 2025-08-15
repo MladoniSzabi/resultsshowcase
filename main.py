@@ -136,6 +136,7 @@ def get_sankey():
     else:
         return render_template("sankey.html")
 
+
 @app.route("/api/sankey/total", methods=["GET"])
 def get_sankey_total_items():
     filters = get_filters()
@@ -144,6 +145,7 @@ def get_sankey_total_items():
         query = db.generate_query(filters)
         result = db.get_count(query)
         return str(result)
+
 
 @app.route("/api/sankey/page", methods=["GET"])
 def get_sankey_page():
@@ -160,13 +162,6 @@ def get_sankey_page():
             return "[]"
 
         return json.dumps(collection)
-
-@app.route("/carbon_prices")
-def get_carbon_prices_view():
-    if os.getenv("ENVIRONMENT") == "PROD":
-        return views['carbon_prices']
-    else:
-        return render_template("TEMP_carbon_prices.html")
 
 
 @app.route("/llmresults")
@@ -187,6 +182,14 @@ def get_sankey_data(sankey_id):
             return f.read()
 
 
+@app.route("/carbon_prices")
+def get_carbon_prices_view():
+    if os.getenv("ENVIRONMENT") == "PROD":
+        return views['carbon_prices']
+    else:
+        return render_template("TEMP_carbon_prices.html")
+
+
 @app.route("/api/carbonprices/map")
 def get_world_map():
     return send_from_directory("results", "countries-50m.json")
@@ -195,3 +198,13 @@ def get_world_map():
 @app.route("/api/carbonprices/data")
 def get_carbon_prices():
     return send_from_directory("results", "carbon_prices.json")
+
+
+@app.route("/nodecount")
+def get_node_count_page():
+    return render_template("node_count.html")
+
+
+@app.route("/api/nodecount")
+def get_node_count_data():
+    return send_from_directory("results", "node-counts.json")

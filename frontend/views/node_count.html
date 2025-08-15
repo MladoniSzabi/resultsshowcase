@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <script src="/scripts/vendor/d3.js"></script>
+    <script src="/scripts/components/node_count_graph.js"></script>
+    <style>
+        html,
+        body {
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #graph-container {
+            position: relative;
+            width: max-content;
+        }
+
+        #legend-container {
+            position: absolute;
+            right: 0;
+            margin: 0.5em;
+            background: white;
+            border: solid 1px black;
+            padding: 0.5em;
+            border-radius: 5px;
+        }
+
+        #legend-container p {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="graph-container">
+        <div id="legend-container"></div>
+    </div>
+</body>
+
+</html>
