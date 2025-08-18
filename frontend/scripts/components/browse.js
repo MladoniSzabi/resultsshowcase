@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    initiliaseFilters([
+    initialiseFilters([
         "name",
         "product",
         "cpc-code",
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "depth",
     ])
 
-    initiliaseTable([
+    initialiseTable([
         "name",
         "productReference",
         "type",

@@ -6,3 +6,5 @@ graphs.db
 __pycache__/
 webserver2.tar.gz
 release.sh
+results/consensus_graphlets
+consensus.db

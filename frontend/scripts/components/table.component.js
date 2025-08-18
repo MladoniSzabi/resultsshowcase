@@ -6,7 +6,7 @@ let tableState = {
     columns: []
 }
 
-function initiliaseTable(columns, callback) {
+function initialiseTable(columns, callback) {
     tableState.columns = columns
     tableState.callback = callback
     const currentUrl = new URLSearchParams(window.location.search)

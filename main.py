@@ -1,6 +1,7 @@
 import gzip
 import os
 import json
+import sqlite3
 
 from dotenv import load_dotenv
 from flask import Flask, render_template, make_response, request, send_from_directory
@@ -208,3 +209,50 @@ def get_node_count_page():
 @app.route("/api/nodecount")
 def get_node_count_data():
     return send_from_directory("results", "node-counts.json")
+
+
+@app.route("/consensusgraphlets/browse")
+def get_consensus_graphlet_browser():
+    return render_template("consensus_graphlet_browse.html")
+
+
+@app.route("/consensusgraphlets/graph")
+def get_consensus_graphlet_view():
+    return render_template("consensus_graphlet.html")
+
+
+@app.route("/api/consensusgraphlets/page")
+def get_consensus_graphlet_table():
+    filters = get_filters()
+
+    page_number = int(request.args.get("page", 0))
+    page_size = min(int(request.args.get("count", 0)), 50)
+
+    with SQLiteDatabase("consensus.db", "Graphs") as db:
+        query = db.generate_query(filters)
+        collection = db.get_page(query, page_size, page_number)
+
+        if len(collection) == 0:
+            return "[]"
+
+        return json.dumps(collection)
+
+
+@app.route("/api/consensusgraphlets/total")
+def get_consensus_graphlet_total_count():
+    filters = get_filters()
+
+    with SQLiteDatabase("consensus.db", "Graphs") as db:
+        query = db.generate_query(filters)
+        result = db.get_count(query)
+        return str(result)
+
+
+@app.route("/api/consensusgraphlets/<int:graphid>")
+def get_consensus_graphlet(graphid):
+    assert (graphid > 0)
+
+    with SQLiteDatabase("consensus.db", "Graphs") as db:
+        graph_entry = db.get_graph(graphid, ["path"])
+        with open(graph_entry["path"]) as f:
+            return f.read()

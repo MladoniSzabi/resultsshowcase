@@ -1,0 +1,319 @@
+TAG_INFORMATION = {
+    "root": {
+        "colour": "#983334",
+        "full_name": "Root node"
+    },
+    "renewable_wind": {
+        "colour": "#8fd14d",
+        "full_name": "Renewable energy"
+    },
+    "renewable_hydro": {
+        "colour": "#8fd14d", //"#66a22a",
+        "full_name": "Renewable energy"
+    },
+    "renewable_solar": {
+        "colour": "#8fd14d", //"#b3e085",
+        "full_name": "Renewable energy"
+    },
+    "renewable_geothermal": {
+        "colour": "#8fd14d", //"#8fe33b",
+        "full_name": "Renewable energy"
+    },
+    "renewable_methanol": {
+        "colour": "#8fd14d", //"#66b319",
+        "full_name": "Renewable energy"
+    },
+    "renewable_biogas": {
+        "colour": "#8fd14d", //"#b3ec79",
+        "full_name": "Renewable energy"
+    },
+    "renewable_biometahne": {
+        "colour": "#8fd14d", //"#8fc15c",
+        "full_name": "Renewable energy"
+    },
+    "renewable_ethanol": {
+        "colour": "#8fd14d", //"#669438",
+        "full_name": "Renewable energy"
+    },
+    "renewable_biodiesel": {
+        "colour": "#8fd14d", //"#b3d590",
+        "full_name": "Renewable energy"
+    },
+    "production_process": {
+        "colour": "#B0D1FF", // "#85b8ff",
+        "full_name": "Scope 1"
+    },
+    "gaseous_fuel": {
+        "colour": "#B0D1FF", // "#cce1ff",
+        "full_name": "Scope 1"
+    },
+    "liquid_fuel": {
+        "colour": "#B0D1FF", // "#d0e2fb",
+        "full_name": "Scope 1"
+    },
+    "solid_fuel": {
+        "colour": "#B0D1FF", // "#8eb9f6",
+        "full_name": "Scope 1"
+    },
+    "electricity": {
+        "colour": "#0AC7CE",// "#12CDD4",
+        "full_name": "Scope 2"
+    },
+    "heat_and_steam": {
+        "colour": "#0AC7CE", // "#0c888d",
+        "full_name": "Scope 2"
+    },
+    "cooling": {
+        "colour": "#0AC7CE", // "#22bec3",
+        "full_name": "Scope 2"
+    },
+    "purchased_goods_and_services": {
+        "colour": "#414BB2",
+        "full_name": "Purchased goods and services"
+    },
+    "transport_and_distribution": {
+        "colour": "#7D5CD9", // "#383e7a", 
+        "full_name": "Transport and distribution"
+    },
+    "fuel_and_energy_related_activities": {
+        "colour": "#757897", // "#505695",
+        "full_name": "Fuel and energy related activities"
+    },
+    "business_travel": {
+        "colour": "#79D5F9", // "#5057a5",
+        "full_name": "Business travel"
+    },
+    "capital_goods": {
+        "colour": "#EAD082", // "#878cc5",
+        "full_name": "Capital goods"
+    },
+    "waste": {
+        "colour": "#F2A47E", // "#7981d2",
+        "full_name": "Waste"
+    },
+    // "intermediate": {
+    //     "colour": "#ce5a5a",
+    //     "full_name": "Intermediate"
+    // },
+}
+
+function changeGraph(newId) {
+    let urlParams = new URLSearchParams(location.search.substring(1))
+    urlParams.set("id", newId)
+    location.search = urlParams.toString()
+}
+
+function getNodeColour(node) {
+    if (!node.parent)
+        return TAG_INFORMATION["root"]["colour"]
+    console.log(node.data)
+    return TAG_INFORMATION[node.data.tag]["colour"]
+}
+
+function wrap(text, width, nodeSize) {
+    text.each(function () {
+        let textNode = d3.select(this),
+            fullText = textNode.text(),
+            words = fullText.split(/\s+/).reverse(),
+            word,
+            line = [],
+            lineHeight = 1.2, // ems
+            dy = parseFloat(textNode.attr("dy") || 0),
+            lines = [],
+            x = parseFloat(textNode.attr("x") || 0)
+        textNode.text(null).attr("x", 0).attr("y", 0).attr("font-size", "16px")
+
+        while (word = words.pop()) {
+            line.push(word)
+            if (line.join(" ").length > width) {
+                line.pop()
+                lines.push(line.join(" "))
+                line = [word]
+            }
+        }
+
+        if (line.length > 0) {
+            lines.push(line.join(" "))
+        }
+
+        if (lines.length >= 11) {
+            lines = lines.slice(0, 10)
+            lines.push("...")
+        }
+
+        let start = 0
+        for (let i = 0; i < lines.length; i += 1) {
+            textNode.append("tspan").attr('x', x).attr("dy", `${i == 0 ? 0.31 : lineHeight}em`).text(lines[i])
+        }
+    })
+}
+
+function getStrokeWidth(edge) {
+    const minWidth = 1.5
+    const maxWidth = 10
+
+    return edge.target.data.presence * (maxWidth - minWidth) + minWidth
+}
+
+function getNodeSize(node) {
+    const minNodeSize = 8
+    const maxNodeSize = 100
+    if (!node.parent)
+        return maxNodeSize
+
+    const proportion = node.data.contribution / node.parent.data.contribution
+    const log = Math.log10(proportion * 9 + 1)
+    console.log(proportion, log)
+
+    return log * (maxNodeSize - minNodeSize) + minNodeSize
+}
+
+function getLabelY(edge) {
+    // const factor = 0.8
+    // const pos = (1 - factor) * edge.source.x + factor * edge.target.x
+    // const difference = (edge.target.x - edge.source.x)
+    // if (difference > 0)
+    //     return pos + difference * 0.12
+    // else if (difference == 0)
+    //     return pos - 4
+    // else {
+    //     return pos + difference * 0.18
+    // }
+
+    const factor = 0.70
+    const angle = edge.target.x - Math.PI / 2 + 0.05
+    const y = Math.sin(angle) * edge.target.y
+    const pos = factor * y
+    return pos
+}
+
+function getLabelX(edge) {
+    // const factor = 0.8
+    // const pos = (1 - factor) * edge.source.y + factor * edge.target.y
+    // return pos
+
+    const factor = 0.70
+    const angle = edge.target.x - Math.PI / 2 + 0.05
+    const x = Math.cos(angle) * edge.target.y
+    const pos = factor * x
+    return pos
+}
+
+
+function drawActivity(data) {
+    const container = document.getElementById("graph-container")
+
+    const width = 928 * 1.5
+    const root = d3.hierarchy(data)
+    const dx = 100
+    const dy = width / (root.height + 1)
+    const radius = width / 2 - 300
+    // const tree = d3.cluster().nodeSize([dx, dy])
+
+    const tree = d3.cluster()
+        .size([2 * Math.PI, radius])
+        .separation((a, b) => (a.parent == b.parent ? 1 : 2) / a.depth);
+
+    root.sort((a, b) => d3.ascending(a.data.name, b.data.name))
+    tree(root)
+
+    let x0 = Infinity
+    let x1 = -x0
+    root.each(d => {
+        if (d.x > x1) x1 = d.x
+        if (d.x < x0) x0 = d.x
+    })
+
+    // const height = x1 - x0 + dx * 2
+    const height = width
+
+    const cx = width * 0.5; // adjust as needed to fit
+    const cy = height * 0.54; // adjust as needed to fit
+
+    const svg = d3.create("svg")
+        .attr("width", width)
+        .attr("height", height)
+        // .attr("viewBox", [-dy / 3, x0 - dx, width, height])
+        .attr("viewBox", [-cx, -cy, width, height])
+        .attr("style", "max-width: 100%, height: auto, font: 10px sans-serif;")
+
+    const link = svg.append("g")
+        .attr("fill", "none")
+        .attr("stroke", "#555")
+        .selectAll()
+        .data(root.links())
+        .join("g")
+
+    // link.append("path")
+    //     .attr("stroke-width", 2)
+    //     .attr("d", d3.linkRadial()
+    //         .angle(d => d.x)
+    //         .radius(d => d.y))
+    link.append("line")
+        .attr("stroke-width", getStrokeWidth)
+        .attr("x0", 0)
+        .attr("y0", 0)
+        .attr("x1", d => d.target.y)
+        .attr("y1", 0)
+        .attr("transform", d => `rotate(${d.target.x * 180 / Math.PI - 90})`)
+
+    link.append("text")
+        .attr("x", getLabelX)
+        .attr("y", getLabelY)
+        .text(d => `${(d.target.data.presence * 100).toFixed(0)}%`)
+        .attr("stroke", "white")
+        .attr("paint-order", "stroke")
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-width", 1)
+        .attr("fill", "black")
+        .attr("stroke", "black")
+        .attr("dominant-baseline", "middle")
+        .attr("text-anchor", "middle")
+        .attr("style", "background: white")
+        .attr("font-size", "14px")
+        .attr("style", "transform-box: fill-box")
+        .attr("transform-origin", "center")
+        .attr("transform", d => `rotate(${d.target.x * 180 / Math.PI - 90}) rotate(${d.target.x > Math.PI ? 180 : 0})`)
+
+    link.append("circle")
+        .attr("cx", getLabelX)
+        .attr("cy", getLabelY)
+        .attr("r", 2)
+
+    const node = svg.append("g")
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-width", 3)
+        .selectAll()
+        .data(root.descendants())
+        .join("g")
+
+    node.append("circle")
+        .attr("transform", d => `rotate(${d.x * 180 / Math.PI - 90}) translate(${d.y}, 0)`)
+        .attr("fill", getNodeColour)
+        .attr("r", getNodeSize)
+        .attr("stroke", d => d.data.connected ? "#000" : "none");
+
+
+    node.append("text")
+        .attr("transform", d => `rotate(${d.x * 180 / Math.PI - 90}) translate(${d.y}, 0) rotate(${d.children ? -90 : 0}) rotate(${d.x > Math.PI ? 180 : 0})`)
+        .attr("text-anchor", d => d.children ? "middle" : (d.x > Math.PI ? "end" : "start"))
+        .attr("dy", d => d.children ? getNodeSize(d) + 20 : `0.31em`)
+        .attr("x", d => d.children ? 0 : (d.x > Math.PI ? -getNodeSize(d) - 5 : getNodeSize(d) + 5))
+        .text(d => d.data.product ? (d.data.product + " " + (d.data.contribution / d.parent.data.contribution * 100).toFixed(0) + "%") : d.data.name)
+        .attr("stroke", "none")
+        .attr("fill", d => d.children ? "#fff" : "#000")
+        .attr("paint-order", "stroke")
+        .attr("font-size", "14px")
+        .call(wrap, 20, d => getNodeSize(d))
+
+
+    node.on('dblclick', (event, d) => { changeGraph(d.data.id) })
+
+    container.appendChild(svg.node())
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+    const searchParamsCurrent = new URLSearchParams(window.location.search)
+    const data = await (await fetch("/api/consensusgraphlets/" + searchParamsCurrent.get("id"))).json()
+    drawActivity(data)
+})

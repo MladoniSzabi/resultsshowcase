@@ -112,7 +112,7 @@ async function renderSankey(id) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    initiliaseFilters([
+    initialiseFilters([
         "activity",
         "product",
         "cpc-code",
@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "layers",
     ])
 
-    initiliaseTable([
+    initialiseTable([
         "activity",
         "product",
         "geography",

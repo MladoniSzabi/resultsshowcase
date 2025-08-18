@@ -57,7 +57,7 @@ function onChange(key, value) {
     timeoutHandler = setTimeout(() => { tableState.currentPage = 0; updateTable(); timeoutHandler = null }, 700)
 }
 
-function initiliaseFilters(columns) {
+function initialiseFilters(columns) {
     filterColumns = columns
 
     for (const col of filterColumns) {

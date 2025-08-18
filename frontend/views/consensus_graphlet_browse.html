@@ -1,0 +1,89 @@
+<html>
+
+<head>
+    <script src="/scripts/components/table.component.js"></script>
+    <script src="/scripts/components/table_navigation.component.js"></script>
+    <script src="/scripts/components/filters.component.js"></script>
+    <script src="/scripts/components/consensus_browse.js" defer></script>
+    <script src="/scripts/utils/fetchConsensusGraphlets.js"></script>
+    <link rel="stylesheet" href="/stylesheets/browse.css">
+
+
+    <style>
+        svg {
+            max-width: 95vw;
+            max-height: calc(98vh - 3em);
+        }
+
+        path {
+            clip-path: stroke-box;
+        }
+
+        #table-container.hidden {
+            display: none;
+        }
+
+        h1 {
+            max-width: 80rem;
+            margin: auto;
+            cursor: pointer;
+        }
+
+        a {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>Database</h1>
+        <div id="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>CPC Code</th>
+                        <th>CPC Name</th>
+                        <th>Ocurrences</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th><input type="text" placeholder="Enter activity" id="name" /></th>
+                        </th>
+                        <th><input type="text" list="cpc-code-datalist" placeholder="Enter CPC code" id="cpc-code" />
+                        </th>
+                        <th><input type="text" list="cpc-name-datalist" placeholder="Enter CPC name" id="cpc-name" />
+                        </th>
+                        <th><input type="text" placeholder="Enter occurance count" id="occurences" />
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="graphs-table"></tbody>
+            </table>
+            <div id="pagination-container">
+                <div id="page-size-control">
+                    <p>Items per page:</p>
+                    <select id="pagination-page-size">
+                        <option>5</option>
+                        <option>10</option>
+                        <option>25</option>
+                        <option>50</option>
+                    </select>
+                </div>
+                <div id="pagination-total-item-count"></div>
+                <div id="pagination-controls"></div>
+            </div>
+        </div>
+    </div>
+    <div id="graph-container"></div>
+
+    {% include 'cpc_code_datalist.html' %}
+
+    {% include 'cpc_name_datalist.html' %}
+
+    {% include 'geography_datalist.html' %}
+</body>
+
+</html>

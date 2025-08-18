@@ -29,7 +29,6 @@ function popBreadcrumb() {
     const breadcrumbsContainer = document.getElementById("breadcrumbs")
     const breadcrumbs = breadcrumbsContainer.getElementsByTagName("a")
     const lastCrumb = breadcrumbs[breadcrumbs.length - 2]
-    console.log(1)
 
     goToBreadcrumb(lastCrumb)
 }
