@@ -203,7 +203,7 @@ def get_carbon_prices():
 
 @app.route("/nodecount")
 def get_node_count_page():
-    return render_template("node_count.html")
+    return render_template("node_count_graph.html")
 
 
 @app.route("/api/nodecount")
