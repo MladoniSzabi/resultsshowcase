@@ -15,6 +15,11 @@ function initialiseTable(columns, callback) {
     tableState.currentPage = Number(currentUrl.get("page")) || 0
     tableState.itemsPerPage = Number(currentUrl.get("itemsPerPage")) || 5
 
+    document.getElementById("pagination-page-size").addEventListener("change", (ev) => {
+        tableState.itemsPerPage = Number(ev.target.value)
+        updateTable();
+    })
+
     updateTable()
 }
 
