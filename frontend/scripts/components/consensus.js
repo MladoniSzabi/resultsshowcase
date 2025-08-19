@@ -168,37 +168,54 @@ function getNodeSize(node) {
     return log * (maxNodeSize - minNodeSize) + minNodeSize
 }
 
-function getLabelY(edge) {
-    // const factor = 0.8
-    // const pos = (1 - factor) * edge.source.x + factor * edge.target.x
-    // const difference = (edge.target.x - edge.source.x)
-    // if (difference > 0)
-    //     return pos + difference * 0.12
-    // else if (difference == 0)
-    //     return pos - 4
-    // else {
-    //     return pos + difference * 0.18
-    // }
+function getNodeContributionPercentage(node) {
+    if (node.parent)
+        return node.data.contribution / node.parent.data.contribution * 100
+}
 
-    const factor = 0.70
-    const angle = edge.target.x - Math.PI / 2 + 0.05
-    const y = Math.sin(angle) * edge.target.y
-    const pos = factor * y
-    return pos
+function getNodeDistance(node) {
+    const contribution = getNodeContributionPercentage(node)
+    if (contribution < 0.5) {
+        return node.y * 2
+    }
+    else if (contribution < 5.5) {
+        return node.y * 1.4
+    } else {
+        return node.y * 0.8
+    }
+}
+
+const labelPositionFactor = 0.95
+const labelDistanceOffset = 10
+const labelAngleOffset = (2 * Math.PI / 180)
+
+function getLabelY(edge) {
+    const angle = edge.target.x - Math.PI / 2
+    const y = Math.sin(angle) * (getNodeDistance(edge.target) - getNodeSize(edge.target))
+    const linePos = labelPositionFactor * y
+
+    let labelPos
+    if (angle < 0 || angle > Math.PI)
+        labelPos = linePos + Math.cos(angle) * labelDistanceOffset
+    else
+        labelPos = linePos - Math.cos(angle) * labelDistanceOffset
+
+    return labelPos
 }
 
 function getLabelX(edge) {
-    // const factor = 0.8
-    // const pos = (1 - factor) * edge.source.y + factor * edge.target.y
-    // return pos
+    const angle = edge.target.x - Math.PI / 2
+    const x = Math.cos(angle) * (getNodeDistance(edge.target) - getNodeSize(edge.target))
+    const linePos = labelPositionFactor * x
 
-    const factor = 0.70
-    const angle = edge.target.x - Math.PI / 2 + 0.05
-    const x = Math.cos(angle) * edge.target.y
-    const pos = factor * x
-    return pos
+    let labelPos
+    if (angle < 0 || angle > Math.PI)
+        labelPos = linePos - Math.sin(angle) * labelDistanceOffset
+    else
+        labelPos = linePos + Math.sin(angle) * labelDistanceOffset
+
+    return labelPos
 }
-
 
 function drawActivity(data) {
     const container = document.getElementById("graph-container")
@@ -230,11 +247,13 @@ function drawActivity(data) {
     const cx = width * 0.5; // adjust as needed to fit
     const cy = height * 0.54; // adjust as needed to fit
 
+    const viewBoxMultiplier = 1.4
+
     const svg = d3.create("svg")
         .attr("width", width)
         .attr("height", height)
         // .attr("viewBox", [-dy / 3, x0 - dx, width, height])
-        .attr("viewBox", [-cx, -cy, width, height])
+        .attr("viewBox", [-cx * viewBoxMultiplier, -cy * viewBoxMultiplier * 0.9, width * viewBoxMultiplier, height * viewBoxMultiplier])
         .attr("style", "max-width: 100%, height: auto, font: 10px sans-serif;")
 
     const link = svg.append("g")
@@ -253,7 +272,7 @@ function drawActivity(data) {
         .attr("stroke-width", getStrokeWidth)
         .attr("x0", 0)
         .attr("y0", 0)
-        .attr("x1", d => d.target.y)
+        .attr("x1", d => getNodeDistance(d.target))
         .attr("y1", 0)
         .attr("transform", d => `rotate(${d.target.x * 180 / Math.PI - 90})`)
 
@@ -270,15 +289,15 @@ function drawActivity(data) {
         .attr("dominant-baseline", "middle")
         .attr("text-anchor", "middle")
         .attr("style", "background: white")
-        .attr("font-size", "14px")
+        .attr("font-size", "12px")
         .attr("style", "transform-box: fill-box")
         .attr("transform-origin", "center")
         .attr("transform", d => `rotate(${d.target.x * 180 / Math.PI - 90}) rotate(${d.target.x > Math.PI ? 180 : 0})`)
 
-    link.append("circle")
-        .attr("cx", getLabelX)
-        .attr("cy", getLabelY)
-        .attr("r", 2)
+    // link.append("circle")
+    //     .attr("cx", getLabelX)
+    //     .attr("cy", getLabelY)
+    //     .attr("r", 2)
 
     const node = svg.append("g")
         .attr("stroke-linejoin", "round")
@@ -288,18 +307,18 @@ function drawActivity(data) {
         .join("g")
 
     node.append("circle")
-        .attr("transform", d => `rotate(${d.x * 180 / Math.PI - 90}) translate(${d.y}, 0)`)
+        .attr("transform", d => `rotate(${d.x * 180 / Math.PI - 90}) translate(${getNodeDistance(d)}, 0)`)
         .attr("fill", getNodeColour)
         .attr("r", getNodeSize)
         .attr("stroke", d => d.data.connected ? "#000" : "none");
 
 
     node.append("text")
-        .attr("transform", d => `rotate(${d.x * 180 / Math.PI - 90}) translate(${d.y}, 0) rotate(${d.children ? -90 : 0}) rotate(${d.x > Math.PI ? 180 : 0})`)
+        .attr("transform", d => `rotate(${d.x * 180 / Math.PI - 90}) translate(${getNodeDistance(d)}, 0) rotate(${d.children ? -90 : 0}) rotate(${d.x > Math.PI ? 180 : 0})`)
         .attr("text-anchor", d => d.children ? "middle" : (d.x > Math.PI ? "end" : "start"))
         .attr("dy", d => d.children ? getNodeSize(d) + 20 : `0.31em`)
         .attr("x", d => d.children ? 0 : (d.x > Math.PI ? -getNodeSize(d) - 5 : getNodeSize(d) + 5))
-        .text(d => d.data.product ? (d.data.product + " " + (d.data.contribution / d.parent.data.contribution * 100).toFixed(0) + "%") : d.data.name)
+        .text(d => d.data.product ? (d.data.product + " " + getNodeContributionPercentage(d).toFixed(0) + "%") : d.data.name)
         .attr("stroke", "none")
         .attr("fill", d => d.children ? "#fff" : "#000")
         .attr("paint-order", "stroke")
@@ -307,7 +326,7 @@ function drawActivity(data) {
         .call(wrap, 20, d => getNodeSize(d))
 
 
-    node.on('dblclick', (event, d) => { changeGraph(d.data.id) })
+    node.on('dblclick', (event, d) => { if (d.data.id) changeGraph(d.data.id) })
 
     container.appendChild(svg.node())
 }
