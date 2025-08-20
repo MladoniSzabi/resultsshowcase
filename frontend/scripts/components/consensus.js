@@ -1,95 +1,118 @@
 TAG_INFORMATION = {
     "root": {
         "colour": "#983334",
-        "full_name": "Root node"
-    },
-    "renewable_wind": {
-        "colour": "#8fd14d",
-        "full_name": "Renewable energy"
-    },
-    "renewable_hydro": {
-        "colour": "#8fd14d", //"#66a22a",
-        "full_name": "Renewable energy"
-    },
-    "renewable_solar": {
-        "colour": "#8fd14d", //"#b3e085",
-        "full_name": "Renewable energy"
-    },
-    "renewable_geothermal": {
-        "colour": "#8fd14d", //"#8fe33b",
-        "full_name": "Renewable energy"
+        "full_name": "Root node",
+        "scope": 1
     },
     "renewable_methanol": {
         "colour": "#8fd14d", //"#66b319",
-        "full_name": "Renewable energy"
+        "full_name": "Renewable energy",
+        "scope": 1
     },
     "renewable_biogas": {
         "colour": "#8fd14d", //"#b3ec79",
-        "full_name": "Renewable energy"
+        "full_name": "Renewable energy",
+        "scope": 1
     },
     "renewable_biometahne": {
         "colour": "#8fd14d", //"#8fc15c",
-        "full_name": "Renewable energy"
+        "full_name": "Renewable energy",
+        "scope": 1
     },
     "renewable_ethanol": {
         "colour": "#8fd14d", //"#669438",
-        "full_name": "Renewable energy"
+        "full_name": "Renewable energy",
+        "scope": 1
     },
     "renewable_biodiesel": {
         "colour": "#8fd14d", //"#b3d590",
-        "full_name": "Renewable energy"
+        "full_name": "Renewable energy",
+        "scope": 1
     },
     "production_process": {
         "colour": "#B0D1FF", // "#85b8ff",
-        "full_name": "Scope 1"
+        "full_name": "Scope 1",
+        "scope": 1
     },
     "gaseous_fuel": {
         "colour": "#B0D1FF", // "#cce1ff",
-        "full_name": "Scope 1"
+        "full_name": "Scope 1",
+        "scope": 1
     },
     "liquid_fuel": {
         "colour": "#B0D1FF", // "#d0e2fb",
-        "full_name": "Scope 1"
+        "full_name": "Scope 1",
+        "scope": 1
     },
     "solid_fuel": {
         "colour": "#B0D1FF", // "#8eb9f6",
-        "full_name": "Scope 1"
+        "full_name": "Scope 1",
+        "scope": 1
+    },
+    "renewable_wind": {
+        "colour": "#8fd14d",
+        "full_name": "Renewable energy",
+        "scope": 2
+    },
+    "renewable_hydro": {
+        "colour": "#8fd14d", //"#66a22a",
+        "full_name": "Renewable energy",
+        "scope": 2
+    },
+    "renewable_solar": {
+        "colour": "#8fd14d", //"#b3e085",
+        "full_name": "Renewable energy",
+        "scope": 2
+    },
+    "renewable_geothermal": {
+        "colour": "#8fd14d", //"#8fe33b",
+        "full_name": "Renewable energy",
+        "scope": 2
     },
     "electricity": {
         "colour": "#0AC7CE",// "#12CDD4",
-        "full_name": "Scope 2"
+        "full_name": "Scope 2",
+        "scope": 2
     },
     "heat_and_steam": {
         "colour": "#0AC7CE", // "#0c888d",
-        "full_name": "Scope 2"
+        "full_name": "Scope 2",
+        "scope": 2
     },
     "cooling": {
         "colour": "#0AC7CE", // "#22bec3",
-        "full_name": "Scope 2"
+        "full_name": "Scope 2",
+        "scope": 2
     },
     "purchased_goods_and_services": {
         "colour": "#414BB2",
-        "full_name": "Purchased goods and services"
+        "full_name": "Purchased goods and services",
+        "scope": 3
     },
     "transport_and_distribution": {
         "colour": "#7D5CD9", // "#383e7a", 
-        "full_name": "Transport and distribution"
+        "full_name": "Transport and distribution",
+        "scope": 3
     },
     "fuel_and_energy_related_activities": {
         "colour": "#757897", // "#505695",
-        "full_name": "Fuel and energy related activities"
+        "full_name": "Fuel and energy related activities",
+        "scope": 3
     },
     "business_travel": {
         "colour": "#79D5F9", // "#5057a5",
-        "full_name": "Business travel"
+        "full_name": "Business travel",
+        "scope": 3
     },
     "capital_goods": {
         "colour": "#EAD082", // "#878cc5",
-        "full_name": "Capital goods"
+        "full_name": "Capital goods",
+        "scope": 3
     },
     "waste": {
         "colour": "#F2A47E", // "#7981d2",
-        "full_name": "Waste"
+        "full_name": "Waste",
+        "scope": 3
     },
     // "intermediate": {
     //     "colour": "#ce5a5a",
@@ -106,7 +129,6 @@ function changeGraph(newId) {
 function getNodeColour(node) {
     if (!node.parent)
         return TAG_INFORMATION["root"]["colour"]
-    console.log(node.data)
     return TAG_INFORMATION[node.data.tag]["colour"]
 }
 
@@ -163,7 +185,6 @@ function getNodeSize(node) {
 
     const proportion = node.data.contribution / node.parent.data.contribution
     const log = Math.log10(proportion * 9 + 1)
-    console.log(proportion, log)
 
     return log * (maxNodeSize - minNodeSize) + minNodeSize
 }
@@ -171,10 +192,14 @@ function getNodeSize(node) {
 function getNodeContributionPercentage(node) {
     if (node.parent)
         return node.data.contribution / node.parent.data.contribution * 100
+    return 1
 }
 
 function getNodeDistance(node) {
+    if (node.children) return 0
     const contribution = getNodeContributionPercentage(node)
+    return (0.8 + 0.6 * node.data.layer) * node.y
+
     if (contribution < 0.5) {
         return node.y * 2
     }
@@ -190,7 +215,7 @@ const labelDistanceOffset = 10
 const labelAngleOffset = (2 * Math.PI / 180)
 
 function getLabelY(edge) {
-    const angle = edge.target.x - Math.PI / 2
+    const angle = edge.target.x
     const y = Math.sin(angle) * (getNodeDistance(edge.target) - getNodeSize(edge.target))
     const linePos = labelPositionFactor * y
 
@@ -204,7 +229,7 @@ function getLabelY(edge) {
 }
 
 function getLabelX(edge) {
-    const angle = edge.target.x - Math.PI / 2
+    const angle = edge.target.x
     const x = Math.cos(angle) * (getNodeDistance(edge.target) - getNodeSize(edge.target))
     const linePos = labelPositionFactor * x
 
@@ -217,22 +242,66 @@ function getLabelX(edge) {
     return labelPos
 }
 
+function calculateLayers(root) {
+    let maxContribution = 0
+    for (const child of root.children) {
+        maxContribution = Math.max(maxContribution, Math.round(getNodeContributionPercentage(child)))
+    }
+    maxContribution = Math.ceil(maxContribution / 10) * 10
+    let categoryCount = {}
+    for (let i = 0; i <= maxContribution / 10; i++) {
+        categoryCount[i] = 0
+    }
+    for (const child of root.children) {
+        let category = Math.ceil(Math.round(getNodeContributionPercentage(child)) / 10)
+        categoryCount[category] += 1
+    }
+    let layer = 0
+    let categoryToLayer = {}
+    for (let i = maxContribution / 10; i >= 0; i--) {
+        if (categoryCount[i] != 0) {
+            categoryToLayer[i] = layer
+            layer += 1
+        }
+    }
+    for (const child of root.children) {
+        let category = Math.ceil(Math.round(getNodeContributionPercentage(child)) / 10)
+        child.data.layer = categoryToLayer[category]
+    }
+    return layer
+}
+
+function shouldFlipText(node) {
+    if (node.children)
+        return false
+    return node.x > Math.PI / 2 && node.x < Math.PI / 2 * 3
+}
+
 function drawActivity(data) {
     const container = document.getElementById("graph-container")
 
-    const width = 928 * 1.5
+    const baseWidth = 928
+    // const tree = d3.cluster().nodeSize([dx, dy])
+
     const root = d3.hierarchy(data)
+    layerCount = calculateLayers(root)
+
+    const width = baseWidth * (0.75 + 0.25 * layerCount)
     const dx = 100
     const dy = width / (root.height + 1)
     const radius = width / 2 - 300
-    // const tree = d3.cluster().nodeSize([dx, dy])
 
     const tree = d3.cluster()
         .size([2 * Math.PI, radius])
         .separation((a, b) => (a.parent == b.parent ? 1 : 2) / a.depth);
-
-    root.sort((a, b) => d3.ascending(a.data.name, b.data.name))
+    // root.sort((a, b) => d3.ascending(a.data.product || a.data.name, b.data.product || b.data.name))
+    root.sort((a, b) => d3.ascending(a.data.layer, b.data.layer) || d3.ascending(TAG_INFORMATION[a.data.tag]["scope"], TAG_INFORMATION[b.data.tag]["scope"]) || d3.ascending(a.data.tag, b.data.tag))
     tree(root)
+    for (let child of root.children) {
+        child.x -= Math.PI / 2
+        if (child.x < 0)
+            child.x += Math.PI * 2
+    }
 
     let x0 = Infinity
     let x1 = -x0
@@ -247,7 +316,7 @@ function drawActivity(data) {
     const cx = width * 0.5; // adjust as needed to fit
     const cy = height * 0.54; // adjust as needed to fit
 
-    const viewBoxMultiplier = 1.4
+    const viewBoxMultiplier = (0.75 + 0.25 * layerCount)
 
     const svg = d3.create("svg")
         .attr("width", width)
@@ -274,7 +343,7 @@ function drawActivity(data) {
         .attr("y0", 0)
         .attr("x1", d => getNodeDistance(d.target))
         .attr("y1", 0)
-        .attr("transform", d => `rotate(${d.target.x * 180 / Math.PI - 90})`)
+        .attr("transform", d => `rotate(${d.target.x * 180 / Math.PI})`)
 
     link.append("text")
         .attr("x", getLabelX)
@@ -292,7 +361,7 @@ function drawActivity(data) {
         .attr("font-size", "12px")
         .attr("style", "transform-box: fill-box")
         .attr("transform-origin", "center")
-        .attr("transform", d => `rotate(${d.target.x * 180 / Math.PI - 90}) rotate(${d.target.x > Math.PI ? 180 : 0})`)
+        .attr("transform", d => `rotate(${d.target.x * 180 / Math.PI}) rotate(${shouldFlipText(d.target) ? 180 : 0})`)
 
     // link.append("circle")
     //     .attr("cx", getLabelX)
@@ -307,17 +376,17 @@ function drawActivity(data) {
         .join("g")
 
     node.append("circle")
-        .attr("transform", d => `rotate(${d.x * 180 / Math.PI - 90}) translate(${getNodeDistance(d)}, 0)`)
+        .attr("transform", d => `rotate(${d.x * 180 / Math.PI}) translate(${getNodeDistance(d)}, 0)`)
         .attr("fill", getNodeColour)
         .attr("r", getNodeSize)
-        .attr("stroke", d => d.data.connected ? "#000" : "none");
+        .attr("stroke", d => d.data.connected ? "#000" : "none")
 
 
     node.append("text")
-        .attr("transform", d => `rotate(${d.x * 180 / Math.PI - 90}) translate(${getNodeDistance(d)}, 0) rotate(${d.children ? -90 : 0}) rotate(${d.x > Math.PI ? 180 : 0})`)
-        .attr("text-anchor", d => d.children ? "middle" : (d.x > Math.PI ? "end" : "start"))
+        .attr("transform", d => `rotate(${d.x * 180 / Math.PI}) translate(${getNodeDistance(d)}, 0) rotate(${d.children ? -180 : 0}) rotate(${shouldFlipText(d) ? 180 : 0})`)
+        .attr("text-anchor", d => d.children ? "middle" : (shouldFlipText(d) ? "end" : "start"))
         .attr("dy", d => d.children ? getNodeSize(d) + 20 : `0.31em`)
-        .attr("x", d => d.children ? 0 : (d.x > Math.PI ? -getNodeSize(d) - 5 : getNodeSize(d) + 5))
+        .attr("x", d => d.children ? 0 : (shouldFlipText(d) ? -getNodeSize(d) - 5 : getNodeSize(d) + 5))
         .text(d => d.data.product ? (d.data.product + " " + getNodeContributionPercentage(d).toFixed(0) + "%") : d.data.name)
         .attr("stroke", "none")
         .attr("fill", d => d.children ? "#fff" : "#000")
@@ -332,6 +401,9 @@ function drawActivity(data) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+    const legend = document.getElementById("legend")
+    drawLegend(legend, TAG_INFORMATION)
+
     const searchParamsCurrent = new URLSearchParams(window.location.search)
     const data = await (await fetch("/api/consensusgraphlets/" + searchParamsCurrent.get("id"))).json()
     drawActivity(data)

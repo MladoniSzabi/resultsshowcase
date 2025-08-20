@@ -3,6 +3,8 @@
 <head>
     <script src="/scripts/vendor/d3.js"></script>
     <script src="/scripts/components/consensus.js"></script>
+    <script src="/scripts/components/legend.component.js"></script>
+    <link rel="stylesheet" href="/stylesheets/main.css">
     <style>
         html,
         body {
@@ -10,11 +12,26 @@
             width: 100vw;
             height: 100vh;
         }
+
+        #legend {
+            position: absolute;
+            display: grid;
+            grid-template-columns: repeat(2, auto);
+            column-gap: 0.5em;
+            margin: 1em;
+            top: 0;
+            right: 0;
+            border: solid 1px black;
+            padding: 0.5em;
+            border-radius: 10px;
+            background-color: white;
+        }
     </style>
 </head>
 
 <body>
     <div id="graph-container">
+        <div id="legend"></div>
     </div>
 </body>
 
