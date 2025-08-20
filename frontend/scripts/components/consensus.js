@@ -298,7 +298,7 @@ function drawActivity(data) {
     root.sort((a, b) => d3.ascending(a.data.layer, b.data.layer) || d3.ascending(TAG_INFORMATION[a.data.tag]["scope"], TAG_INFORMATION[b.data.tag]["scope"]) || d3.ascending(a.data.tag, b.data.tag))
     tree(root)
     for (let child of root.children) {
-        child.x -= Math.PI / 2
+        child.x -= Math.PI - Math.PI / 8
         if (child.x < 0)
             child.x += Math.PI * 2
     }
