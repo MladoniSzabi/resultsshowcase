@@ -132,9 +132,30 @@ function getNodeColour(node) {
     return TAG_INFORMATION[node.data.tag]["colour"]
 }
 
+function splitIntoWord(text) {
+    buffer = ""
+    words = []
+    for (const c of text) {
+        if (c == " ") {
+            words.push(buffer)
+            buffer = ""
+        } else if (c == "-") {
+            words.push(buffer + "-")
+            buffer = ""
+        } else {
+            buffer += c
+        }
+    }
+
+    if (buffer) {
+        words.push(buffer)
+    }
+    return words
+}
+
 function wrapString(str, width) {
     let word,
-        words = str.split(/\s+/).reverse(),
+        words = splitIntoWord(str).reverse(),
         line = [],
         lines = []
 
@@ -142,13 +163,13 @@ function wrapString(str, width) {
         line.push(word)
         if (line.join(" ").length > width) {
             line.pop()
-            lines.push(line.join(" "))
+            lines.push(line.join(" ").replace("- ", "-"))
             line = [word]
         }
     }
 
     if (line.length > 0) {
-        lines.push(line.join(" "))
+        lines.push(line.join(" ").replace("- ", "-"))
     }
 
     if (lines.length >= 11) {
@@ -196,7 +217,7 @@ function getNodeSize(node) {
     const minNodeSize = 4
     const maxNodeSize = 60
     if (!node.parent)
-        return minNodeSize
+        return maxNodeSize
 
     const proportion = node.data.contribution / node.parent.data.contribution
     const log = Math.log10(proportion * 9 + 1)
@@ -213,7 +234,7 @@ function getNodeContributionPercentage(node) {
 function getNodeDistance(node) {
     if (node.children) return 0
     const contribution = getNodeContributionPercentage(node)
-    return (0.8 + 0.6 * node.data.layer) * node.y
+    return (0.8 + 0.4 * node.data.layer) * node.y
 
     if (contribution < 0.5) {
         return node.y * 2
@@ -310,7 +331,7 @@ function drawActivity(data) {
         .size([2 * Math.PI, radius])
         .separation((a, b) => (a.parent == b.parent ? 1 : 2) / a.depth);
     // root.sort((a, b) => d3.ascending(a.data.product || a.data.name, b.data.product || b.data.name))
-    root.sort((a, b) => d3.ascending(TAG_INFORMATION[a.data.tag]["scope"], TAG_INFORMATION[b.data.tag]["scope"]) || d3.descending(a.data.contribution, b.data.contribution))
+    root.sort((a, b) => d3.ascending(TAG_INFORMATION[a.data.tag]["scope"], TAG_INFORMATION[b.data.tag]["scope"]) || d3.descending(Math.round(a.data.contribution * 100), Math.round(b.data.contribution * 100)) || d3.descending(a.data.presence, b.data.presence))
     tree(root)
     for (let child of root.children) {
         child.x -= Math.PI - Math.PI / 8
@@ -400,11 +421,11 @@ function drawActivity(data) {
     node.append("text")
         .attr("transform", d => `rotate(${d.x * 180 / Math.PI}) translate(${getNodeDistance(d)}, 0) rotate(${d.children ? -180 : 0}) rotate(${shouldFlipText(d) ? 180 : 0})`)
         .attr("text-anchor", d => d.children ? "middle" : (shouldFlipText(d) ? "end" : "start"))
-        .attr("dy", d => d.children ? 1 : 0)
+        .attr("dy", d => d.children ? 1 + getNodeSize(d) / 24 : 0)
         .attr("x", d => d.children ? 0 : (shouldFlipText(d) ? -getNodeSize(d) - 5 : getNodeSize(d) + 5))
         .text(d => d.data.product ? (d.data.product + " " + getNodeContributionPercentage(d).toFixed(0) + "%") : d.data.name)
-        .attr("stroke", d => d.children ? "#555" : "none")
-        .attr("fill", d => d.children ? "#fff" : "#000")
+        .attr("stroke", d => d.children ? "#fff" : "none")
+        .attr("fill", d => d.children ? "#000" : "#000")
         .attr("paint-order", "stroke")
         .attr("font-size", d => d.children ? "24px" : "18px")
         .call(wrap, 22)
