@@ -132,40 +132,55 @@ function getNodeColour(node) {
     return TAG_INFORMATION[node.data.tag]["colour"]
 }
 
-function wrap(text, width, nodeSize) {
+function wrapString(str, width) {
+    let word,
+        words = str.split(/\s+/).reverse(),
+        line = [],
+        lines = []
+
+    while (word = words.pop()) {
+        line.push(word)
+        if (line.join(" ").length > width) {
+            line.pop()
+            lines.push(line.join(" "))
+            line = [word]
+        }
+    }
+
+    if (line.length > 0) {
+        lines.push(line.join(" "))
+    }
+
+    if (lines.length >= 11) {
+        lines = lines.slice(0, 10)
+        lines.push("...")
+    }
+
+    return lines;
+}
+
+function wrap(text, width) {
     text.each(function () {
         let textNode = d3.select(this),
             fullText = textNode.text(),
-            words = fullText.split(/\s+/).reverse(),
             word,
             line = [],
             lineHeight = 1.2, // ems
             dy = parseFloat(textNode.attr("dy") || 0),
             lines = [],
             x = parseFloat(textNode.attr("x") || 0)
-        textNode.text(null).attr("x", 0).attr("y", 0).attr("font-size", "16px")
+        textNode.text(null).attr("x", 0).attr("y", 0)
 
-        while (word = words.pop()) {
-            line.push(word)
-            if (line.join(" ").length > width) {
-                line.pop()
-                lines.push(line.join(" "))
-                line = [word]
-            }
+        wordsplit = fullText.split(",")
+        if (wordsplit.length > 1) {
+            fullText = wordsplit[0] + " " + fullText.split(" ").at(-1)
+        } else {
+            fullText = wordsplit[0]
         }
+        lines = wrapString(fullText, width)
 
-        if (line.length > 0) {
-            lines.push(line.join(" "))
-        }
-
-        if (lines.length >= 11) {
-            lines = lines.slice(0, 10)
-            lines.push("...")
-        }
-
-        let start = 0
         for (let i = 0; i < lines.length; i += 1) {
-            textNode.append("tspan").attr('x', x).attr("dy", `${i == 0 ? 0.31 : lineHeight}em`).text(lines[i])
+            textNode.append("tspan").attr('x', x).attr("dy", `${(i == 0 ? 0.31 : lineHeight) + dy}em`).text(lines[i])
         }
     })
 }
@@ -178,10 +193,10 @@ function getStrokeWidth(edge) {
 }
 
 function getNodeSize(node) {
-    const minNodeSize = 8
-    const maxNodeSize = 100
+    const minNodeSize = 4
+    const maxNodeSize = 60
     if (!node.parent)
-        return maxNodeSize
+        return minNodeSize
 
     const proportion = node.data.contribution / node.parent.data.contribution
     const log = Math.log10(proportion * 9 + 1)
@@ -295,7 +310,7 @@ function drawActivity(data) {
         .size([2 * Math.PI, radius])
         .separation((a, b) => (a.parent == b.parent ? 1 : 2) / a.depth);
     // root.sort((a, b) => d3.ascending(a.data.product || a.data.name, b.data.product || b.data.name))
-    root.sort((a, b) => d3.ascending(a.data.layer, b.data.layer) || d3.ascending(TAG_INFORMATION[a.data.tag]["scope"], TAG_INFORMATION[b.data.tag]["scope"]) || d3.ascending(a.data.tag, b.data.tag))
+    root.sort((a, b) => d3.ascending(TAG_INFORMATION[a.data.tag]["scope"], TAG_INFORMATION[b.data.tag]["scope"]) || d3.descending(a.data.contribution, b.data.contribution))
     tree(root)
     for (let child of root.children) {
         child.x -= Math.PI - Math.PI / 8
@@ -385,14 +400,14 @@ function drawActivity(data) {
     node.append("text")
         .attr("transform", d => `rotate(${d.x * 180 / Math.PI}) translate(${getNodeDistance(d)}, 0) rotate(${d.children ? -180 : 0}) rotate(${shouldFlipText(d) ? 180 : 0})`)
         .attr("text-anchor", d => d.children ? "middle" : (shouldFlipText(d) ? "end" : "start"))
-        .attr("dy", d => d.children ? getNodeSize(d) + 20 : `0.31em`)
+        .attr("dy", d => d.children ? 1 : 0)
         .attr("x", d => d.children ? 0 : (shouldFlipText(d) ? -getNodeSize(d) - 5 : getNodeSize(d) + 5))
         .text(d => d.data.product ? (d.data.product + " " + getNodeContributionPercentage(d).toFixed(0) + "%") : d.data.name)
-        .attr("stroke", "none")
+        .attr("stroke", d => d.children ? "#555" : "none")
         .attr("fill", d => d.children ? "#fff" : "#000")
         .attr("paint-order", "stroke")
-        .attr("font-size", "14px")
-        .call(wrap, 20, d => getNodeSize(d))
+        .attr("font-size", d => d.children ? "24px" : "18px")
+        .call(wrap, 22)
 
 
     node.on('dblclick', (event, d) => { if (d.data.id) changeGraph(d.data.id) })
