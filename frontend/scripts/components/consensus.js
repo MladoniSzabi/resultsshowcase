@@ -186,8 +186,8 @@ function wrap(text, width) {
 }
 
 function getStrokeWidth(edge) {
-    const minWidth = 1.5
-    const maxWidth = 10
+    const minWidth = 1
+    const maxWidth = 7
 
     return edge.target.data.presence * (maxWidth - minWidth) + minWidth
 }
