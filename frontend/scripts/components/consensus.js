@@ -425,7 +425,7 @@ function drawActivity(data) {
         .attr("x", d => d.children ? 0 : (shouldFlipText(d) ? -getNodeSize(d) - 5 : getNodeSize(d) + 5))
         .text(d => d.data.product ? (d.data.product + " " + getNodeContributionPercentage(d).toFixed(0) + "%") : d.data.name)
         .attr("stroke", d => d.children ? "#fff" : "none")
-        .attr("fill", d => d.children ? "#000" : "#000")
+        .attr("fill", "#000")
         .attr("paint-order", "stroke")
         .attr("font-size", d => d.children ? "24px" : "18px")
         .attr("class", d => d.children ? "rootNodeLabel" : null)

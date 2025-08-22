@@ -1,18 +1,13 @@
 <html>
 
 <head>
-    <script src="/scripts/components/sankey.js" defer></script>
     <script src="/scripts/components/table.component.js"></script>
     <script src="/scripts/components/table_navigation.component.js"></script>
     <script src="/scripts/components/filters.component.js"></script>
-    <script src="/scripts/utils/fetch_sankey.js"></script>
-    <script src="/scripts/vendor/d3.js"></script>
-    <script src="/scripts/vendor/d3array.js"></script>
-    <script src="/scripts/vendor/d3collection.js"></script>
-    <script src="/scripts/vendor/d3path.js"></script>
-    <script src="/scripts/vendor/d3shape.js"></script>
-    <script src="/scripts/vendor/d3sankey.js"></script>
+    <script src="/scripts/components/boxplots_browse.js" defer></script>
+    <script src="/scripts/utils/fetch_boxplots.js"></script>
     <link rel="stylesheet" href="/stylesheets/browse.css">
+
 
     <style>
         svg {
@@ -48,23 +43,10 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Reference Product</th>
-                        <th>Geography</th>
-                        <th>CPC Code</th>
-                        <th>CPC Name</th>
-                        <th>Layers</th>
                         <th></th>
                     </tr>
                     <tr>
-                        <th><input type="text" placeholder="Enter activity" id="activity" /></th>
-                        <th><input type="text" placeholder="Enter reference product" id="product" /></th>
-                        <th><input type="text" list="geography-datalist" placeholder="Enter geography" id="geography" />
-                        </th>
-                        <th><input type="text" list="cpc-code-datalist" placeholder="Enter CPC code" id="cpc-code" />
-                        </th>
-                        <th><input type="text" list="cpc-name-datalist" placeholder="Enter CPC name" id="cpc-name" />
-                        </th>
-                        <th><input type="number" placeholder="Enter layer count" id="layers" /></th>
+                        <th><input type="text" placeholder="Enter activity" id="name" /></th>
                         <th></th>
                     </tr>
                 </thead>
@@ -86,12 +68,6 @@
         </div>
     </div>
     <div id="graph-container"></div>
-
-    {% include 'cpc_code_datalist.html' %}
-
-    {% include 'cpc_name_datalist.html' %}
-
-    {% include 'geography_datalist.html' %}
 </body>
 
 </html>

@@ -256,3 +256,50 @@ def get_consensus_graphlet(graphid):
         graph_entry = db.get_graph(graphid, ["path"])
         with open(graph_entry["path"]) as f:
             return f.read()
+
+
+@app.route("/boxplots/browse")
+def get_boxplots_browse_page():
+    return render_template("boxplot_browse.html")
+
+
+@app.route("/boxplots/graph")
+def get_boxplot_graph_page():
+    return render_template("boxplot_graph.html")
+
+
+@app.route("/api/boxplots/page")
+def get_boxplots_page():
+    filters = get_filters()
+
+    page_number = int(request.args.get("page", 0))
+    page_size = min(int(request.args.get("count", 0)), 50)
+
+    with SQLiteDatabase("boxPlots.db", "Graphs") as db:
+        query = db.generate_query(filters)
+        collection = db.get_page(query, page_size, page_number)
+
+        if len(collection) == 0:
+            return "[]"
+
+        return json.dumps(collection)
+
+
+@app.route("/api/boxplots/total")
+def get_boxplots_count():
+    filters = get_filters()
+
+    with SQLiteDatabase("boxPlots.db", "Graphs") as db:
+        query = db.generate_query(filters)
+        result = db.get_count(query)
+        return str(result)
+
+
+@app.route("/api/boxplots/<int:graphid>")
+def get_boxplot(graphid):
+    assert (graphid > 0)
+
+    with SQLiteDatabase("boxPlots.db", "Graphs") as db:
+        graph_entry = db.get_graph(graphid, ["path"])
+        with open(graph_entry["path"]) as f:
+            return f.read()
