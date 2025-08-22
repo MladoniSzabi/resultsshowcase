@@ -69,7 +69,7 @@ if not is_debug():
 
 @app.route('/')
 def index():
-    return browse()
+    return render_template("main_browse.html")
 
 
 @app.route('/browse')
