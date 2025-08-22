@@ -428,12 +428,28 @@ function drawActivity(data) {
         .attr("fill", d => d.children ? "#000" : "#000")
         .attr("paint-order", "stroke")
         .attr("font-size", d => d.children ? "24px" : "18px")
+        .attr("class", d => d.children ? "rootNodeLabel" : null)
         .call(wrap, 22)
 
 
     node.on('dblclick', (event, d) => { if (d.data.id) changeGraph(d.data.id) })
 
     container.appendChild(svg.node())
+
+    const rootLabel = svg.node().getElementsByClassName("rootNodeLabel")[0]
+    const labelRect = rootLabel.getBBox()
+    const paddingX = 3
+    const rect = svg.append("rect")
+        .attr("x", labelRect.x - paddingX)
+        .attr("y", labelRect.y)
+        .attr("width", labelRect.width + paddingX * 2)
+        .attr("height", labelRect.height)
+        .attr("fill", "white")
+        .attr("rx", 7)
+        .attr("stroke", "#000")
+        .attr("stroke-width", 2)
+
+    rootLabel.parentElement.insertBefore(rect.node(), rootLabel)
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
