@@ -446,8 +446,8 @@ function drawActivity(data) {
         .attr("height", labelRect.height)
         .attr("fill", "white")
         .attr("rx", 7)
-        .attr("stroke", "#000")
-        .attr("stroke-width", 2)
+    // .attr("stroke", "#000")
+    // .attr("stroke-width", 2)
 
     rootLabel.parentElement.insertBefore(rect.node(), rootLabel)
 }
