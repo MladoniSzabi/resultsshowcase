@@ -201,7 +201,7 @@ function wrap(text, width) {
         lines = wrapString(fullText, width)
 
         for (let i = 0; i < lines.length; i += 1) {
-            textNode.append("tspan").attr('x', x).attr("dy", `${(i == 0 ? 0.31 : lineHeight) + dy}em`).text(lines[i])
+            textNode.append("tspan").attr('x', x).attr("dy", `${i == 0 ? (0.31 + dy) : lineHeight}em`).text(lines[i])
         }
     })
 }
