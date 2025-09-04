@@ -180,7 +180,7 @@ function wrapString(str, width) {
     return lines;
 }
 
-function wrap(text, width) {
+function wrap(text) {
     text.each(function () {
         let textNode = d3.select(this),
             fullText = textNode.text(),
@@ -189,7 +189,8 @@ function wrap(text, width) {
             lineHeight = 1.2, // ems
             dy = parseFloat(textNode.attr("dy") || 0),
             lines = [],
-            x = parseFloat(textNode.attr("x") || 0)
+            x = parseFloat(textNode.attr("x") || 0),
+            width = parseInt(textNode.attr("data-linelength"))
         textNode.text(null).attr("x", 0).attr("y", 0)
 
         wordsplit = fullText.split(",")
@@ -201,7 +202,7 @@ function wrap(text, width) {
         lines = wrapString(fullText, width)
 
         for (let i = 0; i < lines.length; i += 1) {
-            textNode.append("tspan").attr('x', x).attr("dy", `${i == 0 ? (0.31 + dy) : lineHeight}em`).text(lines[i])
+            textNode.append("tspan").attr('x', x).attr("dy", `${i == 0 ? (0.31 + dy - (lines.length - 1) / 2 * lineHeight) : lineHeight}em`).text(lines[i])
         }
     })
 }
@@ -215,7 +216,7 @@ function getStrokeWidth(edge) {
 
 function getNodeSize(node) {
     const minNodeSize = 4
-    const maxNodeSize = 60
+    const maxNodeSize = 100
     if (!node.parent)
         return maxNodeSize
 
@@ -232,9 +233,10 @@ function getNodeContributionPercentage(node) {
 }
 
 function getNodeDistance(node) {
+    console.log(node.data.layer, node.y)
     if (node.children) return 0
     const contribution = getNodeContributionPercentage(node)
-    return (0.8 + 0.4 * node.data.layer) * node.y
+    return (0.4 + 0.3 * node.data.layer) * node.y
 
     if (contribution < 0.5) {
         return node.y * 2
@@ -316,16 +318,15 @@ function shouldFlipText(node) {
 function drawActivity(data) {
     const container = document.getElementById("graph-container")
 
-    const baseWidth = 928
+    const baseWidth = 1000
     // const tree = d3.cluster().nodeSize([dx, dy])
 
     const root = d3.hierarchy(data)
     layerCount = calculateLayers(root)
+    console.log(layerCount)
 
-    const width = baseWidth * (0.75 + 0.25 * layerCount)
-    const dx = 100
-    const dy = width / (root.height + 1)
-    const radius = width / 2 - 300
+    const radius = 600
+    const width = (radius * (0.4 + 0.3 * layerCount) + 50) * 2
 
     const tree = d3.cluster()
         .size([2 * Math.PI, radius])
@@ -350,16 +351,13 @@ function drawActivity(data) {
     const height = width
 
     const cx = width * 0.5; // adjust as needed to fit
-    const cy = height * 0.54; // adjust as needed to fit
-
-    const viewBoxMultiplier = (0.75 + 0.25 * layerCount)
+    const cy = height * 0.5; // adjust as needed to fit
 
     const svg = d3.create("svg")
         .attr("width", width)
         .attr("height", height)
         // .attr("viewBox", [-dy / 3, x0 - dx, width, height])
-        .attr("viewBox", [-cx * viewBoxMultiplier, -cy * viewBoxMultiplier * 0.9, width * viewBoxMultiplier, height * viewBoxMultiplier])
-        .attr("style", "max-width: 100%, height: auto, font: 10px sans-serif;")
+        .attr("viewBox", [-cx, -cy, width, height])
 
     const link = svg.append("g")
         .attr("fill", "none")
@@ -421,31 +419,32 @@ function drawActivity(data) {
     node.append("text")
         .attr("transform", d => `rotate(${d.x * 180 / Math.PI}) translate(${getNodeDistance(d)}, 0) rotate(${d.children ? -180 : 0}) rotate(${shouldFlipText(d) ? 180 : 0})`)
         .attr("text-anchor", d => d.children ? "middle" : (shouldFlipText(d) ? "end" : "start"))
-        .attr("dy", d => d.children ? 1 + getNodeSize(d) / 24 : 0)
+        .attr("dy", d => d.children ? 0 : 0)
         .attr("x", d => d.children ? 0 : (shouldFlipText(d) ? -getNodeSize(d) - 5 : getNodeSize(d) + 5))
         .text(d => d.data.product ? (d.data.product + " " + getNodeContributionPercentage(d).toFixed(0) + "%") : d.data.name)
-        .attr("stroke", d => d.children ? "#fff" : "none")
-        .attr("fill", "#000")
+        .attr("stroke", d => d.children ? "none" : "none")
+        .attr("fill", d => d.children ? "#fff" : "#000")
         .attr("paint-order", "stroke")
-        .attr("font-size", d => d.children ? "24px" : "18px")
+        .attr("font-size", d => d.children ? "25px" : "20px")
         .attr("class", d => d.children ? "rootNodeLabel" : null)
-        .call(wrap, 22)
+        .attr("data-linelength", d => d.children ? 15 : 20)
+        .call(wrap)
 
 
     node.on('dblclick', (event, d) => { if (d.data.id) changeGraph(d.data.id) })
 
     container.appendChild(svg.node())
 
-    const rootLabel = svg.node().getElementsByClassName("rootNodeLabel")[0]
-    const labelRect = rootLabel.getBBox()
-    const paddingX = 3
-    const rect = svg.append("rect")
-        .attr("x", labelRect.x - paddingX)
-        .attr("y", labelRect.y)
-        .attr("width", labelRect.width + paddingX * 2)
-        .attr("height", labelRect.height)
-        .attr("fill", "white")
-        .attr("rx", 7)
+    // const rootLabel = svg.node().getElementsByClassName("rootNodeLabel")[0]
+    // const labelRect = rootLabel.getBBox()
+    // const paddingX = 3
+    // const rect = svg.append("rect")
+    //     .attr("x", labelRect.x - paddingX)
+    //     .attr("y", labelRect.y)
+    //     .attr("width", labelRect.width + paddingX * 2)
+    //     .attr("height", labelRect.height)
+    //     .attr("fill", "white")
+    //     .attr("rx", 7)
     // .attr("stroke", "#000")
     // .attr("stroke-width", 2)
 
