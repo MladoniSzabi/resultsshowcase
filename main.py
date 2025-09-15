@@ -303,3 +303,23 @@ def get_boxplot(graphid):
         graph_entry = db.get_graph(graphid, ["path"])
         with open(graph_entry["path"]) as f:
             return f.read()
+
+
+@app.route("/diets/circular")
+def diets_circular_graph():
+    return render_template("diets_circular.html")
+
+
+@app.route("/diets/fdg")
+def diets_force_graph():
+    return render_template("diets_fdg.html")
+
+
+@app.route("/diets/list")
+def diets_list_graph():
+    return render_template("diets_list.html")
+
+
+@app.route("/diets/data.js")
+def diets_data():
+    return send_from_directory("results/diets/", "diets_data.js")

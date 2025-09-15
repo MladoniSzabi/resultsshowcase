@@ -54,6 +54,7 @@ def setup_module(module):
     browser = Browser()
 
 
+# TODO:
 def test_fits_screen_720p():
     browser.driver.set_window_size(720, 1280)
     browser.visit(os.path.join(os.getenv("TEST_URL"),
