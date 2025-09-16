@@ -1,0 +1,122 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="/stylesheets/graph_browse.css">
+
+
+    <style>
+        #table-container.hidden {
+            display: none;
+        }
+
+        h1 {
+            max-width: 80rem;
+            margin: auto;
+            cursor: pointer;
+        }
+
+        a {
+            cursor: pointer;
+        }
+
+        td {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>Database</h1>
+        <div id="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cluster</th>
+                        <th>Circular</th>
+                        <th>Force directed</th>
+                        <th>List</th>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td><a href="/diets/circular?cluster=0">Show graph</a></td>
+                        <td><a href="/diets/fdg?cluster=0">Show graph</a></td>
+                        <td><a href="/diets/list?cluster=0">Show graph</a></td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td><a href="/diets/circular?cluster=1">Show graph</a></td>
+                        <td><a href="/diets/fdg?cluster=1">Show graph</a></td>
+                        <td><a href="/diets/list?cluster=1">Show graph</a></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><a href="/diets/circular?cluster=2">Show graph</a></td>
+                        <td><a href="/diets/fdg?cluster=2">Show graph</a></td>
+                        <td><a href="/diets/list?cluster=2">Show graph</a></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><a href="/diets/circular?cluster=3">Show graph</a></td>
+                        <td><a href="/diets/fdg?cluster=3">Show graph</a></td>
+                        <td><a href="/diets/list?cluster=3">Show graph</a></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><a href="/diets/circular?cluster=4">Show graph</a></td>
+                        <td><a href="/diets/fdg?cluster=4">Show graph</a></td>
+                        <td><a href="/diets/list?cluster=4">Show graph</a></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><a href="/diets/circular?cluster=5">Show graph</a></td>
+                        <td><a href="/diets/fdg?cluster=5">Show graph</a></td>
+                        <td><a href="/diets/list?cluster=5">Show graph</a></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><a href="/diets/circular?cluster=6">Show graph</a></td>
+                        <td><a href="/diets/fdg?cluster=6">Show graph</a></td>
+                        <td><a href="/diets/list?cluster=6">Show graph</a></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><a href="/diets/circular?cluster=7">Show graph</a></td>
+                        <td><a href="/diets/fdg?cluster=7">Show graph</a></td>
+                        <td><a href="/diets/list?cluster=7">Show graph</a></td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><a href="/diets/circular?cluster=8">Show graph</a></td>
+                        <td><a href="/diets/fdg?cluster=8">Show graph</a></td>
+                        <td><a href="/diets/list?cluster=8">Show graph</a></td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><a href="/diets/circular?cluster=9">Show graph</a></td>
+                        <td><a href="/diets/fdg?cluster=9">Show graph</a></td>
+                        <td><a href="/diets/list?cluster=9">Show graph</a></td>
+                    </tr>
+
+                </thead>
+                <tbody id="graphs-table"></tbody>
+            </table>
+            <div id="pagination-container">
+                <div id="page-size-control">
+                    <p>Items per page:</p>
+                    <select id="pagination-page-size">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+                <div id="pagination-total-item-count"></div>
+                <div id="pagination-controls"></div>
+            </div>
+        </div>
+    </div>
+    <div id="graph-container"></div>
+</body>
+
+</html>

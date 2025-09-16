@@ -105,7 +105,7 @@ function drawSvg(data) {
         event.subject.fy = null;
     }
 
-    return [svg.node(), { "link": linkForce, "charge": manyBodyForce, "x": xForce, "y": yForce }];
+    return svg.node()
 }
 
 function setForcesStrengths(forces, strength) {
@@ -115,5 +115,8 @@ function setForcesStrengths(forces, strength) {
     forces['y'].strength(strength['y'])
 }
 
-const [svg, forces] = drawSvg(graph)
-document.body.appendChild(svg)
+const params = new URLSearchParams(document.location.search);
+fetch("/diets/data/" + params.get('cluster')).then((data) => data.json()).then((graph) => {
+    const svg = drawSvg(graph)
+    document.body.appendChild(svg)
+})

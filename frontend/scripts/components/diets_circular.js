@@ -159,5 +159,9 @@ function drawSvg(data) {
     return svg.node()
 }
 
-const svg = drawSvg(graph)
-document.body.appendChild(svg)
+const params = new URLSearchParams(document.location.search);
+fetch("/diets/data/" + params.get('cluster')).then((data) => data.json()).then((graph) => {
+    console.log(graph)
+    const svg = drawSvg(graph)
+    document.body.appendChild(svg)
+})

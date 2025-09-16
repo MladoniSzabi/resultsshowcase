@@ -147,9 +147,13 @@ function drawSvg(data) {
     return Object.assign(svg.node(), { update });
 }
 
-const svg = drawSvg(graph)
-document.getElementById("svg").appendChild(svg)
-document.getElementById("order-by").addEventListener("change", (ev) => {
-    const orders = ["by name", "by group", "by degree"]
-    svg.update(orders[Number(ev.target.value)])
+const params = new URLSearchParams(document.location.search);
+fetch("/diets/data/" + params.get('cluster')).then((data) => data.json()).then((graph) => {
+    const svg = drawSvg(graph)
+    document.getElementById("svg").appendChild(svg)
+    document.getElementById("order-by").addEventListener("change", (ev) => {
+        const orders = ["by name", "by group", "by degree"]
+        svg.update(orders[Number(ev.target.value)])
+    })
 })
+
