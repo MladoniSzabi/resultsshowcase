@@ -35,7 +35,7 @@ function layout(nodes, links, radius) {
 }
 
 function drawSvg(data) {
-    const [nodes, links] = layout(data["nodes"], data["links"], 120)
+    const [nodes, links] = layout(data["nodes"], data["links"], 180)
     const width = 600;
     const height = 600;
     const color = d3.scaleOrdinal(d3.schemeCategory10);
@@ -110,7 +110,7 @@ function drawSvg(data) {
         return d.angle >= Math.PI / 2 && d.angle <= Math.PI * 1.5
     }
 
-    svg.append("g")
+    const labels = svg.append("g")
         .attr("stroke-linejoin", "round")
         .attr("stroke-width", 3)
         .selectAll()
@@ -122,13 +122,17 @@ function drawSvg(data) {
         .attr("text-anchor", d => shouldRotate(d) ? "end" : "start")
         .attr("paint-order", "stroke")
         .attr("stroke", "white")
-        .attr("font-size", "6px")
+        .attr("font-size", "4.5px")
         .attr("fill", "currentColor")
         .text(d => d.id)
         .on("pointerenter", (event, d) => {
             svg.classed("hover", true);
             node.classed("primary", n => n === d);
             node.classed("secondary", n => links.some(({ source, target }) => (
+                n === source && d == target || n === target && d === source
+            )));
+            labels.classed("primary", n => n === d);
+            labels.classed("secondary", n => links.some(({ source, target }) => (
                 n === source && d == target || n === target && d === source
             )));
             link.classed("primary", l => l.source === d || l.target === d).filter(".primary").raise();
@@ -139,6 +143,8 @@ function drawSvg(data) {
                     svg.classed("hover", false);
                     node.classed("primary", false);
                     node.classed("secondary", false);
+                    labels.classed("primary", false);
+                    labels.classed("secondary", false);
                     link.classed("primary", false).order();
                 }
             }, 200)
@@ -146,8 +152,8 @@ function drawSvg(data) {
 
     svg.append("style").text(`
     .hover text { fill: #aaa; }
-    .hover g.primary text { font-weight: bold; fill: #333; }
-    .hover g.secondary text { fill: #333; }
+    .hover text.primary { font-weight: bold; fill: #333; }
+    .hover text.secondary { fill: #333; }
     .hover circle {opacity: 0.2}
     .hover circle.primary {opacity: 1}
     .hover circle.secondary {opacity: 1}
@@ -161,7 +167,6 @@ function drawSvg(data) {
 
 const params = new URLSearchParams(document.location.search);
 fetch("/diets/data/" + params.get('cluster')).then((data) => data.json()).then((graph) => {
-    console.log(graph)
     const svg = drawSvg(graph)
     document.body.appendChild(svg)
 })
