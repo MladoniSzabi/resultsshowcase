@@ -21,6 +21,7 @@
 
         td {
             text-align: center;
+            padding: 0.5em !important
         }
     </style>
 </head>
@@ -37,6 +38,8 @@
                         <th>Force directed</th>
                         <th>List</th>
                     </tr>
+                </thead>
+                <tbody id="graphs-table">
                     <tr>
                         <td>0</td>
                         <td><a href="/diets/circular?cluster=0">Show graph</a></td>
@@ -97,26 +100,10 @@
                         <td><a href="/diets/fdg?cluster=9">Show graph</a></td>
                         <td><a href="/diets/list?cluster=9">Show graph</a></td>
                     </tr>
-
-                </thead>
-                <tbody id="graphs-table"></tbody>
+                </tbody>
             </table>
-            <div id="pagination-container">
-                <div id="page-size-control">
-                    <p>Items per page:</p>
-                    <select id="pagination-page-size">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                    </select>
-                </div>
-                <div id="pagination-total-item-count"></div>
-                <div id="pagination-controls"></div>
-            </div>
         </div>
     </div>
-    <div id="graph-container"></div>
 </body>
 
 </html>
