@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>CPC Tree (D3, wrapped distributions + pure coloring + collision fix)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 0; padding: 0; }
+  .container { padding: 16px; }
+  .node circle { stroke: #555; stroke-width: 1.2px; }
+  .node text { font-size: 12px; dominant-baseline: middle; }
+  .node text .name { font-weight: 600; }
+  .node text .dist { opacity: 0.95; font-size: 11px; }
+  .link { fill: none; stroke: #aaa; stroke-width: 1px; }
+  #chart { overflow: auto; }
+  #chart svg { overflow: visible; display: block; }
+  .buttons { margin: 8px 0 0 16px; }
+  .buttons button { margin-right: 8px; padding: 6px 10px; }
+
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="buttons">
+    <button id="btn-expand">Expand all</button>
+    <button id="btn-collapse">Collapse to depth 1</button>
+  </div>
+  <div id="chart"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script>
+(async function() {
+  // data.json must include: code, title, total, counts (object), children
+  const data = await d3.json("data_v2.json");
+
+  // ===== Tunables =====
+  const baseHeight = 1000;                 // minimum SVG height
+  const dx = 28;                            // base vertical unit (pixels)
+  const dy = 500;                           // horizontal spacing (pixels)
+  const margin = {top: 0, right: 0, bottom: 0, left: 0};
+
+  const TOP_K = 20;                          // show top-K labels in distribution
+  const SHOW_OTHER = true;                  // aggregate the rest as "other"
+  const MAX_CHARS_PER_LINE = 60;            // wrap distribution to new line after ~N chars
+  const LINE_HEIGHT_EM = 1.25;              // vertical spacing between wrapped lines (em)
+  const NAME_LINE_WEIGHT = 1.4;             // name line weight for spacing estimation
+
+  // Font sizes used to estimate pixel height for collision fixing
+  const NAME_FONT_PX = 12;
+  const DIST_FONT_PX = 11;
+  const PADDING_PX   = 48;                   // extra buffer between nodes (pixels)
+
+  // ===== D3 setup =====
+  const tree = d3.tree().nodeSize([dx, dy]);
+  const diagonal = d3.linkHorizontal().x(d => d.y).y(d => d.x);
+  const root = d3.hierarchy(data);
+  root.x0 = 0; root.y0 = 0;
+
+  // Expand all by default
+  expandLevel(root, Infinity);
+
+  const svg = d3.select("#chart").append("svg")
+      .attr("width", 1900)
+      .attr("height", baseHeight)
+      .style("font", "12px sans-serif")
+      .style("user-select", "none");
+
+  const gAll  = svg.append("g");
+  const gLink = gAll.append("g").attr("class", "links");
+  const gNode = gAll.append("g").attr("class", "nodes");
+
+  // Zoom / pan
+  const zoom = d3.zoom()
+      .scaleExtent([0.3, 3])
+      .on("zoom", (event) => gAll.attr("transform", event.transform));
+  svg.call(zoom);
+
+  // ===== Helpers =====
+  function isLeaf(d) {
+    return !!d.data.label || (Array.isArray(d.data.children) && d.data.children.length === 0);
+  }
+  function isPure(d) {
+    const counts = d.data.counts || {};
+    return Object.keys(counts).length === 1;
+  }
+  function displayName(d) {
+    if (isLeaf(d)) {
+      const code = d.data.code ?? "";
+      const title = d.data.title ?? "";
+      return title ? `${code} — ${title}` : code;
+    }
+    return d.data.code ?? d.data.name ?? "ROOT";
+  }
+  function distItems(d, topK = TOP_K, showOther = SHOW_OTHER) {
+    const counts = d.data.counts || {};
+    const total = d.data.total ?? 0;
+    const entries = Object.entries(counts).sort((a,b) => b[1] - a[1]);
+    if (entries.length === 0) return ["(no counts)"];
+    const head = entries.slice(0, topK);
+    const items = head.map(([lab, c]) => {
+      const pct = total > 0 ? (100 * c / total).toFixed(1) : "0.0";
+      return `${lab}: ${c} (${pct}%)`;
+    });
+    if (showOther && entries.length > topK) {
+      const rest = entries.slice(topK).reduce((s, [,c]) => s + c, 0);
+      const pct = total > 0 ? (100 * rest / total).toFixed(1) : "0.0";
+      items.push(`other: ${rest} (${pct}%)`);
+    }
+    return items;
+  }
+  function wrapLines(items, maxChars = MAX_CHARS_PER_LINE) {
+    const lines = [];
+    let cur = "";
+    for (const seg of items) {
+      if (cur.length === 0) cur = seg;
+      else if ((cur + ", " + seg).length <= maxChars) cur += ", " + seg;
+      else { lines.push(cur); cur = seg; }
+    }
+    if (cur.length > 0) lines.push(cur);
+    return lines;
+  }
+  function nodeTextHeightPx(d) {
+    const distLines = wrapLines(distItems(d)).length;
+    const nameH = NAME_FONT_PX * NAME_LINE_WEIGHT;
+    const distH = distLines * DIST_FONT_PX * LINE_HEIGHT_EM;
+    return nameH + distH;
+  }
+  function forEachDescendant(n, fn) {
+    fn(n);
+    const kids = (n.children || n._children || []);
+    kids.forEach(c => forEachDescendant(c, fn));
+  }
+  function resolveVerticalCollisions(nodes) {
+    const byDepth = d3.group(nodes, d => d.depth);
+    byDepth.forEach(arr => {
+      arr.sort((a, b) => a.x - b.x);
+      let prevBottom = -Infinity;
+      arr.forEach(n => {
+        const h = nodeTextHeightPx(n);
+        const half = h / 2;
+        const top  = n.x - half;
+        const minTop = prevBottom + PADDING_PX;
+        if (top < minTop) {
+          const delta = minTop - top;
+          forEachDescendant(n, nd => { nd.x += delta; });
+        }
+        prevBottom = Math.max(prevBottom, (n.x + half));
+      });
+    });
+  }
+
+  // Spacing increases with text lines to reduce overlap
+  tree.separation((a, b) => {
+    const wa = NAME_LINE_WEIGHT + wrapLines(distItems(a)).length;
+    const wb = NAME_LINE_WEIGHT + wrapLines(distItems(b)).length;
+    const base = (a.parent === b.parent) ? 1 : 2;
+    return base * (1 + 0.25 * (wa + wb));
+  });
+
+  // ===== Render =====
+  function update(source) {
+    // Layout
+    tree(root);
+
+    // Collision fix before drawing
+    const nodes = root.descendants().filter(d => d.depth > 0);
+    resolveVerticalCollisions(nodes);
+
+    const links = root.links().filter(l => l.source.depth > 0);
+
+    // Autosize viewBox
+    const minX = d3.min(nodes, d => d.x);
+    const maxX = d3.max(nodes, d => d.x);
+    const minY = d3.min(nodes, d => d.y);
+    const maxY = d3.max(nodes, d => d.y);
+
+    const vbX = (minY ?? 0) - margin.left;
+    const vbY = (minX ?? 0) - margin.top;
+    const vbW = (maxY - minY) + margin.left + margin.right;
+    const vbH = Math.max(baseHeight, (maxX - minX) + margin.top + margin.bottom);
+
+    svg.attr("viewBox", [vbX, vbY, vbW, vbH]);
+    svg.attr("height", vbH);
+
+    // Nodes
+    const node = gNode.selectAll("g.node")
+      .data(nodes, d => (d.data.code ?? d.data.name ?? "node") + "-" + d.depth);
+
+    const nodeEnter = node.enter().append("g")
+      .attr("class", "node")
+      .attr("transform", _ => `translate(${source.y0},${source.x0})`);
+
+    nodeEnter.append("circle")
+      .attr("r", 6)
+      .attr("fill", d => isPure(d) ? "#7cc37c" : "#f4a261")
+      .attr("stroke", "#555");
+
+    nodeEnter.each(function(d) {
+      const g = d3.select(this);
+      const text = g.append("text").attr("x", 10);
+
+      // First line (name)
+      text.append("tspan")
+        .attr("class", "name")
+        .attr("x", 10)
+        .attr("dy", "0.32em")
+        .text(displayName(d));
+
+      // Wrapped distribution lines
+      const lines = wrapLines(distItems(d));
+      let dyEm = 1.2;
+      lines.forEach((ln) => {
+        text.append("tspan")
+          .attr("class", "dist")
+          .attr("x", 10)
+          .attr("dy", `${dyEm}em`)
+          .text(ln);
+        dyEm = LINE_HEIGHT_EM;
+      });
+    });
+
+    nodeEnter.merge(node).transition().duration(200)
+      .attr("transform", d => `translate(${d.y},${d.x})`);
+
+    node.exit().transition().duration(200)
+      .attr("transform", d => `translate(${source.y},${source.x})`)
+      .remove();
+
+    // Links
+    const link = gLink.selectAll("path.link")
+      .data(links, d => (d.source.data.code ?? d.source.data.name) + "->" + (d.target.data.code ?? d.target.data.name));
+
+    link.enter().append("path")
+      .attr("class", "link")
+      .attr("d", _ => {
+        const o = {x: source.x0, y: source.y0};
+        return diagonal({source: o, target: o});
+      })
+      .merge(link)
+      .transition().duration(200)
+      .attr("d", diagonal);
+
+    link.exit().transition().duration(200)
+      .attr("d", d => {
+        const o = {x: source.x, y: source.y};
+        return diagonal({source: o, target: o});
+      })
+      .remove();
+
+    root.each(d => { d.x0 = d.x; d.y0 = d.y; });
+  }
+
+  // Expand / collapse utils
+  function expandLevel(d, depthLimit) {
+    if (d.depth < depthLimit && d._children) {
+      d.children = d._children;
+      d._children = null;
+    }
+    (d.children || d._children || []).forEach(c => expandLevel(c, depthLimit));
+  }
+  function collapseAll(d) {
+    if (d.children) {
+      d._children = d.children;
+      d.children.forEach(collapseAll);
+      d.children = null;
+    }
+  }
+
+  // Buttons
+  document.getElementById("btn-expand").addEventListener("click", () => {
+    expandLevel(root, Infinity);
+    update(root);
+  });
+  document.getElementById("btn-collapse").addEventListener("click", () => {
+    collapseAll(root);
+    expandLevel(root, 1);
+    update(root);
+  });
+
+
+  update(root);
+})();
+</script>
+</body>
+</html>

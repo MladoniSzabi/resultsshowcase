@@ -1,0 +1,2998 @@
+{
+  "name": "ROOT",
+  "children": [
+    {
+      "name": "0",
+      "code": "0",
+      "title": "Agriculture, forestry and fishery products",
+      "total": 52,
+      "label": null,
+      "counts": {
+        "agrifood goods": 44,
+        "forest goods": 3,
+        "waste": 1,
+        "agricultural services": 1,
+        "fibre crops": 3
+      },
+      "children": [
+        {
+          "name": "01",
+          "code": "01",
+          "title": "Products of agriculture, horticulture and market gardening",
+          "total": 46,
+          "label": null,
+          "counts": {
+            "agrifood goods": 41,
+            "waste": 1,
+            "agricultural services": 1,
+            "fibre crops": 3
+          },
+          "children": [
+            {
+              "name": "011",
+              "code": "011",
+              "title": "Cereals",
+              "total": 7,
+              "label": "agrifood goods",
+              "counts": {
+                "agrifood goods": 7
+              },
+              "children": []
+            },
+            {
+              "name": "012",
+              "code": "012",
+              "title": "Vegetables",
+              "total": 10,
+              "label": "agrifood goods",
+              "counts": {
+                "agrifood goods": 10
+              },
+              "children": []
+            },
+            {
+              "name": "013",
+              "code": "013",
+              "title": "Fruits and nuts",
+              "total": 5,
+              "label": "agrifood goods",
+              "counts": {
+                "agrifood goods": 5
+              },
+              "children": []
+            },
+            {
+              "name": "014",
+              "code": "014",
+              "title": "Oilseeds and oleaginous fruits",
+              "total": 4,
+              "label": "agrifood goods",
+              "counts": {
+                "agrifood goods": 4
+              },
+              "children": []
+            },
+            {
+              "name": "017",
+              "code": "017",
+              "title": "Pulses (dried leguminous vegetables)",
+              "total": 1,
+              "label": "agrifood goods",
+              "counts": {
+                "agrifood goods": 1
+              },
+              "children": []
+            },
+            {
+              "name": "019",
+              "code": "019",
+              "title": "Forage products; fibre crops; plants used in perfumery, pharmacy, or for insecticidal, fungicidal or similar purposes; beet, forage plant and flower seeds; natural rubber; living plants, cut flowers and flower buds; unmanufactured tobacco; other raw vegetable materials",
+              "total": 19,
+              "label": null,
+              "counts": {
+                "agrifood goods": 14,
+                "waste": 1,
+                "agricultural services": 1,
+                "fibre crops": 3
+              },
+              "children": [
+                {
+                  "name": "0191",
+                  "code": "0191",
+                  "title": "Forage products",
+                  "total": 11,
+                  "label": null,
+                  "counts": {
+                    "agrifood goods": 10,
+                    "waste": 1
+                  },
+                  "children": [
+                    {
+                      "name": "01913",
+                      "code": "01913",
+                      "title": "Cereal straw, husks, unprepared, ground, pressed, or in the form of pellets",
+                      "total": 3,
+                      "label": null,
+                      "counts": {
+                        "agrifood goods": 2,
+                        "waste": 1
+                      },
+                      "children": []
+                    },
+                    {
+                      "name": "01919",
+                      "code": "01919",
+                      "title": "Forage products, n.e.c.",
+                      "total": 8,
+                      "label": "agrifood goods",
+                      "counts": {
+                        "agrifood goods": 8
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "0192",
+                  "code": "0192",
+                  "title": "Fibre crops",
+                  "total": 5,
+                  "label": null,
+                  "counts": {
+                    "agrifood goods": 2,
+                    "fibre crops": 3
+                  },
+                  "children": [
+                    {
+                      "name": "01922",
+                      "code": "01922",
+                      "title": "Jute, kenaf, and other textile bast fibres, raw or retted, except flax, true hemp and ramie",
+                      "total": 3,
+                      "label": null,
+                      "counts": {
+                        "agrifood goods": 2,
+                        "fibre crops": 1
+                      },
+                      "children": []
+                    },
+                    {
+                      "name": "01929",
+                      "code": "01929",
+                      "title": "Other fibre crops, raw, n.e.c.",
+                      "total": 2,
+                      "label": "fibre crops",
+                      "counts": {
+                        "fibre crops": 2
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "0194",
+                  "code": "0194",
+                  "title": "Beet seeds (excluding sugar beet seeds) and seeds of forage plants",
+                  "total": 1,
+                  "label": "agrifood goods",
+                  "counts": {
+                    "agrifood goods": 1
+                  },
+                  "children": []
+                },
+                {
+                  "name": "0196",
+                  "code": "0196",
+                  "title": "Living plants; cut flowers and flower buds; flower seeds",
+                  "total": 2,
+                  "label": null,
+                  "counts": {
+                    "agrifood goods": 1,
+                    "agricultural services": 1
+                  },
+                  "children": [
+                    {
+                      "name": "01961",
+                      "code": "01961",
+                      "title": "Live plants; bulbs, tubers and roots; cuttings and slips; mushroom spawn",
+                      "total": 1,
+                      "label": "agricultural services",
+                      "counts": {
+                        "agricultural services": 1
+                      },
+                      "children": []
+                    },
+                    {
+                      "name": "01963",
+                      "code": "01963",
+                      "title": "Flower seeds",
+                      "total": 1,
+                      "label": "agrifood goods",
+                      "counts": {
+                        "agrifood goods": 1
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "03",
+          "code": "03",
+          "title": "Forestry and logging products",
+          "total": 3,
+          "label": "forest goods",
+          "counts": {
+            "forest goods": 3
+          },
+          "children": []
+        },
+        {
+          "name": "04",
+          "code": "04",
+          "title": "Fish, crustaceans, molluscs and other aquatic invertebrates products",
+          "total": 3,
+          "label": "agrifood goods",
+          "counts": {
+            "agrifood goods": 3
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "1",
+      "code": "1",
+      "title": "Ores and minerals; electricity, gas and water",
+      "total": 81,
+      "label": null,
+      "counts": {
+        "electricity": 25,
+        "heat steam and cooling": 19,
+        "solid fuel": 3,
+        "gaseous fuel": 3,
+        "renewable solar": 1,
+        "liquid fuel": 2,
+        "purchased other goods and services": 19,
+        "renewable hydro": 4,
+        "renewable wind": 2,
+        "scope 2": 1,
+        "renewable biogas": 1,
+        "fuel and energy related activities": 1
+      },
+      "children": [
+        {
+          "name": "11",
+          "code": "11",
+          "title": "Coal and peat",
+          "total": 3,
+          "label": "solid fuel",
+          "counts": {
+            "solid fuel": 3
+          },
+          "children": []
+        },
+        {
+          "name": "12",
+          "code": "12",
+          "title": "Crude petroleum and natural gas",
+          "total": 2,
+          "label": "gaseous fuel",
+          "counts": {
+            "gaseous fuel": 2
+          },
+          "children": []
+        },
+        {
+          "name": "14",
+          "code": "14",
+          "title": "Metal ores",
+          "total": 5,
+          "label": "purchased other goods and services",
+          "counts": {
+            "purchased other goods and services": 5
+          },
+          "children": []
+        },
+        {
+          "name": "15",
+          "code": "15",
+          "title": "Stone, sand and clay",
+          "total": 6,
+          "label": "purchased other goods and services",
+          "counts": {
+            "purchased other goods and services": 6
+          },
+          "children": []
+        },
+        {
+          "name": "16",
+          "code": "16",
+          "title": "Other minerals",
+          "total": 4,
+          "label": "purchased other goods and services",
+          "counts": {
+            "purchased other goods and services": 4
+          },
+          "children": []
+        },
+        {
+          "name": "17",
+          "code": "17",
+          "title": "Electricity, town gas, steam and hot water",
+          "total": 58,
+          "label": null,
+          "counts": {
+            "electricity": 25,
+            "heat steam and cooling": 19,
+            "renewable solar": 1,
+            "liquid fuel": 2,
+            "renewable hydro": 4,
+            "renewable wind": 2,
+            "purchased other goods and services": 1,
+            "scope 2": 1,
+            "gaseous fuel": 1,
+            "renewable biogas": 1,
+            "fuel and energy related activities": 1
+          },
+          "children": [
+            {
+              "name": "171",
+              "code": "171",
+              "title": "Electrical energy",
+              "total": 40,
+              "label": null,
+              "counts": {
+                "electricity": 25,
+                "renewable solar": 1,
+                "liquid fuel": 2,
+                "renewable hydro": 4,
+                "renewable wind": 2,
+                "purchased other goods and services": 1,
+                "scope 2": 1,
+                "heat steam and cooling": 3,
+                "fuel and energy related activities": 1
+              },
+              "children": [
+                {
+                  "name": "1710",
+                  "code": "1710",
+                  "title": "Electrical energy",
+                  "total": 40,
+                  "label": null,
+                  "counts": {
+                    "electricity": 25,
+                    "renewable solar": 1,
+                    "liquid fuel": 2,
+                    "renewable hydro": 4,
+                    "renewable wind": 2,
+                    "purchased other goods and services": 1,
+                    "scope 2": 1,
+                    "heat steam and cooling": 3,
+                    "fuel and energy related activities": 1
+                  },
+                  "children": [
+                    {
+                      "name": "17100",
+                      "code": "17100",
+                      "title": "Electrical energy",
+                      "total": 40,
+                      "label": null,
+                      "counts": {
+                        "electricity": 25,
+                        "renewable solar": 1,
+                        "liquid fuel": 2,
+                        "renewable hydro": 4,
+                        "renewable wind": 2,
+                        "purchased other goods and services": 1,
+                        "scope 2": 1,
+                        "heat steam and cooling": 3,
+                        "fuel and energy related activities": 1
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "172",
+              "code": "172",
+              "title": "Coal gas, water gas, producer gas and similar gases, other than petroleum gases and other gaseous hydrocarbons",
+              "total": 2,
+              "label": null,
+              "counts": {
+                "gaseous fuel": 1,
+                "renewable biogas": 1
+              },
+              "children": [
+                {
+                  "name": "1720",
+                  "code": "1720",
+                  "title": "Coal gas, water gas, producer gas and similar gases, other than petroleum gases and other gaseous hydrocarbons",
+                  "total": 2,
+                  "label": null,
+                  "counts": {
+                    "gaseous fuel": 1,
+                    "renewable biogas": 1
+                  },
+                  "children": [
+                    {
+                      "name": "17200",
+                      "code": "17200",
+                      "title": "Coal gas, water gas, producer gas and similar gases, other than petroleum gases and other gaseous hydrocarbons",
+                      "total": 2,
+                      "label": null,
+                      "counts": {
+                        "gaseous fuel": 1,
+                        "renewable biogas": 1
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "173",
+              "code": "173",
+              "title": "Steam and hot water",
+              "total": 16,
+              "label": "heat steam and cooling",
+              "counts": {
+                "heat steam and cooling": 16
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "18",
+          "code": "18",
+          "title": "Natural water",
+          "total": 3,
+          "label": "purchased other goods and services",
+          "counts": {
+            "purchased other goods and services": 3
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "2",
+      "code": "2",
+      "title": "Food products, beverages and tobacco; textiles, apparel and leather products",
+      "total": 23,
+      "label": null,
+      "counts": {
+        "agrifood goods": 20,
+        "waste": 1,
+        "fibre crops": 2
+      },
+      "children": [
+        {
+          "name": "21",
+          "code": "21",
+          "title": "Meat, fish, fruits, vegetables, oils and fats",
+          "total": 7,
+          "label": null,
+          "counts": {
+            "agrifood goods": 6,
+            "waste": 1
+          },
+          "children": [
+            {
+              "name": "212",
+              "code": "212",
+              "title": "Prepared and preserved fish, crustaceans, molluscs and other aquatic invertebrates",
+              "total": 4,
+              "label": null,
+              "counts": {
+                "agrifood goods": 3,
+                "waste": 1
+              },
+              "children": [
+                {
+                  "name": "2122",
+                  "code": "2122",
+                  "title": "Fish fillets and meat; fish livers and roes",
+                  "total": 3,
+                  "label": null,
+                  "counts": {
+                    "agrifood goods": 2,
+                    "waste": 1
+                  },
+                  "children": [
+                    {
+                      "name": "21221",
+                      "code": "21221",
+                      "title": "Fish fillets and fish meat (whether or not minced), fresh or chilled",
+                      "total": 1,
+                      "label": "waste",
+                      "counts": {
+                        "waste": 1
+                      },
+                      "children": []
+                    },
+                    {
+                      "name": "21222",
+                      "code": "21222",
+                      "title": "Fish fillets, frozen",
+                      "total": 1,
+                      "label": "agrifood goods",
+                      "counts": {
+                        "agrifood goods": 1
+                      },
+                      "children": []
+                    },
+                    {
+                      "name": "21223",
+                      "code": "21223",
+                      "title": "Fish meat, whether or not minced, frozen",
+                      "total": 1,
+                      "label": "agrifood goods",
+                      "counts": {
+                        "agrifood goods": 1
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "2124",
+                  "code": "2124",
+                  "title": "Fish, otherwise prepared or preserved; caviar and caviar substitutes",
+                  "total": 1,
+                  "label": "agrifood goods",
+                  "counts": {
+                    "agrifood goods": 1
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "215",
+              "code": "215",
+              "title": "Animal fats",
+              "total": 2,
+              "label": "agrifood goods",
+              "counts": {
+                "agrifood goods": 2
+              },
+              "children": []
+            },
+            {
+              "name": "216",
+              "code": "216",
+              "title": "Vegetable oils",
+              "total": 1,
+              "label": "agrifood goods",
+              "counts": {
+                "agrifood goods": 1
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "22",
+          "code": "22",
+          "title": "Dairy products and egg products",
+          "total": 1,
+          "label": "agrifood goods",
+          "counts": {
+            "agrifood goods": 1
+          },
+          "children": []
+        },
+        {
+          "name": "23",
+          "code": "23",
+          "title": "Grain mill products, starches and starch products; other food products",
+          "total": 13,
+          "label": "agrifood goods",
+          "counts": {
+            "agrifood goods": 13
+          },
+          "children": []
+        },
+        {
+          "name": "26",
+          "code": "26",
+          "title": "Yarn and thread; woven and tufted textile fabrics",
+          "total": 2,
+          "label": "fibre crops",
+          "counts": {
+            "fibre crops": 2
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "3",
+      "code": "3",
+      "title": "Other transportable goods, except metal products, machinery and equipment",
+      "total": 293,
+      "label": null,
+      "counts": {
+        "purchased other goods and services": 177,
+        "capital goods": 8,
+        "waste": 72,
+        "gaseous fuel": 3,
+        "forest goods": 12,
+        "uncertain": 8,
+        "liquid fuel": 2,
+        "fertiliser": 8,
+        "fuel and energy related activities": 3
+      },
+      "children": [
+        {
+          "name": "31",
+          "code": "31",
+          "title": "Products of wood, cork, straw and plaiting materials",
+          "total": 12,
+          "label": "forest goods",
+          "counts": {
+            "forest goods": 12
+          },
+          "children": []
+        },
+        {
+          "name": "32",
+          "code": "32",
+          "title": "Pulp, paper and paper products; printed matter and related articles",
+          "total": 4,
+          "label": "purchased other goods and services",
+          "counts": {
+            "purchased other goods and services": 4
+          },
+          "children": []
+        },
+        {
+          "name": "33",
+          "code": "33",
+          "title": "Coke oven products; refined petroleum products; nuclear fuel",
+          "total": 10,
+          "label": null,
+          "counts": {
+            "purchased other goods and services": 1,
+            "uncertain": 3,
+            "liquid fuel": 2,
+            "fuel and energy related activities": 3,
+            "capital goods": 1
+          },
+          "children": [
+            {
+              "name": "331",
+              "code": "331",
+              "title": "Coke and semi-coke of coal, of lignite or of peat; retort carbon",
+              "total": 2,
+              "label": "uncertain",
+              "counts": {
+                "uncertain": 2
+              },
+              "children": []
+            },
+            {
+              "name": "333",
+              "code": "333",
+              "title": "Petroleum oils and oils obtained from bituminous materials, other than crude; preparations n.e.c. containing by weight 70% or more of these oils, such oils being the basic constituents of the preparations",
+              "total": 6,
+              "label": null,
+              "counts": {
+                "purchased other goods and services": 1,
+                "liquid fuel": 2,
+                "fuel and energy related activities": 3
+              },
+              "children": [
+                {
+                  "name": "3331",
+                  "code": "3331",
+                  "title": "Motor gasoline and aviation gasoline",
+                  "total": 1,
+                  "label": "liquid fuel",
+                  "counts": {
+                    "liquid fuel": 1
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3336",
+                  "code": "3336",
+                  "title": "Gas oil",
+                  "total": 2,
+                  "label": null,
+                  "counts": {
+                    "liquid fuel": 1,
+                    "fuel and energy related activities": 1
+                  },
+                  "children": [
+                    {
+                      "name": "33360",
+                      "code": "33360",
+                      "title": "Gas oil",
+                      "total": 2,
+                      "label": null,
+                      "counts": {
+                        "liquid fuel": 1,
+                        "fuel and energy related activities": 1
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "3337",
+                  "code": "3337",
+                  "title": "Fuel oils n.e.c.",
+                  "total": 3,
+                  "label": null,
+                  "counts": {
+                    "purchased other goods and services": 1,
+                    "fuel and energy related activities": 2
+                  },
+                  "children": [
+                    {
+                      "name": "33370",
+                      "code": "33370",
+                      "title": "Fuel oils n.e.c.",
+                      "total": 2,
+                      "label": "fuel and energy related activities",
+                      "counts": {
+                        "fuel and energy related activities": 2
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "335",
+              "code": "335",
+              "title": "Petroleum jelly; paraffin wax, micro- crystalline petroleum wax, slack wax, ozokerite, lignite wax, peat wax, other mineral waxes, and similar products; petroleum coke, petroleum bitumen and other residues of petroleum oils or of oils obtained from bituminous materials",
+              "total": 1,
+              "label": "uncertain",
+              "counts": {
+                "uncertain": 1
+              },
+              "children": []
+            },
+            {
+              "name": "337",
+              "code": "337",
+              "title": "Fuel elements (cartridges), for or of nuclear reactors",
+              "total": 1,
+              "label": "capital goods",
+              "counts": {
+                "capital goods": 1
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "34",
+          "code": "34",
+          "title": "Basic chemicals",
+          "total": 126,
+          "label": null,
+          "counts": {
+            "purchased other goods and services": 109,
+            "gaseous fuel": 3,
+            "uncertain": 5,
+            "fertiliser": 8,
+            "capital goods": 1
+          },
+          "children": [
+            {
+              "name": "341",
+              "code": "341",
+              "title": "Basic organic chemicals",
+              "total": 58,
+              "label": null,
+              "counts": {
+                "purchased other goods and services": 54,
+                "gaseous fuel": 1,
+                "uncertain": 3
+              },
+              "children": [
+                {
+                  "name": "3411",
+                  "code": "3411",
+                  "title": "Hydrocarbons and their halogenated, sulphonated, nitrated or nitrosated derivatives",
+                  "total": 15,
+                  "label": null,
+                  "counts": {
+                    "gaseous fuel": 1,
+                    "purchased other goods and services": 11,
+                    "uncertain": 3
+                  },
+                  "children": [
+                    {
+                      "name": "34110",
+                      "code": "34110",
+                      "title": "Hydrocarbons and their halogenated, sulphonated, nitrated or nitrosated derivatives",
+                      "total": 14,
+                      "label": null,
+                      "counts": {
+                        "gaseous fuel": 1,
+                        "purchased other goods and services": 11,
+                        "uncertain": 2
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "3412",
+                  "code": "3412",
+                  "title": "Industrial monocarboxylic fatty acids; acid oils from refining",
+                  "total": 4,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 4
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3413",
+                  "code": "3413",
+                  "title": "Alcohols, phenols, phenol-alcohols, and their halogenated, sulphonated, nitrated or nitrosated derivatives; industrial fatty alcohols",
+                  "total": 8,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 8
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3414",
+                  "code": "3414",
+                  "title": "Carboxylic acids and their anhydrides, halides, peroxides and peroxyacids and their halogenated, sulphonated, nitrated or nitrosated derivatives, except salicylic acid and its salts and esters and their salts",
+                  "total": 4,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 4
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3415",
+                  "code": "3415",
+                  "title": "Amine-function compounds; oxygen-function amino-compounds, except lysine and its esters and salts thereof and glutamic acid and its salts; ureines and their derivatives and salts thereof; carboxyimide-function compounds and imine-compounds; nitrile-function compounds; diazo-, azo- or azoxy-compounds; organic derivatives of hydrazine or of hydroxylamine; compounds with other nitrogen function",
+                  "total": 13,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 13
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3416",
+                  "code": "3416",
+                  "title": "Organo-sulphur compounds and other organo-inorganic compounds; heterocyclic compounds n.e.c.; nucleic acids and their salts",
+                  "total": 2,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 2
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3417",
+                  "code": "3417",
+                  "title": "Ethers, alcohol peroxides, ether peroxides, epoxides, acetals and hemiacetals, and their halogenated, sulphonated, nitrated or nitrosated derivatives; aldehyde-function compounds; ketone-function compounds and quinone-function compounds; enzymes; prepared enzymes n.e.c.; organic compounds n.e.c.",
+                  "total": 10,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 10
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "342",
+              "code": "342",
+              "title": "Basic inorganic chemicals n.e.c.",
+              "total": 39,
+              "label": null,
+              "counts": {
+                "purchased other goods and services": 37,
+                "gaseous fuel": 2
+              },
+              "children": [
+                {
+                  "name": "3421",
+                  "code": "3421",
+                  "title": "Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.",
+                  "total": 6,
+                  "label": null,
+                  "counts": {
+                    "purchased other goods and services": 4,
+                    "gaseous fuel": 2
+                  },
+                  "children": [
+                    {
+                      "name": "34210",
+                      "code": "34210",
+                      "title": "Hydrogen, nitrogen, oxygen, carbon dioxide and rare gases; inorganic oxygen compounds of non-metals n.e.c.",
+                      "total": 6,
+                      "label": null,
+                      "counts": {
+                        "purchased other goods and services": 4,
+                        "gaseous fuel": 2
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "3422",
+                  "code": "3422",
+                  "title": "Zinc oxide; zinc peroxide; chromium oxides and hydroxides; manganese oxides; iron oxides and hydroxides; earth colours; cobalt oxides and hydroxides; titanium oxides; lead oxides; red lead and orange lead; inorganic bases n.e.c.; metal oxides, hydroxides and peroxides n.e.c., except of mercury",
+                  "total": 4,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 4
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3423",
+                  "code": "3423",
+                  "title": "Chemical elements n.e.c.; inorganic acids; inorganic oxygen compounds of boron, silicon and carbon; halogen or sulphur compounds of non-metals; sodium hydroxide; hydroxide and peroxide of magnesium; oxides, hydroxides and peroxides of strontium or barium; aluminium hydroxide; hydrozine and hydroxylamine and their inorganic salts",
+                  "total": 11,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 11
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3424",
+                  "code": "3424",
+                  "title": "Phosphates of triammonium; salts and peroxysalts of inorganic acids and metals n.e.c.",
+                  "total": 5,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 5
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3425",
+                  "code": "3425",
+                  "title": "Salts of oxometallic or peroxometallic acids; colloidal precious metals and compounds thereof; inorganic and organic compounds of mercury; other inorganic chemicals n.e.c.; compressed air; amalgams",
+                  "total": 1,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 1
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3427",
+                  "code": "3427",
+                  "title": "Cyanides, cyanide oxides and complex cyanides; fulminates, cyanates and thiocyanates; silicates; borates; perborates",
+                  "total": 4,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 4
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3428",
+                  "code": "3428",
+                  "title": "Hydrogen peroxide; phosphides; carbides; hydrides, nitrides, azides, silicides and borides",
+                  "total": 4,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 4
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3429",
+                  "code": "3429",
+                  "title": "Compounds of rare earth metals, of yttrium or of scandium",
+                  "total": 3,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 3
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "344",
+              "code": "344",
+              "title": "Activated natural mineral products; animal black; tall oil; terpenic oils produced by the treatment of coniferous woods; crude dipentene; crude para-cymene; pine oil; rosin and resin acids, and derivatives thereof; rosin spirit and rosin oils; rum gums; wood tar; wood tar oils; wood creosote; wood naphtha; vegetable pitch; brewers' pitch",
+              "total": 2,
+              "label": "purchased other goods and services",
+              "counts": {
+                "purchased other goods and services": 2
+              },
+              "children": []
+            },
+            {
+              "name": "345",
+              "code": "345",
+              "title": "Miscellaneous basic chemical products",
+              "total": 5,
+              "label": null,
+              "counts": {
+                "purchased other goods and services": 3,
+                "uncertain": 2
+              },
+              "children": [
+                {
+                  "name": "3453",
+                  "code": "3453",
+                  "title": "Roasted iron pyrites",
+                  "total": 2,
+                  "label": "uncertain",
+                  "counts": {
+                    "uncertain": 2
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3457",
+                  "code": "3457",
+                  "title": "Glycerol",
+                  "total": 3,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 3
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "346",
+              "code": "346",
+              "title": "Fertilizers and pesticides",
+              "total": 18,
+              "label": null,
+              "counts": {
+                "purchased other goods and services": 10,
+                "fertiliser": 8
+              },
+              "children": [
+                {
+                  "name": "3461",
+                  "code": "3461",
+                  "title": "Mineral or chemical fertilizers, nitrogenous",
+                  "total": 2,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 2
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3462",
+                  "code": "3462",
+                  "title": "Mineral or chemical fertilizers, phosphatic",
+                  "total": 1,
+                  "label": "fertiliser",
+                  "counts": {
+                    "fertiliser": 1
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3465",
+                  "code": "3465",
+                  "title": "Other fertilizers",
+                  "total": 9,
+                  "label": null,
+                  "counts": {
+                    "fertiliser": 7,
+                    "purchased other goods and services": 2
+                  },
+                  "children": [
+                    {
+                      "name": "34651",
+                      "code": "34651",
+                      "title": "Ammonia, anhydrous",
+                      "total": 1,
+                      "label": "purchased other goods and services",
+                      "counts": {
+                        "purchased other goods and services": 1
+                      },
+                      "children": []
+                    },
+                    {
+                      "name": "34653",
+                      "code": "34653",
+                      "title": "Ammonium chloride; nitrites",
+                      "total": 1,
+                      "label": "purchased other goods and services",
+                      "counts": {
+                        "purchased other goods and services": 1
+                      },
+                      "children": []
+                    },
+                    {
+                      "name": "34654",
+                      "code": "34654",
+                      "title": "Excreta of animals useful for manure/fertilizer and fuel preparation",
+                      "total": 1,
+                      "label": "fertiliser",
+                      "counts": {
+                        "fertiliser": 1
+                      },
+                      "children": []
+                    },
+                    {
+                      "name": "34659",
+                      "code": "34659",
+                      "title": "Fertilizers n.e.c.",
+                      "total": 6,
+                      "label": "fertiliser",
+                      "counts": {
+                        "fertiliser": 6
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "3466",
+                  "code": "3466",
+                  "title": "Insecticides, fungicides, herbicides and disinfectants",
+                  "total": 6,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 6
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "347",
+              "code": "347",
+              "title": "Plastics in primary forms",
+              "total": 3,
+              "label": null,
+              "counts": {
+                "purchased other goods and services": 2,
+                "capital goods": 1
+              },
+              "children": [
+                {
+                  "name": "3474",
+                  "code": "3474",
+                  "title": "Polyacetals, other polyethers and epoxide resins, in primary forms; polycarbonates, alkyd resins, polyallyl esters and other polyesters, in primary forms",
+                  "total": 1,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 1
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3479",
+                  "code": "3479",
+                  "title": "Other plastics in primary forms; ion exchangers",
+                  "total": 2,
+                  "label": null,
+                  "counts": {
+                    "capital goods": 1,
+                    "purchased other goods and services": 1
+                  },
+                  "children": [
+                    {
+                      "name": "34790",
+                      "code": "34790",
+                      "title": "Other plastics in primary forms; ion exchangers",
+                      "total": 2,
+                      "label": null,
+                      "counts": {
+                        "capital goods": 1,
+                        "purchased other goods and services": 1
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "35",
+          "code": "35",
+          "title": "Other chemical products; man-made fibres",
+          "total": 11,
+          "label": "purchased other goods and services",
+          "counts": {
+            "purchased other goods and services": 11
+          },
+          "children": []
+        },
+        {
+          "name": "36",
+          "code": "36",
+          "title": "Rubber and plastics products",
+          "total": 3,
+          "label": null,
+          "counts": {
+            "capital goods": 1,
+            "purchased other goods and services": 2
+          },
+          "children": [
+            {
+              "name": "363",
+              "code": "363",
+              "title": "Semi-manufactures of plastics",
+              "total": 1,
+              "label": "purchased other goods and services",
+              "counts": {
+                "purchased other goods and services": 1
+              },
+              "children": []
+            },
+            {
+              "name": "364",
+              "code": "364",
+              "title": "Packaging products of plastics",
+              "total": 1,
+              "label": "purchased other goods and services",
+              "counts": {
+                "purchased other goods and services": 1
+              },
+              "children": []
+            },
+            {
+              "name": "369",
+              "code": "369",
+              "title": "Other plastics products",
+              "total": 1,
+              "label": "capital goods",
+              "counts": {
+                "capital goods": 1
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "37",
+          "code": "37",
+          "title": "Glass and glass products and other non-metallic products n.e.c.",
+          "total": 47,
+          "label": null,
+          "counts": {
+            "purchased other goods and services": 45,
+            "capital goods": 1,
+            "waste": 1
+          },
+          "children": [
+            {
+              "name": "371",
+              "code": "371",
+              "title": "Glass and glass products",
+              "total": 9,
+              "label": null,
+              "counts": {
+                "purchased other goods and services": 8,
+                "waste": 1
+              },
+              "children": [
+                {
+                  "name": "3711",
+                  "code": "3711",
+                  "title": "Unworked glass, flat glass and pressed or moulded glass for construction; glass mirrors",
+                  "total": 5,
+                  "label": null,
+                  "counts": {
+                    "purchased other goods and services": 4,
+                    "waste": 1
+                  },
+                  "children": [
+                    {
+                      "name": "37111",
+                      "code": "37111",
+                      "title": "Glass in the mass, in balls (except microspheres), rods or tubes, unworked; waste and scrap of glass",
+                      "total": 4,
+                      "label": null,
+                      "counts": {
+                        "purchased other goods and services": 3,
+                        "waste": 1
+                      },
+                      "children": []
+                    },
+                    {
+                      "name": "37114",
+                      "code": "37114",
+                      "title": "Glass in sheets, bent, edge-worked, engraved, drilled, enamelled or otherwise worked, but not framed, etc.",
+                      "total": 1,
+                      "label": "purchased other goods and services",
+                      "counts": {
+                        "purchased other goods and services": 1
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "3712",
+                  "code": "3712",
+                  "title": "Glass fibres and articles thereof, except woven fabrics",
+                  "total": 2,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 2
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3719",
+                  "code": "3719",
+                  "title": "Other glass articles",
+                  "total": 2,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 2
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "373",
+              "code": "373",
+              "title": "Refractory products and structural non-refractory clay products",
+              "total": 2,
+              "label": "purchased other goods and services",
+              "counts": {
+                "purchased other goods and services": 2
+              },
+              "children": []
+            },
+            {
+              "name": "374",
+              "code": "374",
+              "title": "Plaster, lime and cement",
+              "total": 15,
+              "label": null,
+              "counts": {
+                "purchased other goods and services": 14,
+                "capital goods": 1
+              },
+              "children": [
+                {
+                  "name": "3741",
+                  "code": "3741",
+                  "title": "Plasters",
+                  "total": 1,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 1
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3742",
+                  "code": "3742",
+                  "title": "Quicklime, slaked lime and hydraulic lime",
+                  "total": 2,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 2
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3743",
+                  "code": "3743",
+                  "title": "Cement clinkers",
+                  "total": 1,
+                  "label": "capital goods",
+                  "counts": {
+                    "capital goods": 1
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3744",
+                  "code": "3744",
+                  "title": "Portland cement, aluminous cement, slag cement and similar hydraulic cements, except in the form of clinkers",
+                  "total": 11,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 11
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "375",
+              "code": "375",
+              "title": "Articles of concrete, cement and plaster",
+              "total": 16,
+              "label": "purchased other goods and services",
+              "counts": {
+                "purchased other goods and services": 16
+              },
+              "children": []
+            },
+            {
+              "name": "379",
+              "code": "379",
+              "title": "Other non-metallic mineral products n.e.c.",
+              "total": 5,
+              "label": "purchased other goods and services",
+              "counts": {
+                "purchased other goods and services": 5
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "38",
+          "code": "38",
+          "title": "Furniture; other transportable goods n.e.c.",
+          "total": 3,
+          "label": "capital goods",
+          "counts": {
+            "capital goods": 3
+          },
+          "children": []
+        },
+        {
+          "name": "39",
+          "code": "39",
+          "title": "Wastes or scraps",
+          "total": 77,
+          "label": null,
+          "counts": {
+            "purchased other goods and services": 5,
+            "capital goods": 1,
+            "waste": 71
+          },
+          "children": [
+            {
+              "name": "391",
+              "code": "391",
+              "title": "Wastes from food and tobacco industry",
+              "total": 3,
+              "label": null,
+              "counts": {
+                "waste": 2,
+                "purchased other goods and services": 1
+              },
+              "children": [
+                {
+                  "name": "3911",
+                  "code": "3911",
+                  "title": "Raw offal, inedible (including pigs' bristles, horse hair, animal guts, bird skins, feathers, bones and ivory)",
+                  "total": 1,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 1
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3914",
+                  "code": "3914",
+                  "title": "Beet-pulp, bagasse and other waste of sugar manufacture",
+                  "total": 2,
+                  "label": "waste",
+                  "counts": {
+                    "waste": 2
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "392",
+              "code": "392",
+              "title": "Non-metal wastes or scraps",
+              "total": 7,
+              "label": "waste",
+              "counts": {
+                "waste": 7
+              },
+              "children": []
+            },
+            {
+              "name": "393",
+              "code": "393",
+              "title": "Metal wastes or scraps",
+              "total": 57,
+              "label": null,
+              "counts": {
+                "purchased other goods and services": 4,
+                "capital goods": 1,
+                "waste": 52
+              },
+              "children": [
+                {
+                  "name": "3931",
+                  "code": "3931",
+                  "title": "Slag, dross, scalings and other waste from the manufacture of iron or steel",
+                  "total": 11,
+                  "label": "waste",
+                  "counts": {
+                    "waste": 11
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3932",
+                  "code": "3932",
+                  "title": "Ash and residue (except from the manufacture of iron or steel), containing metals or metallic compounds, except precious metals",
+                  "total": 35,
+                  "label": null,
+                  "counts": {
+                    "purchased other goods and services": 4,
+                    "waste": 31
+                  },
+                  "children": [
+                    {
+                      "name": "39320",
+                      "code": "39320",
+                      "title": "Ash and residue (except from the manufacture of iron or steel), containing metals or metallic compounds, except precious metals",
+                      "total": 28,
+                      "label": null,
+                      "counts": {
+                        "purchased other goods and services": 4,
+                        "waste": 24
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "3936",
+                  "code": "3936",
+                  "title": "Waste and scrap of other metals",
+                  "total": 10,
+                  "label": "waste",
+                  "counts": {
+                    "waste": 10
+                  },
+                  "children": []
+                },
+                {
+                  "name": "3937",
+                  "code": "3937",
+                  "title": "Vessels and other floating structures for breaking up",
+                  "total": 1,
+                  "label": "capital goods",
+                  "counts": {
+                    "capital goods": 1
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "399",
+              "code": "399",
+              "title": "Other wastes and scraps",
+              "total": 9,
+              "label": "waste",
+              "counts": {
+                "waste": 9
+              },
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4",
+      "code": "4",
+      "title": "Metal products, machinery and equipment",
+      "total": 134,
+      "label": null,
+      "counts": {
+        "capital goods": 69,
+        "purchased other goods and services": 64,
+        "waste": 1
+      },
+      "children": [
+        {
+          "name": "41",
+          "code": "41",
+          "title": "Basic metals",
+          "total": 28,
+          "label": "purchased other goods and services",
+          "counts": {
+            "purchased other goods and services": 28
+          },
+          "children": []
+        },
+        {
+          "name": "42",
+          "code": "42",
+          "title": "Fabricated metal products, except machinery and equipment",
+          "total": 2,
+          "label": null,
+          "counts": {
+            "capital goods": 1,
+            "purchased other goods and services": 1
+          },
+          "children": [
+            {
+              "name": "422",
+              "code": "422",
+              "title": "Tanks, reservoirs and containers of iron, steel or aluminium",
+              "total": 1,
+              "label": "capital goods",
+              "counts": {
+                "capital goods": 1
+              },
+              "children": []
+            },
+            {
+              "name": "429",
+              "code": "429",
+              "title": "Other fabricated metal products",
+              "total": 1,
+              "label": "purchased other goods and services",
+              "counts": {
+                "purchased other goods and services": 1
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "43",
+          "code": "43",
+          "title": "General-purpose machinery",
+          "total": 29,
+          "label": null,
+          "counts": {
+            "capital goods": 27,
+            "purchased other goods and services": 2
+          },
+          "children": [
+            {
+              "name": "431",
+              "code": "431",
+              "title": "Engines and turbines and parts thereof",
+              "total": 2,
+              "label": "capital goods",
+              "counts": {
+                "capital goods": 2
+              },
+              "children": []
+            },
+            {
+              "name": "434",
+              "code": "434",
+              "title": "Ovens and furnace burners and parts thereof",
+              "total": 16,
+              "label": null,
+              "counts": {
+                "capital goods": 15,
+                "purchased other goods and services": 1
+              },
+              "children": [
+                {
+                  "name": "4342",
+                  "code": "4342",
+                  "title": "Industrial or laboratory furnaces and ovens, except non-electric bakery ovens; other industrial or laboratory induction or dielectric heating equipment",
+                  "total": 15,
+                  "label": "capital goods",
+                  "counts": {
+                    "capital goods": 15
+                  },
+                  "children": []
+                },
+                {
+                  "name": "4343",
+                  "code": "4343",
+                  "title": "Parts for the goods of subclasses 43410 and 43420; parts of non-electric bakery ovens",
+                  "total": 1,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 1
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "439",
+              "code": "439",
+              "title": "Other general-purpose machinery and parts thereof",
+              "total": 11,
+              "label": null,
+              "counts": {
+                "capital goods": 10,
+                "purchased other goods and services": 1
+              },
+              "children": [
+                {
+                  "name": "4391",
+                  "code": "4391",
+                  "title": "Gas generators; distilling plant; air-conditioning and refrigerating equipment; filtering machinery",
+                  "total": 9,
+                  "label": "capital goods",
+                  "counts": {
+                    "capital goods": 9
+                  },
+                  "children": []
+                },
+                {
+                  "name": "4394",
+                  "code": "4394",
+                  "title": "Parts for the goods of classes 4391 to 4393",
+                  "total": 2,
+                  "label": null,
+                  "counts": {
+                    "capital goods": 1,
+                    "purchased other goods and services": 1
+                  },
+                  "children": [
+                    {
+                      "name": "43941",
+                      "code": "43941",
+                      "title": "Parts of producer gas or water gas generators; parts of acetylene gas generators and similar water process gas generators; parts for the goods of subclass 43912; parts of refrigerating and freezing equipment and heat pumps; parts of machinery for the treatment of materials by a process involving a change of temperature",
+                      "total": 2,
+                      "label": null,
+                      "counts": {
+                        "capital goods": 1,
+                        "purchased other goods and services": 1
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "44",
+          "code": "44",
+          "title": "Special-purpose machinery",
+          "total": 7,
+          "label": null,
+          "counts": {
+            "capital goods": 3,
+            "purchased other goods and services": 4
+          },
+          "children": [
+            {
+              "name": "441",
+              "code": "441",
+              "title": "Agricultural or forestry machinery and parts thereof",
+              "total": 2,
+              "label": "capital goods",
+              "counts": {
+                "capital goods": 2
+              },
+              "children": []
+            },
+            {
+              "name": "442",
+              "code": "442",
+              "title": "Machine-tools and parts and accessories thereof",
+              "total": 1,
+              "label": "purchased other goods and services",
+              "counts": {
+                "purchased other goods and services": 1
+              },
+              "children": []
+            },
+            {
+              "name": "448",
+              "code": "448",
+              "title": "Domestic appliances and parts thereof",
+              "total": 4,
+              "label": null,
+              "counts": {
+                "purchased other goods and services": 3,
+                "capital goods": 1
+              },
+              "children": [
+                {
+                  "name": "4481",
+                  "code": "4481",
+                  "title": "Domestic electric appliances; non-electric refrigerators and clothes drying machines",
+                  "total": 3,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 3
+                  },
+                  "children": []
+                },
+                {
+                  "name": "4482",
+                  "code": "4482",
+                  "title": "Domestic cooking and heating equipment, non-electric",
+                  "total": 1,
+                  "label": "capital goods",
+                  "counts": {
+                    "capital goods": 1
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "45",
+          "code": "45",
+          "title": "Office, accounting and computing machinery",
+          "total": 6,
+          "label": null,
+          "counts": {
+            "capital goods": 2,
+            "purchased other goods and services": 4
+          },
+          "children": [
+            {
+              "name": "452",
+              "code": "452",
+              "title": "Computing machinery and parts and accessories thereof",
+              "total": 6,
+              "label": null,
+              "counts": {
+                "capital goods": 2,
+                "purchased other goods and services": 4
+              },
+              "children": [
+                {
+                  "name": "4522",
+                  "code": "4522",
+                  "title": "Portable automatic data processing machines weighing not more than 10 kg, such as laptops, notebooks and sub-notebooks",
+                  "total": 2,
+                  "label": "capital goods",
+                  "counts": {
+                    "capital goods": 2
+                  },
+                  "children": []
+                },
+                {
+                  "name": "4529",
+                  "code": "4529",
+                  "title": "Parts and accessories of computing machines",
+                  "total": 4,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 4
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "46",
+          "code": "46",
+          "title": "Electrical machinery and apparatus",
+          "total": 34,
+          "label": null,
+          "counts": {
+            "purchased other goods and services": 13,
+            "capital goods": 20,
+            "waste": 1
+          },
+          "children": [
+            {
+              "name": "461",
+              "code": "461",
+              "title": "Electric motors, generators and transformers, and parts thereof",
+              "total": 13,
+              "label": null,
+              "counts": {
+                "capital goods": 11,
+                "purchased other goods and services": 2
+              },
+              "children": [
+                {
+                  "name": "4611",
+                  "code": "4611",
+                  "title": "Electric motors, generators and the like",
+                  "total": 4,
+                  "label": "capital goods",
+                  "counts": {
+                    "capital goods": 4
+                  },
+                  "children": []
+                },
+                {
+                  "name": "4613",
+                  "code": "4613",
+                  "title": "Parts for the goods of classes 4611 and 4612",
+                  "total": 9,
+                  "label": null,
+                  "counts": {
+                    "capital goods": 7,
+                    "purchased other goods and services": 2
+                  },
+                  "children": [
+                    {
+                      "name": "46131",
+                      "code": "46131",
+                      "title": "Parts of electric motors, generators and the like",
+                      "total": 7,
+                      "label": null,
+                      "counts": {
+                        "purchased other goods and services": 2,
+                        "capital goods": 5
+                      },
+                      "children": []
+                    },
+                    {
+                      "name": "46132",
+                      "code": "46132",
+                      "title": "Parts of electrical transformers, static converters and inductors",
+                      "total": 1,
+                      "label": "capital goods",
+                      "counts": {
+                        "capital goods": 1
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "462",
+              "code": "462",
+              "title": "Electricity distribution and control apparatus, and parts thereof",
+              "total": 3,
+              "label": null,
+              "counts": {
+                "capital goods": 2,
+                "purchased other goods and services": 1
+              },
+              "children": [
+                {
+                  "name": "4622",
+                  "code": "4622",
+                  "title": "Parts of electricity distribution or control apparatus",
+                  "total": 3,
+                  "label": null,
+                  "counts": {
+                    "capital goods": 2,
+                    "purchased other goods and services": 1
+                  },
+                  "children": [
+                    {
+                      "name": "46220",
+                      "code": "46220",
+                      "title": "Parts of electricity distribution or control apparatus",
+                      "total": 3,
+                      "label": null,
+                      "counts": {
+                        "capital goods": 2,
+                        "purchased other goods and services": 1
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "464",
+              "code": "464",
+              "title": "Accumulators, primary cells and primary batteries, and parts thereof",
+              "total": 14,
+              "label": null,
+              "counts": {
+                "purchased other goods and services": 7,
+                "capital goods": 7
+              },
+              "children": [
+                {
+                  "name": "4641",
+                  "code": "4641",
+                  "title": "Primary cells and primary batteries",
+                  "total": 7,
+                  "label": "capital goods",
+                  "counts": {
+                    "capital goods": 7
+                  },
+                  "children": []
+                },
+                {
+                  "name": "4643",
+                  "code": "4643",
+                  "title": "Parts of primary cells, primary batteries and electric accumulators (including separators)",
+                  "total": 7,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 7
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "469",
+              "code": "469",
+              "title": "Other electrical equipment and parts thereof",
+              "total": 4,
+              "label": null,
+              "counts": {
+                "purchased other goods and services": 3,
+                "waste": 1
+              },
+              "children": [
+                {
+                  "name": "4695",
+                  "code": "4695",
+                  "title": "Carbon electrodes, carbon brushes, lamp carbons, battery carbons and other articles of graphite or other carbon of a kind used for electrical purposes",
+                  "total": 4,
+                  "label": null,
+                  "counts": {
+                    "purchased other goods and services": 3,
+                    "waste": 1
+                  },
+                  "children": [
+                    {
+                      "name": "46950",
+                      "code": "46950",
+                      "title": "Carbon electrodes, carbon brushes, lamp carbons, battery carbons and other articles of graphite or other carbon of a kind used for electrical purposes",
+                      "total": 2,
+                      "label": "purchased other goods and services",
+                      "counts": {
+                        "purchased other goods and services": 2
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "47",
+          "code": "47",
+          "title": "Radio, television and communication equipment and apparatus",
+          "total": 13,
+          "label": null,
+          "counts": {
+            "purchased other goods and services": 10,
+            "capital goods": 3
+          },
+          "children": [
+            {
+              "name": "471",
+              "code": "471",
+              "title": "Electronic valves and tubes; electronic components; parts thereof",
+              "total": 10,
+              "label": null,
+              "counts": {
+                "purchased other goods and services": 9,
+                "capital goods": 1
+              },
+              "children": [
+                {
+                  "name": "4711",
+                  "code": "4711",
+                  "title": "Electrical capacitors",
+                  "total": 2,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 2
+                  },
+                  "children": []
+                },
+                {
+                  "name": "4714",
+                  "code": "4714",
+                  "title": "Thermionic, cold cathode or photo-cathode valves and tubes (including cathode ray tubes)",
+                  "total": 2,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 2
+                  },
+                  "children": []
+                },
+                {
+                  "name": "4715",
+                  "code": "4715",
+                  "title": "Diodes, transistors and similar semi-conductor devices; photosensitive semi-conductor devices; light emitting diodes; mounted piezo-electric crystals",
+                  "total": 3,
+                  "label": null,
+                  "counts": {
+                    "purchased other goods and services": 2,
+                    "capital goods": 1
+                  },
+                  "children": [
+                    {
+                      "name": "47150",
+                      "code": "47150",
+                      "title": "Diodes, transistors and similar semi-conductor devices; photosensitive semi-conductor devices; light emitting diodes; mounted piezo-electric crystals",
+                      "total": 3,
+                      "label": null,
+                      "counts": {
+                        "purchased other goods and services": 2,
+                        "capital goods": 1
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "4716",
+                  "code": "4716",
+                  "title": "Electronic integrated circuits",
+                  "total": 1,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 1
+                  },
+                  "children": []
+                },
+                {
+                  "name": "4717",
+                  "code": "4717",
+                  "title": "Parts for the goods of classes 4711, 4712 and 4714 to 4716",
+                  "total": 2,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 2
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "473",
+              "code": "473",
+              "title": "Radio broadcast and television receivers; apparatus for sound and video recording and reproducing; microphones, loudspeakers, amplifiers, etc.",
+              "total": 1,
+              "label": "purchased other goods and services",
+              "counts": {
+                "purchased other goods and services": 1
+              },
+              "children": []
+            },
+            {
+              "name": "474",
+              "code": "474",
+              "title": "Parts for the goods of classes 4721 to 4733 and 4822",
+              "total": 2,
+              "label": "capital goods",
+              "counts": {
+                "capital goods": 2
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "49",
+          "code": "49",
+          "title": "Transport equipment",
+          "total": 15,
+          "label": null,
+          "counts": {
+            "capital goods": 13,
+            "purchased other goods and services": 2
+          },
+          "children": [
+            {
+              "name": "491",
+              "code": "491",
+              "title": "Motor vehicles, trailers and semi-trailers; parts and accessories thereof",
+              "total": 3,
+              "label": "capital goods",
+              "counts": {
+                "capital goods": 3
+              },
+              "children": []
+            },
+            {
+              "name": "492",
+              "code": "492",
+              "title": "Bodies (coachwork) for motor vehicles; trailers and semi-trailers; parts and accessories thereof",
+              "total": 2,
+              "label": "capital goods",
+              "counts": {
+                "capital goods": 2
+              },
+              "children": []
+            },
+            {
+              "name": "493",
+              "code": "493",
+              "title": "Ships",
+              "total": 2,
+              "label": "capital goods",
+              "counts": {
+                "capital goods": 2
+              },
+              "children": []
+            },
+            {
+              "name": "496",
+              "code": "496",
+              "title": "Aircraft and spacecraft, and parts thereof",
+              "total": 6,
+              "label": "capital goods",
+              "counts": {
+                "capital goods": 6
+              },
+              "children": []
+            },
+            {
+              "name": "499",
+              "code": "499",
+              "title": "Other transport equipment and parts thereof",
+              "total": 2,
+              "label": "purchased other goods and services",
+              "counts": {
+                "purchased other goods and services": 2
+              },
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "5",
+      "code": "5",
+      "title": "Constructions and construction services",
+      "total": 53,
+      "label": null,
+      "counts": {
+        "capital goods": 41,
+        "scope 2": 1,
+        "purchased other goods and services": 9,
+        "fertiliser": 1,
+        "fuel and energy related activities": 1
+      },
+      "children": [
+        {
+          "name": "53",
+          "code": "53",
+          "title": "Constructions",
+          "total": 42,
+          "label": null,
+          "counts": {
+            "capital goods": 40,
+            "purchased other goods and services": 1,
+            "fertiliser": 1
+          },
+          "children": [
+            {
+              "name": "531",
+              "code": "531",
+              "title": "Buildings",
+              "total": 10,
+              "label": null,
+              "counts": {
+                "capital goods": 9,
+                "fertiliser": 1
+              },
+              "children": [
+                {
+                  "name": "5312",
+                  "code": "5312",
+                  "title": "Non-residential buildings",
+                  "total": 10,
+                  "label": null,
+                  "counts": {
+                    "capital goods": 9,
+                    "fertiliser": 1
+                  },
+                  "children": [
+                    {
+                      "name": "53121",
+                      "code": "53121",
+                      "title": "Industrial buildings",
+                      "total": 3,
+                      "label": null,
+                      "counts": {
+                        "fertiliser": 1,
+                        "capital goods": 2
+                      },
+                      "children": []
+                    },
+                    {
+                      "name": "53129",
+                      "code": "53129",
+                      "title": "Other non-residential buildings",
+                      "total": 2,
+                      "label": "capital goods",
+                      "counts": {
+                        "capital goods": 2
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "532",
+              "code": "532",
+              "title": "Civil engineering works",
+              "total": 32,
+              "label": null,
+              "counts": {
+                "capital goods": 31,
+                "purchased other goods and services": 1
+              },
+              "children": [
+                {
+                  "name": "5321",
+                  "code": "5321",
+                  "title": "Highways (except elevated highways), streets, roads, railways and airfield runways",
+                  "total": 1,
+                  "label": "capital goods",
+                  "counts": {
+                    "capital goods": 1
+                  },
+                  "children": []
+                },
+                {
+                  "name": "5323",
+                  "code": "5323",
+                  "title": "Harbours, waterways, dams, irrigation and other waterworks",
+                  "total": 1,
+                  "label": "capital goods",
+                  "counts": {
+                    "capital goods": 1
+                  },
+                  "children": []
+                },
+                {
+                  "name": "5326",
+                  "code": "5326",
+                  "title": "Mines and industrial plants",
+                  "total": 27,
+                  "label": null,
+                  "counts": {
+                    "capital goods": 26,
+                    "purchased other goods and services": 1
+                  },
+                  "children": [
+                    {
+                      "name": "53261",
+                      "code": "53261",
+                      "title": "Mining constructions",
+                      "total": 1,
+                      "label": "capital goods",
+                      "counts": {
+                        "capital goods": 1
+                      },
+                      "children": []
+                    },
+                    {
+                      "name": "53262",
+                      "code": "53262",
+                      "title": "Power plants",
+                      "total": 15,
+                      "label": null,
+                      "counts": {
+                        "capital goods": 14,
+                        "purchased other goods and services": 1
+                      },
+                      "children": []
+                    },
+                    {
+                      "name": "53269",
+                      "code": "53269",
+                      "title": "Other constructions for manufacturing",
+                      "total": 11,
+                      "label": "capital goods",
+                      "counts": {
+                        "capital goods": 11
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "5329",
+                  "code": "5329",
+                  "title": "Other civil engineering works",
+                  "total": 3,
+                  "label": "capital goods",
+                  "counts": {
+                    "capital goods": 3
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "54",
+          "code": "54",
+          "title": "Construction services",
+          "total": 11,
+          "label": null,
+          "counts": {
+            "scope 2": 1,
+            "purchased other goods and services": 8,
+            "fuel and energy related activities": 1,
+            "capital goods": 1
+          },
+          "children": [
+            {
+              "name": "542",
+              "code": "542",
+              "title": "General construction services of civil engineering works",
+              "total": 11,
+              "label": null,
+              "counts": {
+                "scope 2": 1,
+                "purchased other goods and services": 8,
+                "fuel and energy related activities": 1,
+                "capital goods": 1
+              },
+              "children": [
+                {
+                  "name": "5424",
+                  "code": "5424",
+                  "title": "General construction services of long-distance pipelines, communication and power lines (cables)",
+                  "total": 1,
+                  "label": "fuel and energy related activities",
+                  "counts": {
+                    "fuel and energy related activities": 1
+                  },
+                  "children": []
+                },
+                {
+                  "name": "5426",
+                  "code": "5426",
+                  "title": "General construction services of mines and industrial plants",
+                  "total": 4,
+                  "label": null,
+                  "counts": {
+                    "scope 2": 1,
+                    "purchased other goods and services": 3
+                  },
+                  "children": [
+                    {
+                      "name": "54262",
+                      "code": "54262",
+                      "title": "General construction services of power plants",
+                      "total": 3,
+                      "label": "purchased other goods and services",
+                      "counts": {
+                        "purchased other goods and services": 3
+                      },
+                      "children": []
+                    },
+                    {
+                      "name": "54269",
+                      "code": "54269",
+                      "title": "General construction services of other industrial plants",
+                      "total": 1,
+                      "label": "scope 2",
+                      "counts": {
+                        "scope 2": 1
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "5429",
+                  "code": "5429",
+                  "title": "General construction services of other civil engineering works",
+                  "total": 1,
+                  "label": "capital goods",
+                  "counts": {
+                    "capital goods": 1
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "6",
+      "code": "6",
+      "title": "Distributive trade services; accommodation, food and beverage serving services; transport services; and electricity, gas and water distribution services",
+      "total": 13,
+      "label": null,
+      "counts": {
+        "heat steam and cooling": 4,
+        "transport and distribution": 3,
+        "business travel": 2,
+        "gaseous fuel": 1,
+        "purchased other goods and services": 2,
+        "fuel and energy related activities": 1
+      },
+      "children": [
+        {
+          "name": "63",
+          "code": "63",
+          "title": "Accommodation, food and beverage services",
+          "total": 1,
+          "label": "purchased other goods and services",
+          "counts": {
+            "purchased other goods and services": 1
+          },
+          "children": []
+        },
+        {
+          "name": "64",
+          "code": "64",
+          "title": "Passenger transport services",
+          "total": 2,
+          "label": "business travel",
+          "counts": {
+            "business travel": 2
+          },
+          "children": []
+        },
+        {
+          "name": "65",
+          "code": "65",
+          "title": "Freight transport services",
+          "total": 3,
+          "label": "transport and distribution",
+          "counts": {
+            "transport and distribution": 3
+          },
+          "children": []
+        },
+        {
+          "name": "67",
+          "code": "67",
+          "title": "Supporting transport services",
+          "total": 2,
+          "label": null,
+          "counts": {
+            "heat steam and cooling": 1,
+            "purchased other goods and services": 1
+          },
+          "children": [
+            {
+              "name": "672",
+              "code": "672",
+              "title": "Storage and warehousing services",
+              "total": 2,
+              "label": null,
+              "counts": {
+                "heat steam and cooling": 1,
+                "purchased other goods and services": 1
+              },
+              "children": [
+                {
+                  "name": "6721",
+                  "code": "6721",
+                  "title": "Refrigerated storage services",
+                  "total": 2,
+                  "label": null,
+                  "counts": {
+                    "heat steam and cooling": 1,
+                    "purchased other goods and services": 1
+                  },
+                  "children": [
+                    {
+                      "name": "67210",
+                      "code": "67210",
+                      "title": "Refrigerated storage services",
+                      "total": 2,
+                      "label": null,
+                      "counts": {
+                        "heat steam and cooling": 1,
+                        "purchased other goods and services": 1
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "69",
+          "code": "69",
+          "title": "Electricity, gas and water distribution (on own account)",
+          "total": 5,
+          "label": null,
+          "counts": {
+            "heat steam and cooling": 3,
+            "gaseous fuel": 1,
+            "fuel and energy related activities": 1
+          },
+          "children": [
+            {
+              "name": "691",
+              "code": "691",
+              "title": "Electricity and gas distribution (on own account)",
+              "total": 2,
+              "label": null,
+              "counts": {
+                "gaseous fuel": 1,
+                "fuel and energy related activities": 1
+              },
+              "children": [
+                {
+                  "name": "6912",
+                  "code": "6912",
+                  "title": "Gas distribution through mains (on own account)",
+                  "total": 2,
+                  "label": null,
+                  "counts": {
+                    "gaseous fuel": 1,
+                    "fuel and energy related activities": 1
+                  },
+                  "children": [
+                    {
+                      "name": "69120",
+                      "code": "69120",
+                      "title": "Gas distribution through mains (on own account)",
+                      "total": 2,
+                      "label": null,
+                      "counts": {
+                        "gaseous fuel": 1,
+                        "fuel and energy related activities": 1
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "692",
+              "code": "692",
+              "title": "Water distribution (on own account)",
+              "total": 3,
+              "label": "heat steam and cooling",
+              "counts": {
+                "heat steam and cooling": 3
+              },
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "8",
+      "code": "8",
+      "title": "Business and production services",
+      "total": 61,
+      "label": null,
+      "counts": {
+        "agricultural services": 13,
+        "purchased other goods and services": 43,
+        "waste": 2,
+        "agrifood goods": 1,
+        "liquid fuel": 1,
+        "packaging": 1
+      },
+      "children": [
+        {
+          "name": "84",
+          "code": "84",
+          "title": "Telecommunications, broadcasting and information supply services",
+          "total": 2,
+          "label": "purchased other goods and services",
+          "counts": {
+            "purchased other goods and services": 2
+          },
+          "children": []
+        },
+        {
+          "name": "85",
+          "code": "85",
+          "title": "Support services",
+          "total": 5,
+          "label": "purchased other goods and services",
+          "counts": {
+            "purchased other goods and services": 5
+          },
+          "children": []
+        },
+        {
+          "name": "86",
+          "code": "86",
+          "title": "Support and operation services to agriculture, hunting, forestry, fishing, mining and utilities",
+          "total": 18,
+          "label": null,
+          "counts": {
+            "agricultural services": 13,
+            "purchased other goods and services": 2,
+            "waste": 1,
+            "agrifood goods": 1,
+            "liquid fuel": 1
+          },
+          "children": [
+            {
+              "name": "861",
+              "code": "861",
+              "title": "Support and operation services to agriculture, hunting, forestry and fishing",
+              "total": 18,
+              "label": null,
+              "counts": {
+                "agricultural services": 13,
+                "purchased other goods and services": 2,
+                "waste": 1,
+                "agrifood goods": 1,
+                "liquid fuel": 1
+              },
+              "children": [
+                {
+                  "name": "8611",
+                  "code": "8611",
+                  "title": "Support and operation services to crop production",
+                  "total": 15,
+                  "label": null,
+                  "counts": {
+                    "agricultural services": 12,
+                    "waste": 1,
+                    "agrifood goods": 1,
+                    "liquid fuel": 1
+                  },
+                  "children": [
+                    {
+                      "name": "86111",
+                      "code": "86111",
+                      "title": "Post-harvest crop services",
+                      "total": 5,
+                      "label": "agricultural services",
+                      "counts": {
+                        "agricultural services": 5
+                      },
+                      "children": []
+                    },
+                    {
+                      "name": "86112",
+                      "code": "86112",
+                      "title": "Seed processing services",
+                      "total": 1,
+                      "label": "agrifood goods",
+                      "counts": {
+                        "agrifood goods": 1
+                      },
+                      "children": []
+                    },
+                    {
+                      "name": "86119",
+                      "code": "86119",
+                      "title": "Other support services to crop production",
+                      "total": 9,
+                      "label": null,
+                      "counts": {
+                        "agricultural services": 7,
+                        "waste": 1,
+                        "liquid fuel": 1
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "8612",
+                  "code": "8612",
+                  "title": "Animal husbandry services",
+                  "total": 1,
+                  "label": "agricultural services",
+                  "counts": {
+                    "agricultural services": 1
+                  },
+                  "children": []
+                },
+                {
+                  "name": "8614",
+                  "code": "8614",
+                  "title": "Support and operation services to forestry and logging",
+                  "total": 2,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 2
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "87",
+          "code": "87",
+          "title": "Maintenance, repair and installation (except construction) services",
+          "total": 11,
+          "label": "purchased other goods and services",
+          "counts": {
+            "purchased other goods and services": 11
+          },
+          "children": []
+        },
+        {
+          "name": "88",
+          "code": "88",
+          "title": "Manufacturing services on physical inputs owned by others",
+          "total": 12,
+          "label": null,
+          "counts": {
+            "purchased other goods and services": 11,
+            "packaging": 1
+          },
+          "children": [
+            {
+              "name": "882",
+              "code": "882",
+              "title": "Textile, wearing apparel and leather manufacturing services",
+              "total": 1,
+              "label": "purchased other goods and services",
+              "counts": {
+                "purchased other goods and services": 1
+              },
+              "children": []
+            },
+            {
+              "name": "886",
+              "code": "886",
+              "title": "Basic metal manufacturing services",
+              "total": 2,
+              "label": "purchased other goods and services",
+              "counts": {
+                "purchased other goods and services": 2
+              },
+              "children": []
+            },
+            {
+              "name": "887",
+              "code": "887",
+              "title": "Fabricated metal product, machinery and equipment manufacturing services",
+              "total": 9,
+              "label": null,
+              "counts": {
+                "purchased other goods and services": 8,
+                "packaging": 1
+              },
+              "children": [
+                {
+                  "name": "8873",
+                  "code": "8873",
+                  "title": "Other fabricated metal product manufacturing and metal treatment services",
+                  "total": 5,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 5
+                  },
+                  "children": []
+                },
+                {
+                  "name": "8874",
+                  "code": "8874",
+                  "title": "Computer, electronic and optical product manufacturing services",
+                  "total": 3,
+                  "label": "purchased other goods and services",
+                  "counts": {
+                    "purchased other goods and services": 3
+                  },
+                  "children": []
+                },
+                {
+                  "name": "8875",
+                  "code": "8875",
+                  "title": "Electrical equipment manufacturing services",
+                  "total": 1,
+                  "label": "packaging",
+                  "counts": {
+                    "packaging": 1
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "89",
+          "code": "89",
+          "title": "Other manufacturing services; publishing, printing and reproduction services; materials recovery services",
+          "total": 13,
+          "label": null,
+          "counts": {
+            "purchased other goods and services": 12,
+            "waste": 1
+          },
+          "children": [
+            {
+              "name": "892",
+              "code": "892",
+              "title": "Moulding, pressing, stamping, extruding and similar plastic manufacturing services",
+              "total": 2,
+              "label": "purchased other goods and services",
+              "counts": {
+                "purchased other goods and services": 2
+              },
+              "children": []
+            },
+            {
+              "name": "893",
+              "code": "893",
+              "title": "Casting, forging, stamping and similar metal manufacturing services",
+              "total": 10,
+              "label": "purchased other goods and services",
+              "counts": {
+                "purchased other goods and services": 10
+              },
+              "children": []
+            },
+            {
+              "name": "894",
+              "code": "894",
+              "title": "Materials recovery (recycling) services, on a fee or contract basis",
+              "total": 1,
+              "label": "waste",
+              "counts": {
+                "waste": 1
+              },
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "9",
+      "code": "9",
+      "title": "Community, social and personal services",
+      "total": 4,
+      "label": null,
+      "counts": {
+        "agricultural services": 3,
+        "purchased other goods and services": 1
+      },
+      "children": [
+        {
+          "name": "91",
+          "code": "91",
+          "title": "Public administration and other services provided to the community as a whole; compulsory social security services",
+          "total": 3,
+          "label": "agricultural services",
+          "counts": {
+            "agricultural services": 3
+          },
+          "children": []
+        },
+        {
+          "name": "97",
+          "code": "97",
+          "title": "Other services",
+          "total": 1,
+          "label": "purchased other goods and services",
+          "counts": {
+            "purchased other goods and services": 1
+          },
+          "children": []
+        }
+      ]
+    }
+  ]
+}

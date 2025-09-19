@@ -328,3 +328,13 @@ def diets_list_graph():
 @app.route("/diets/data/<int:cluster>")
 def diets_data(cluster):
     return send_from_directory("results/diets/", str(cluster) + "/backbone_graph.json")
+
+
+@app.route("/data_v2.json")
+def yi_cpc_tree_data():
+    return send_from_directory("yi", "data_v2.json")
+
+
+@app.route("/cpc-tree")
+def yi_cpc_tree_page():
+    return send_from_directory("yi", "tree_v2.html")
