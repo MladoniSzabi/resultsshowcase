@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <script src="/scripts/vendor/d3.js"></script>
+    <script src="/scripts/components/diets_foodgroups_fdg.js" defer></script>
+    <link rel="stylesheet" href="/stylesheets/diets_foodgroups.css" />
+</head>
+
+<body>
+    <div id="sliders-container">
+        <div id="food-cluster-slider-container">
+            <div class="range-container">
+                <div class="sliders-control">
+                    <input type="range" min="-1" max="18" value="-1" id="food-cluster-slider" />
+                </div>
+                <div class="form-control">
+                    <div class="form-control-container">
+                        <div class="form-control-container__time">Min</div>
+                        <input class="form-control-container__time__input" type="number" id="food-cluster-input"
+                            value="-1" min="-1" max="18" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="node-frequency-slider-container" class="range-container">
+            <div class="sliders-control">
+                <input id="fromSlider" type="range" value="10" min="0" max="100" />
+                <input id="toSlider" type="range" value="40" min="0" max="100" />
+            </div>
+            <div class="form-control">
+                <div class="form-control-container">
+                    <div class="form-control-container__time">Min</div>
+                    <input class="form-control-container__time__input" type="number" id="fromInput" value="10" min="0"
+                        max="100" />
+                </div>
+                <div class="form-control-container">
+                    <div class="form-control-container__time">Max</div>
+                    <input class="form-control-container__time__input" type="number" id="toInput" value="40" min="0"
+                        max="100" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="svg-container"></div>
+</body>
+
+</html>
