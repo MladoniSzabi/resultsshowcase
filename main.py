@@ -4,7 +4,7 @@ import json
 import sqlite3
 
 from dotenv import load_dotenv
-from flask import Flask, render_template, make_response, request, send_from_directory, send_file
+from flask import Flask, render_template, make_response, request, send_from_directory, send_file, abort
 
 from SQLiteDatabase import SQLiteDatabase
 
@@ -335,8 +335,12 @@ def diets_foodgroups_page():
     return render_template("diets_foodgroups_fdg.html")
 
 
-@app.route("/diets/foodclusters/data/<int:cluster>")
+@app.route("/diets/foodclusters/data/<string:cluster>")
 def diets_foodgroups_data(cluster):
+    try:
+        cluster = int(cluster)
+    except Exception:
+        return abort(404)
     if cluster == -1:
         return send_file("results/diets/food_clustering/0/graph_full.json")
     return send_from_directory("results/diets/food_clustering/0/", "graph_" + str(cluster) + ".json")

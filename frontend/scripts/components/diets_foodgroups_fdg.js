@@ -1,20 +1,156 @@
-const MW_TO_ID = {
-    'A': 1,
-    'B': 2,
-    'C': 3,
-    'D': 4,
-    'E': 5,
-    'F': 6,
-    'G': 7,
-    'H': 8,
-    'J': 9,
-    'M': 10,
-    'O': 11,
-    'P': 12,
-    'Q': 13,
-    'S': 14,
-    'W': 15,
-    'Z': 16
+const MW_TO_COLOR = {
+    'A': '#dfdc67',
+    'B': '#a0ca79',
+    'C': '#97d2d4',
+    'D': '#9dcbec',
+    'E': '#d3aad1',
+    'F': '#eda4a7',
+    'G': '#fbc07f',
+    'H': '#f6dc8a',
+    'J': '#ddbda3',
+    'M': '#66771e',
+    'O': '#247130',
+    'P': '#026879',
+    'Q': '#064e91',
+    'S': '#792c74',
+    'W': '#9c2726',
+    'Z': '#b75006',
+}
+
+const MW_TO_TEXT = {
+    'A': "Cereals and cereal products",
+    'B': "Milk and milk products",
+    'C': "Eggs",
+    'D': "Vegetables",
+    'E': "Water",
+    'F': "Fruit",
+    'G': "Nuts and seeds",
+    'H': "Herbs and spices",
+    'J': "Fish and fish products",
+    'M': "Meat and meat products",
+    'O': "Fats and oils",
+    'P': "Beverages",
+    'Q': "Alcoholic beverages",
+    'S': "Sugars, preserves and snacks",
+    'W': "Soups, sauces and miscellaneous foods",
+    'Z': "Supplements",
+}
+
+var selected_categories = {
+    'A': true,
+    'B': true,
+    'C': true,
+    'D': true,
+    'E': true,
+    'F': true,
+    'G': true,
+    'H': true,
+    'J': true,
+    'M': true,
+    'O': true,
+    'P': true,
+    'Q': true,
+    'S': true,
+    'W': true,
+    'Z': true,
+}
+
+var selectedFrequency = []
+
+function splitIntoWord(text) {
+    buffer = ""
+    words = []
+    for (const c of text) {
+        if (c == " ") {
+            words.push(buffer)
+            buffer = ""
+        } else if (c == "-") {
+            words.push(buffer + "-")
+            buffer = ""
+        } else {
+            buffer += c
+        }
+    }
+
+    if (buffer) {
+        words.push(buffer)
+    }
+    return words
+}
+
+function wrapString(str, width) {
+    let word,
+        words = splitIntoWord(str).reverse(),
+        line = [],
+        lines = []
+
+    while (word = words.pop()) {
+        line.push(word)
+        if (line.join(" ").length > width) {
+            line.pop()
+            lines.push(line.join(" ").replace("- ", "-"))
+            line = [word]
+        }
+    }
+
+    if (line.length > 0) {
+        lines.push(line.join(" ").replace("- ", "-"))
+    }
+
+    if (lines.length >= 11) {
+        lines = lines.slice(0, 10)
+        lines.push("...")
+    }
+
+    return lines;
+}
+
+function wrap(text) {
+    text.each(function () {
+        let textNode = d3.select(this),
+            fontSizeText = textNode.attr("font-size"),
+            fullText = textNode.text(),
+            word,
+            line = [],
+            lineHeight = 1.2, // ems
+            dy = parseFloat(textNode.attr("dy") || 0),
+            lines = [],
+            x = parseFloat(textNode.attr("x") || 0),
+            width = parseInt(textNode.attr("data-linelength"))
+        textNode.text(null).attr("x", 0).attr("y", 0)
+
+        fontSize = ""
+        unit = ""
+        for (const x of fontSizeText) {
+            if ("1234567890".includes(x))
+                fontSize += x
+            else
+                unit += x
+        }
+        fontSize = Number(fontSize)
+
+        if (fullText.length > 40) {
+            fontSize -= 2
+        }
+        if (fullText.length > 30) {
+            fontSize -= 2
+        }
+        console.log(fontSize, fullText.length)
+
+        textNode.attr("font-size", String(fontSize) + unit)
+
+        wordsplit = fullText.split(",")
+        if (wordsplit.length > 1) {
+            fullText = wordsplit[0] + " " + fullText.split(" ").at(-1)
+        } else {
+            fullText = wordsplit[0]
+        }
+        lines = wrapString(fullText, width)
+
+        for (let i = 0; i < lines.length; i += 1) {
+            textNode.append("tspan").attr('x', x).attr("dy", `${i == 0 ? (0.31 + dy - (lines.length - 1) / 2 * lineHeight) : lineHeight}em`).text(lines[i])
+        }
+    })
 }
 
 function initSliders(fromSlider, toSlider, fromInput, toInput, min, max, currentMin, currentMax, onChange) {
@@ -122,7 +258,7 @@ function initSliders(fromSlider, toSlider, fromInput, toInput, min, max, current
         toSlider.max = max
         toSlider.value = max
         toInput.min = min
-        toInput.nax = max
+        toInput.max = max
         toInput.value = max
     }
 
@@ -175,7 +311,6 @@ function drawSvg(data, minFrequency, maxFrequency) {
         .attr("width", width)
         .attr("height", height)
         .attr("viewBox", [-width / 2, -height / 2, width, height])
-        .attr("style", "max-width: 100%; height: auto;");
 
     // Add a line for each link, and a circle for each node.
     const gLink = svg.append("g")
@@ -208,13 +343,13 @@ function drawSvg(data, minFrequency, maxFrequency) {
 
         node.exit().remove()
         const nodeEnter = node.enter()
-            .append("g", d => { console.log("Entering node ", d.id) })
+            .append("g")
 
         nodeEnter.attr("stroke", "#fff")
             .attr("stroke-width", 1.5)
             .append("circle")
             .attr("r", d => getNodeSize(d.frequency, minFrequency, maxFrequency))
-            .attr("fill", d => color(MW_TO_ID[d.category]));
+            .attr("fill", d => MW_TO_COLOR[d.category]);
 
         nodeEnter.append("text")
             .attr("alignment-baseline", "central")
@@ -223,7 +358,9 @@ function drawSvg(data, minFrequency, maxFrequency) {
             .attr("fill", "black")
             .attr("stroke", "none")
             .attr("font-size", "12px")
+            .attr("data-linelength", 15)
             .text(d => d.id)
+            .call(wrap)
 
         node = nodeEnter.merge(node)
 
@@ -266,6 +403,8 @@ function drawSvg(data, minFrequency, maxFrequency) {
             event.subject.fx = null;
             event.subject.fy = null;
         }
+
+        return svg.node()
     }
 
     update(data)
@@ -283,13 +422,15 @@ function setForcesStrengths(forces, strength) {
 function filterNodes(graph, minFrequency, maxFrequency) {
     const nodes = []
     for (const node of graph["nodes"]) {
-        if (node.frequency >= minFrequency && node.frequency <= maxFrequency)
+        if (node.frequency >= minFrequency && node.frequency <= maxFrequency && selected_categories[node.category])
             nodes.push(node)
     }
     return nodes
 }
 
-function onFrequencySlidersChange(minFrequency, maxFrequency, graph, update) {
+function onFilterChange(minFrequency, maxFrequency, graph, container, update) {
+
+    selectedFrequency = [minFrequency, maxFrequency]
     const filteredNodes = filterNodes(graph, minFrequency, maxFrequency)
     const filteredNodesIds = new Set(filteredNodes.map((el) => el.id))
 
@@ -299,7 +440,15 @@ function onFrequencySlidersChange(minFrequency, maxFrequency, graph, update) {
             filteredEdges.push(link)
     }
 
-    update({ nodes: filteredNodes, links: filteredEdges })
+    if (filteredNodes.length > 100) {
+        container.innerHTML = ""
+        return
+    }
+
+    const svg = update({ nodes: filteredNodes, links: filteredEdges })
+    if (container.innerHTML == "") {
+        container.appendChild(svg)
+    }
 }
 
 const graphData = {
@@ -336,7 +485,7 @@ function getFrequencyRange(nodes) {
     return [min, max]
 }
 
-const svg_container = document.getElementById("svg-container")
+const svgContainer = document.getElementById("svg-container")
 
 const fromSlider = document.querySelector('#fromSlider');
 const toSlider = document.querySelector('#toSlider');
@@ -350,14 +499,23 @@ initSliders(fromSlider, toSlider, fromInput, toInput, 0, 5, 0, 5, () => { })
 
 function fetchAndDrawGraph(graphId) {
     function callback(graph) {
-        svg_container.innerHTML = ""
+        svgContainer.innerHTML = ""
         const [minFrequency, maxFrequency] = getFrequencyRange(graph["nodes"])
         const [svg, update] = drawSvg(graph, minFrequency, maxFrequency)
-        initSliders(fromSlider, toSlider, fromInput, toInput, minFrequency, maxFrequency, minFrequency, maxFrequency, (min, max) => onFrequencySlidersChange(min, max, graph, update))
-        if (graph == -1)
-            return
+        initSliders(fromSlider, toSlider, fromInput, toInput, minFrequency, maxFrequency, minFrequency, maxFrequency, (min, max) => onFilterChange(min, max, graph, svgContainer, update))
+        selectedFrequency = [minFrequency, maxFrequency]
 
-        svg_container.appendChild(svg)
+        const checkboxes = document.getElementById("category-selector").getElementsByTagName("input")
+        for (const box of checkboxes) {
+            selected_categories[box.dataset.category] = box.checked
+            box.onchange = (ev) => {
+                selected_categories[ev.target.dataset.category] = ev.target.checked
+                onFilterChange(selectedFrequency[0], selectedFrequency[1], graph, svgContainer, update)
+            }
+        }
+
+        if (graph.nodes.length <= 100)
+            svgContainer.appendChild(svg)
     }
 
     if (graphData[graphId] != null)
@@ -370,3 +528,10 @@ function fetchAndDrawGraph(graphId) {
 }
 initSliders(foodGroupSlider, null, foodGroupInput, null, -1, 18, -1, null, fetchAndDrawGraph)
 
+const labelContainer = document.getElementById("label-container")
+
+for (const key in MW_TO_TEXT) {
+    const el = document.createElement("p")
+    el.innerHTML = "<span style='color:" + MW_TO_COLOR[key] + "' >⬤</span>" + MW_TO_TEXT[key]
+    labelContainer.appendChild(el)
+}
