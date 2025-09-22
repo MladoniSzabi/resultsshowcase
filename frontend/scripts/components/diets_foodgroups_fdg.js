@@ -535,3 +535,5 @@ for (const key in MW_TO_TEXT) {
     el.innerHTML = "<span style='color:" + MW_TO_COLOR[key] + "' >⬤</span>" + MW_TO_TEXT[key]
     labelContainer.appendChild(el)
 }
+
+fetchAndDrawGraph(-1)
