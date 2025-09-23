@@ -6,3 +6,4 @@ graphs.db
 __pycache__/
 webserver2.tar.gz
 release.sh
+results/diets/food_clustering/0_backup

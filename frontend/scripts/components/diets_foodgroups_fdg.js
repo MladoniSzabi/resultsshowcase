@@ -1,20 +1,20 @@
 const MW_TO_COLOR = {
     'A': '#dfdc67',
-    'B': '#a0ca79',
+    'B': '#f6dc8a',
     'C': '#97d2d4',
-    'D': '#9dcbec',
+    'D': '#247130',
     'E': '#d3aad1',
-    'F': '#eda4a7',
+    'F': '#66771e',
     'G': '#fbc07f',
-    'H': '#f6dc8a',
+    'H': '#a0ca79',
     'J': '#ddbda3',
-    'M': '#66771e',
-    'O': '#247130',
-    'P': '#026879',
+    'M': '#eda4a7',
+    'O': '#9dcbec',
+    'P': '#b75006',
     'Q': '#064e91',
     'S': '#792c74',
     'W': '#9c2726',
-    'Z': '#b75006',
+    'Z': '#026879',
 }
 
 const MW_TO_TEXT = {
@@ -135,7 +135,6 @@ function wrap(text) {
         if (fullText.length > 30) {
             fontSize -= 2
         }
-        console.log(fontSize, fullText.length)
 
         textNode.attr("font-size", String(fontSize) + unit)
 
@@ -316,15 +315,18 @@ function drawSvg(data, minFrequency, maxFrequency) {
     const gLink = svg.append("g")
     const gNode = svg.append("g")
 
-    function update(data) {
-        const links = data.links.map(d => ({ ...d }));
-        const nodes = data.nodes.map(d => ({ ...d }));
+    function update(filteredData) {
 
-        simulation.nodes(nodes)
-        simulation.force('link').links(links)
+        const filteredLinks = links.filter(e => filteredData.links[e.numericalId])
+        const filteredNodes = nodes.filter(e => filteredData.nodes[e.numericalId])
+
+        console.log(nodes, nodes.length, filteredNodes.length, filteredData.nodes.filter(e => e).length, filteredData.nodes)
+
+        simulation.nodes(filteredNodes)
+        simulation.force('link').links(filteredLinks)
 
         let link = gLink.selectAll("path")
-            .data(links, link => link.source + "__" + link.target)
+            .data(filteredLinks, link => link.source + "__" + link.target)
 
         link.exit().remove()
         const linkEnter = link.enter()
@@ -339,7 +341,7 @@ function drawSvg(data, minFrequency, maxFrequency) {
         link = linkEnter.merge(link)
 
         let node = gNode.selectAll("g")
-            .data(nodes, d => d.id)
+            .data(filteredNodes, d => d.id)
 
         node.exit().remove()
         const nodeEnter = node.enter()
@@ -407,7 +409,7 @@ function drawSvg(data, minFrequency, maxFrequency) {
         return svg.node()
     }
 
-    update(data)
+    update({ nodes: Array(data.nodes.length).fill(true), links: Array(data.links.length).fill(true) })
 
     return [svg.node(), update]
 }
@@ -420,10 +422,10 @@ function setForcesStrengths(forces, strength) {
 }
 
 function filterNodes(graph, minFrequency, maxFrequency) {
-    const nodes = []
-    for (const node of graph["nodes"]) {
+    const nodes = Array(graph.nodes.length).fill(false)
+    for (const node of graph.nodes) {
         if (node.frequency >= minFrequency && node.frequency <= maxFrequency && selected_categories[node.category])
-            nodes.push(node)
+            nodes[node.numericalId] = true
     }
     return nodes
 }
@@ -432,15 +434,14 @@ function onFilterChange(minFrequency, maxFrequency, graph, container, update) {
 
     selectedFrequency = [minFrequency, maxFrequency]
     const filteredNodes = filterNodes(graph, minFrequency, maxFrequency)
-    const filteredNodesIds = new Set(filteredNodes.map((el) => el.id))
 
-    const filteredEdges = []
-    for (const link of graph["links"]) {
-        if (filteredNodesIds.has(link.source) && filteredNodesIds.has(link.target))
-            filteredEdges.push(link)
+    const filteredEdges = Array(graph.links.length).fill(false)
+    for (const link of graph.links) {
+        if (filteredNodes[link.sourceIndex] && filteredNodes[link.targetIndex])
+            filteredEdges[link.numericalId] = true
     }
 
-    if (filteredNodes.length > 100) {
+    if (filteredNodes.filter(m => m).length > 100) {
         container.innerHTML = ""
         return
     }
