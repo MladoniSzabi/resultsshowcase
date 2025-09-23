@@ -406,6 +406,10 @@ function drawSvg(data, minFrequency, maxFrequency) {
             event.subject.fy = null;
         }
 
+        for (let i = 0; i < 5; i++) {
+            simulation.tick()
+        }
+
         return svg.node()
     }
 

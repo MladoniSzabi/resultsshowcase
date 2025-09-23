@@ -330,7 +330,7 @@ def diets_data(cluster):
     return send_from_directory("results/diets/backbone/", str(cluster) + "/backbone_graph.json")
 
 
-@app.route("/diets/foodclusters/page/")
+@app.route("/diets/foodclusters/page")
 def diets_foodgroups_page():
     return render_template("diets_foodgroups_fdg.html")
 
@@ -344,6 +344,11 @@ def diets_foodgroups_data(cluster):
     if cluster == -1:
         return send_file("results/diets/food_clustering/0/graph_full.json")
     return send_from_directory("results/diets/food_clustering/0/", "graph_" + str(cluster) + ".json")
+
+
+@app.route("/diets/foodclusters/browse")
+def diets_foodclusters_page():
+    return render_template("diets_foodgroups_table.html")
 
 
 @app.route("/data_v2.json")
