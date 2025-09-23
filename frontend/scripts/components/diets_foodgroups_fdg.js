@@ -284,9 +284,6 @@ function drawSvg(data, minFrequency, maxFrequency) {
     const width = 928;
     const height = 680;
 
-    // Specify the color scale.
-    const color = d3.scaleOrdinal(d3.schemeCategory10);
-
     // The force simulation mutates links and nodes, so create a copy
     // so that re-evaluating this cell produces the same result.
     const links = data.links.map(d => ({ ...d }));
@@ -327,26 +324,26 @@ function drawSvg(data, minFrequency, maxFrequency) {
         simulation.force('link').links(filteredLinks)
 
         let link = gLink.selectAll("path")
-            .data(filteredLinks, link => link.source + "__" + link.target)
+            .data(filteredLinks, link => link.numericalId)
 
         link.exit().remove()
         const linkEnter = link.enter()
-            .append("g")
+            .append("path")
             .attr("stroke", "#999")
             .attr("stroke-opacity", 0.6)
             .attr("fill", "none")
-            .append("path")
-            .attr("d", d => Math.abs(d.source.x - d.target.x) >= (d.source.y - d.target.y) ? d3.linkHorizontal()(d) : d3.linkVertical()(d))
+            .attr("d", (...args) => Math.abs(args[0].source.x - args[0].target.x) >= (args[0].source.y - args[0].target.y) ? d3.linkHorizontal().x(d => d.x).y(d => d.y)(...args) : d3.linkVertical().x(d => d.x).y(d => d.y)(...args))
             .attr("stroke-width", d => Math.sqrt(d.value));
 
         link = linkEnter.merge(link)
 
         let node = gNode.selectAll("g")
-            .data(filteredNodes, d => d.id)
+            .data(filteredNodes, d => d.numericalId)
 
         node.exit().remove()
         const nodeEnter = node.enter()
             .append("g")
+            .attr("transform", d => `translate(${d.x || 0}, ${d.y || 0})`)
 
         nodeEnter.attr("stroke", "#fff")
             .attr("stroke-width", 1.5)
