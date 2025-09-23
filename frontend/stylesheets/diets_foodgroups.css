@@ -133,3 +133,18 @@ input[type="range"] {
 #label-container p {
     margin: 0
 }
+
+#label-container h4 {
+    margin-bottom: 0
+}
+
+#node-size-labels {
+    gap: 0.5em 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+#node-size-labels div {
+    justify-self: center;
+}

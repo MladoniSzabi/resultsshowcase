@@ -273,6 +273,9 @@ function initSliders(fromSlider, toSlider, fromInput, toInput, min, max, current
 }
 
 function getNodeSize(frequency, minFrequency, maxFrequency) {
+    if (minFrequency == maxFrequency) {
+        return 35 / 2
+    }
     return (frequency - minFrequency) / (maxFrequency - minFrequency) * 30 + 5
 }
 
@@ -319,8 +322,6 @@ function drawSvg(data, minFrequency, maxFrequency) {
 
         const filteredLinks = links.filter(e => filteredData.links[e.numericalId])
         const filteredNodes = nodes.filter(e => filteredData.nodes[e.numericalId])
-
-        console.log(nodes, nodes.length, filteredNodes.length, filteredData.nodes.filter(e => e).length, filteredData.nodes)
 
         simulation.nodes(filteredNodes)
         simulation.force('link').links(filteredLinks)
@@ -502,6 +503,8 @@ const foodGroupInput = document.querySelector("#food-cluster-input")
 
 initSliders(fromSlider, toSlider, fromInput, toInput, 0, 5, 0, 5, () => { })
 
+let previousWindowResizeFunction = null
+
 function fetchAndDrawGraph(graphId) {
     function callback(graph) {
         svgContainer.innerHTML = ""
@@ -509,6 +512,55 @@ function fetchAndDrawGraph(graphId) {
         const [svg, update] = drawSvg(graph, minFrequency, maxFrequency)
         initSliders(fromSlider, toSlider, fromInput, toInput, minFrequency, maxFrequency, minFrequency, maxFrequency, (min, max) => onFilterChange(min, max, graph, svgContainer, update))
         selectedFrequency = [minFrequency, maxFrequency]
+
+        const createNodeSizeLegend = () => {
+            const container = document.getElementById("node-size-labels")
+            container.innerHTML = ""
+
+            const svgs = document.getElementsByTagName("svg")
+            if (svgs.length == 0)
+                return
+
+            const svgRect = svgs[0].getBoundingClientRect()
+            const ratioX = svgRect.width / svgs[0].width.baseVal.value
+            const ratioY = svgRect.height / svgs[0].height.baseVal.value
+
+            const ratio = Math.min(ratioX, ratioY) * 2
+
+            const minNodeSize = getNodeSize(minFrequency, minFrequency, maxFrequency)
+            const midNodeSize = getNodeSize(Math.floor((minFrequency + maxFrequency) / 2), minFrequency, maxFrequency)
+            const maxNodeSize = getNodeSize(maxFrequency, minFrequency, maxFrequency)
+
+            function addLegendRow(nodeSize, frequency, container) {
+                const node = document.createElement("div")
+                node.style.backgroundColor = "#888"
+                node.style.borderRadius = "100%"
+                node.style.width = nodeSize + "px"
+                node.style.height = nodeSize + "px"
+                // const nodeContainer = document.createElement("div")
+                // nodeContainer.appendChild(node)
+                container.appendChild(node)
+                const nodeText = document.createElement("span")
+                nodeText.innerText = String(frequency) + " occurences"
+                container.appendChild(nodeText)
+            }
+
+            addLegendRow(minNodeSize * ratio, minFrequency, container)
+
+            if (minFrequency == maxFrequency) {
+                return
+            }
+
+            if (minFrequency + 1 < maxFrequency) {
+                addLegendRow(midNodeSize * ratio, Math.floor((minFrequency + maxFrequency) / 2), container)
+            }
+
+            addLegendRow(maxNodeSize * ratio, maxFrequency, container)
+        }
+
+        window.removeEventListener('resize', previousWindowResizeFunction)
+        previousWindowResizeFunction = createNodeSizeLegend
+        window.addEventListener('resize', createNodeSizeLegend)
 
         const checkboxes = document.getElementById("category-selector").getElementsByTagName("input")
         for (const box of checkboxes) {
@@ -521,6 +573,8 @@ function fetchAndDrawGraph(graphId) {
 
         if (graph.nodes.length <= 100)
             svgContainer.appendChild(svg)
+
+        createNodeSizeLegend()
     }
 
     if (graphData[graphId] != null)
@@ -533,7 +587,7 @@ function fetchAndDrawGraph(graphId) {
 }
 initSliders(foodGroupSlider, null, foodGroupInput, null, -1, 18, -1, null, fetchAndDrawGraph)
 
-const labelContainer = document.getElementById("label-container")
+const labelContainer = document.getElementById("category-labels")
 
 for (const key in MW_TO_TEXT) {
     const el = document.createElement("p")
