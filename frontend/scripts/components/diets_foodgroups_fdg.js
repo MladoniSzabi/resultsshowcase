@@ -289,7 +289,7 @@ function drawSvg(data, minFrequency, maxFrequency) {
     const links = data.links.map(d => ({ ...d }));
     const nodes = data.nodes.map(d => ({ ...d }));
 
-    const linkForce = d3.forceLink(links)
+    const linkForce = d3.forceLink()
     linkForce.id(d => d.id).distance(100).strength(0)
     const manyBodyForce = d3.forceManyBody()
     manyBodyForce.distanceMax(100).strength(-2000)
@@ -299,7 +299,7 @@ function drawSvg(data, minFrequency, maxFrequency) {
 
     // Create a simulation with several forces.
     const simulation = d3.forceSimulation(nodes)
-        .force("link", linkForce)
+    simulation.force("link", linkForce)
         .force("charge", manyBodyForce)
         .force("x", xForce)
         .force("y", yForce);
@@ -319,7 +319,7 @@ function drawSvg(data, minFrequency, maxFrequency) {
 
         const filteredNodes = nodes.filter(e => filteredData.nodes[e.numericalId])
 
-        if (data.id != -1 && filteredNodes.length > 100)
+        if (data.id == -1 && filteredNodes.length > 100)
             return svg.node()
 
         const filteredLinks = links.filter(e => filteredData.links[e.numericalId])
@@ -408,9 +408,7 @@ function drawSvg(data, minFrequency, maxFrequency) {
             event.subject.fy = null;
         }
 
-        for (let i = 0; i < 5; i++) {
-            simulation.tick()
-        }
+        simulation.tick(5)
 
         return svg.node()
     }
