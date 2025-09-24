@@ -317,8 +317,12 @@ function drawSvg(data, minFrequency, maxFrequency) {
 
     function update(filteredData) {
 
-        const filteredLinks = links.filter(e => filteredData.links[e.numericalId])
         const filteredNodes = nodes.filter(e => filteredData.nodes[e.numericalId])
+
+        if (data.id != -1 && filteredNodes.length > 100)
+            return svg.node()
+
+        const filteredLinks = links.filter(e => filteredData.links[e.numericalId])
 
         simulation.nodes(filteredNodes)
         simulation.force('link').links(filteredLinks)
@@ -443,7 +447,7 @@ function onFilterChange(minFrequency, maxFrequency, graph, container, update) {
             filteredEdges[link.numericalId] = true
     }
 
-    if (filteredNodes.filter(m => m).length > 100) {
+    if (graph.id == -1 && filteredNodes.filter(m => m).length > 100) {
         container.innerHTML = ""
         return
     }
@@ -497,6 +501,8 @@ const toInput = document.querySelector('#toInput');
 
 const foodGroupSlider = document.querySelector("#food-cluster-slider")
 const foodGroupInput = document.querySelector("#food-cluster-input")
+
+const url = new URL(window.location.href)
 
 initSliders(fromSlider, toSlider, fromInput, toInput, 0, 5, 0, 5, () => { })
 
@@ -568,7 +574,7 @@ function fetchAndDrawGraph(graphId) {
             }
         }
 
-        if (graph.nodes.length <= 100)
+        if (graphId != -1 || graph.nodes.length <= 100)
             svgContainer.appendChild(svg)
 
         createNodeSizeLegend()
@@ -577,12 +583,16 @@ function fetchAndDrawGraph(graphId) {
     if (graphData[graphId] != null)
         callback(graphData[graphId])
     else
-        fetch("/diets/foodclusters/data/" + String(graphId)).then((data) => data.json()).then((graph) => {
+        fetch("/diets/foodclusters/data/" + url.searchParams.get("pattern") + "/" + String(graphId)).then((data) => data.json()).then((graph) => {
             graphData[graphId] = graph
+            graph.id = graphId
             callback(graph)
         })
 }
-initSliders(foodGroupSlider, null, foodGroupInput, null, -1, 18, -1, null, fetchAndDrawGraph)
+
+fetch("/diets/foodclusters/data/" + url.searchParams.get("pattern") + "/clustercount").then(response => response.text()).then((response) => {
+    initSliders(foodGroupSlider, null, foodGroupInput, null, -1, Number(response), -1, null, fetchAndDrawGraph)
+})
 
 const labelContainer = document.getElementById("category-labels")
 

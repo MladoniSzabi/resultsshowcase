@@ -335,15 +335,22 @@ def diets_foodgroups_page():
     return render_template("diets_foodgroups_fdg.html")
 
 
-@app.route("/diets/foodclusters/data/<string:cluster>")
-def diets_foodgroups_data(cluster):
+@app.route("/diets/foodclusters/data/<int:pattern>/<string:cluster>")
+def diets_foodgroups_data(pattern, cluster):
     try:
         cluster = int(cluster)
     except Exception:
         return abort(404)
     if cluster == -1:
-        return send_file("results/diets/food_clustering/0/graph_full.json")
-    return send_from_directory("results/diets/food_clustering/0/", "graph_" + str(cluster) + ".json")
+        return send_file("results/diets/food_clustering/" + str(pattern) + "/graph_full.json")
+    return send_from_directory("results/diets/food_clustering/" + str(pattern) + "/", "graph_" + str(cluster) + ".json")
+
+
+@app.route("/diets/foodclusters/data/<int:pattern>/clustercount")
+def diets_foodgroups_get_count(pattern):
+    if not os.path.exists(os.path.join("results/diets/food_clustering/", str(pattern))):
+        return abort(404)
+    return str(len(os.listdir(os.path.join("results/diets/food_clustering/", str(pattern)))) - 2)
 
 
 @app.route("/diets/foodclusters/browse")
