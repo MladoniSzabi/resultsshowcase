@@ -305,31 +305,6 @@ def get_boxplot(graphid):
             return f.read()
 
 
-@app.route("/diets/browse")
-def diets_browse():
-    return render_template("diets_browse.html")
-
-
-@app.route("/diets/circular")
-def diets_circular_graph():
-    return render_template("diets_circular.html")
-
-
-@app.route("/diets/fdg")
-def diets_force_graph():
-    return render_template("diets_fdg.html")
-
-
-@app.route("/diets/list")
-def diets_list_graph():
-    return render_template("diets_list.html")
-
-
-@app.route("/diets/data/<int:cluster>")
-def diets_data(cluster):
-    return send_from_directory("results/diets/backbone/", str(cluster) + "/backbone_graph.json")
-
-
 @app.route("/diets/foodclusters/page")
 def diets_foodgroups_page():
     return render_template("diets_foodgroups_fdg.html")
